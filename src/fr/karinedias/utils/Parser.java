@@ -30,13 +30,17 @@ public class Parser {
 	 * TODO: use interface "spliterator" for parallel processing of stream of elements for any collection
 	 */
 	
-	public ArrayList<Double> atomicCoordinatesParser(StringBuilder atomsInput) {
+	public static ArrayList<Double> atomicCoordinatesParser(StringBuilder atomsInput) {
 		
 		ArrayList<Double> atomicCoordinates = new ArrayList<Double>();
-		Pattern atomicCoordinatesPattern = Pattern.compile("\\d\\d.\\d\\d\\d\\s{3}");
+		Pattern atomicCoordinatesPattern = Pattern.compile("\\s\\d{1,4}(.)\\d\\d\\d");
 		Matcher matcher = atomicCoordinatesPattern.matcher(atomsInput);
+		
+		while (matcher.find()) {
+			System.out.println("groupe: " + matcher.group());
+		}
 		String coordinatesDelimiter = " ";
-		//atomsInput.toString().split(atomicCoordinatesPattern);
+		atomsInput.toString().split("\\d\\d.\\d\\d\\d\\s{3}");
 		
 		return atomicCoordinates;
 		
@@ -60,5 +64,7 @@ public class Parser {
 		System.out.println(sb2.toString());
 		System.out.println(atomParser.searchAtomsEntries(sb2));
 		//System.out.println(atomParser.searchAtomsEntries(sb));
+		
+		System.out.println(atomicCoordinatesParser(sb2));
 	}
 }
