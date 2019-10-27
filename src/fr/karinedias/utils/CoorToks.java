@@ -3,6 +3,11 @@ import java.util.*;
 import java.io.*;
 import java.util.regex.Pattern; import
 java.io.StreamTokenizer;
+import java.nio.charset.StandardCharsets;
+
+/*
+ * Class to be deleted, exists for example purposes
+ */
 
 public class CoorToks {
 
@@ -18,7 +23,9 @@ public class CoorToks {
         StringTokenizer tokenizer = new StringTokenizer(token);
 
         try {
-            inputStream = new BufferedReader(new FileReader("1APB.pdb.txt"));
+        	FileInputStream fileInputStream = new FileInputStream(""); //TODO: put path
+        	inputStream = new BufferedReader(new FileReader(fileInputStream));
+        	BufferedReader br= new BufferedReader(new FileInputStream(""), StandardCharsets.UTF_8)));
             outputStream = new PrintWriter(new FileWriter("characteroutput.txt"));
             while(tokenizer.hasMoreTokens())
             {
