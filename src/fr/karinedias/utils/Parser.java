@@ -49,7 +49,7 @@ public class Parser {
 
 	public static void main(String[] args) {
 
-		sb = FileReader.reader("/Users/dias/cnam/projet-cnam/CalculDistancesPDB/doc/1fn3.cif");
+		//sb = FileReader.reader("/Users/dias/cnam/projet-cnam/CalculDistancesPDB/doc/1fn3.cif");
 		
 		//print all content of the cif file 
 		//System.out.println(sb.toString());
@@ -58,7 +58,7 @@ public class Parser {
 		//System.out.println(atomParser.searchAtomsEntries(sb));
 		
 		//TEST avec le fichier txt des atomes : 
-		String atomFile = "/Users/dias/cnam/projet-cnam/CalculDistancesPDB/doc/atoms.cif";
+		String atomFile = "/home/karine/src/java/ProjetPDB/doc/atoms.txt";
 		StringBuilder sb2 = new StringBuilder();
 		sb2 = FileReader.reader(atomFile);
 		System.out.println(sb2.toString());
