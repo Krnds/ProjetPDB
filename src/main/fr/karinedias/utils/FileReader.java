@@ -1,4 +1,4 @@
-package fr.karinedias.utils;
+package main.fr.karinedias.utils;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -16,15 +16,10 @@ import java.util.stream.Stream;
 
 public class FileReader {
 
-	private String filename = "";
 
-	public FileReader(String filename) {
-		this.setFilename(filename);
-	}
-
-	public StringBuilder readerTest() {
+	public static StringBuilder readerTest(String input) {
 		Scanner sc;
-		File file = new File(getFilename());
+		File file = new File(input);
 		StringBuilder fileContent = new StringBuilder("");
 
 		try {
@@ -44,8 +39,8 @@ public class FileReader {
 		return fileContent;
 	}
 
-	public StringBuilder readerTest2 () {
-		Path filePath = Paths.get(getFilename());
+	public static StringBuilder readerTest2 (String input) {
+		Path filePath = Paths.get(input);
 		Charset charset = Charset.forName("UTF-8");
 		StringBuilder sb = new StringBuilder("");
 		try {
@@ -64,9 +59,9 @@ public class FileReader {
 
 
 
-	public static StringBuilder readerTest3 (String filePath) throws IOException {
+	public static StringBuilder readerTest3 (String input) throws IOException {
 
-		java.io.FileReader fr = new java.io.FileReader(filePath);
+		java.io.FileReader fr = new java.io.FileReader(input);
 
 		BufferedReader br = new BufferedReader(fr);
 		StringBuilder sb = new StringBuilder();
@@ -97,28 +92,13 @@ public class FileReader {
 	    return contentBuilder;
 	}
 	
-	/*
-	 * Getter and Setter fir filename : 
-	 */
-	
-	public String getFilename() {
-		return filename;
-	}
 
-	public void setFilename(String filename) {
-		this.filename = filename;
-	}
-	
-
-	// test de la classe FileReader : 
-	//
-
+/*
+ * Tests in method main for all reader methods
+ */
 	public static void main(String[] args) throws IOException {
 
-		FileReader haemoglobin = new FileReader("/Users/dias/cnam/projet-cnam/CalculDistancesPDB/doc/1fn3.cif");
-		System.out.println(FileReader.reader("/Users/dias/cnam/projet-cnam/CalculDistancesPDB/doc/1fn3.cif"));
-		
-		StringBuilder fileContent = FileReader.reader(haemoglobin.getFilename());
+		System.out.println(FileReader.readerTest2("/Users/dias/cnam/projet-cnam/CalculDistancesPDB/doc/1fn3.cif"));
 
 		//test de ma méthode reader
 		//System.out.println(fileContent);

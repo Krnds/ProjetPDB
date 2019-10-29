@@ -1,4 +1,4 @@
-package fr.karinedias.utils;
+package main.fr.karinedias.utils;
 
 import java.io.IOException;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package fr.karinedias.model;
+package main.fr.karinedias.model;
 
 public enum AminoAcidCode {
 	
