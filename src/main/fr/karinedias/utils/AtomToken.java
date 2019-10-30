@@ -129,7 +129,7 @@ public class AtomToken {
 					infosAtomes[k] = oneEntry.nextToken().trim();
 					 //System.out.println("entrée n° " + j + " " + infosAtomes[k].toString());
 				}
-				 System.out.println("entrée n° " + j + " " + infosAtomes[6].toString());
+				 System.out.println("Coordonnées x de l'atome " + j + " = " + infosAtomes[6].toString());
 			}
 
 		}

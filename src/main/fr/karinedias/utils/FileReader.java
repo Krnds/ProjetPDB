@@ -16,6 +16,9 @@ import java.util.stream.Stream;
 
 public class FileReader {
 
+	/*
+	 * Test of readerTest : prints only the first line
+	 */
 
 	public static StringBuilder readerTest(String input) {
 		Scanner sc;
@@ -27,10 +30,10 @@ public class FileReader {
 			while (sc.hasNextLine()) {
 
 				fileContent = fileContent.append(sc.nextLine());
-				System.out.println(fileContent);
-				sc.close();
-
+				
 			}
+			System.out.println(fileContent);
+			sc.close();
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -39,6 +42,10 @@ public class FileReader {
 		return fileContent;
 	}
 
+	/*
+	 * Test of readerTest2 : prints only the first line
+	 */
+	
 	public static StringBuilder readerTest2 (String input) {
 		Path filePath = Paths.get(input);
 		Charset charset = Charset.forName("UTF-8");
@@ -58,7 +65,10 @@ public class FileReader {
 	}
 
 
-
+	/*
+	 * Test of readerTest3 : prints only the first line
+	 */
+	
 	public static StringBuilder readerTest3 (String input) throws IOException {
 
 		java.io.FileReader fr = new java.io.FileReader(input);
@@ -77,6 +87,9 @@ public class FileReader {
 
 	}
 	
+	/*
+	 * Test of reader : prints all the file content
+	 */
 	//source : https://howtodoinjava.com/java/io/java-read-file-to-string-examples/
 	public static StringBuilder reader (String filePath)
 	{
@@ -98,7 +111,7 @@ public class FileReader {
  */
 	public static void main(String[] args) throws IOException {
 
-		System.out.println(FileReader.readerTest2("/Users/dias/cnam/projet-cnam/CalculDistancesPDB/doc/1fn3.cif"));
+		System.out.println(FileReader.reader("/Users/dias/cnam/projet-cnam/CalculDistancesPDB/doc/1fn3.cif"));
 
 		//test de ma méthode reader
 		//System.out.println(fileContent);
