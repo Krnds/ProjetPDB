@@ -8,6 +8,9 @@ public class AminoAcid {
 
 	HashMap<String, Character> aminoAcidCode = new HashMap<String, Character>();
 	private int aminoAcidNumber = 0;
+	private double coordX;
+	private double coordY;
+	private double coordZ;
 
 	public AminoAcid(AminoAcidCode code) {
 		aminoAcidCode.put("GLY", 'G');
