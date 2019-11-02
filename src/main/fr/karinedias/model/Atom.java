@@ -6,10 +6,10 @@ import java.util.List;
 public class Atom {
 
 	//Add "final" modifier for all fields ?
-	private String recordName =  "ATOM";
-	private int serialNumber = 651;
-	private char atomName = 'N';
-	private String alternateLocIndicator = "N";
+	private String recordName =  "";
+	private int serialNumber;
+	private char atomName;
+	private String alternateLocIndicator;
 	//Create an enumeration for amino residues ?
 	private String residueName = "ALA";
 	private int chainIdentifier = 1;

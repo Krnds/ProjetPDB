@@ -1,6 +1,5 @@
-package main.fr.karinedias.manager;
+package main.fr.karinedias.model;
 
-import java.lang.ProcessBuilder.Redirect;
 import java.util.HashMap;
 
 public class AminoAcidDistanceCalculation {
@@ -25,7 +24,6 @@ public class AminoAcidDistanceCalculation {
 	 */
 
 	public double distanceBetween2Residues (AminoAcid residue1, AminoAcid residue2) {
-		
 		double distance = Math.sqrt(0.0);
 		return distance;
 	}
