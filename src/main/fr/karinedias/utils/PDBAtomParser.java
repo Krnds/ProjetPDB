@@ -61,6 +61,10 @@ public class PDBAtomParser {
 		
 	}
 	
+	public static void main(String[] args) {
+		
+	}
+	
 	
 	/*create methods for :
 	 * - atomSerialNumber
