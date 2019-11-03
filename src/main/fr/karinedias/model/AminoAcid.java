@@ -12,9 +12,18 @@ public class AminoAcid {
 	private double coordXAlphaCarbon;
 	private double coordYAlphaCarbon;
 	private double coordZAlphaCarbon;
-	private List<Double> coordAlphaCarbon = new ArrayList<Double>(); // coordinates of the alpha carbon of the residue
+	private List<Double> coordAlphaCarbon = new ArrayList<Double>(3); // coordinates of the alpha carbon of the residue
 	// TODO: créér une liste d'atomes pour chaque acide aminé
-	private List<Atom> atomsOfAminoAcid = new ArrayList<Atom>();
+	private List<Atom> atomsOfAminoAcid = new ArrayList<Atom>(); //TODO: create a metod for storing all the atoms of an AA
+
+	
+	protected List<Double> getCoordAlphaCarbon() {
+		return coordAlphaCarbon;
+	}
+
+	protected void setCoordAlphaCarbon(List<Double> coordAlphaCarbon) {
+		this.coordAlphaCarbon = coordAlphaCarbon;
+	}
 
 	/*
 	 * Constructor of AminoAcid object
@@ -28,7 +37,10 @@ public class AminoAcid {
 	}
 
 	public void carbonAlphaRetriver(AminoAcid a) {
-		// TODO
+		//link to the list of atoms
+		if (a.atomsOfAminoAcid.contains("CA")) {
+			
+		}
 	}
 
 	// TODO link the residueName to the Hashmpa containing the code of the residue
@@ -110,7 +122,7 @@ public class AminoAcid {
 	}
 
 	public void atomParser(String input) {
-
+		
 	}
 
 }

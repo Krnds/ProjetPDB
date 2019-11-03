@@ -1,18 +1,7 @@
 package main.fr.karinedias.model;
 
-public class AtomicDistanceCalculation extends Atom {
+public class AtomicDistanceCalculation {
 
-	public AtomicDistanceCalculation() {
-		super();
-
-	}
-
-	public AtomicDistanceCalculation(String recordName, int serialNumber, char atomName, String alternateLocIndicator,
-			String residueName, int chainIdentifier, int residueSequenceNumber) {
-		super(recordName, serialNumber, atomName, alternateLocIndicator, residueName, chainIdentifier,
-				residueSequenceNumber);
-		// TODO Auto-generated constructor stub
-	}
 
 	public Double distanceBetweenAtoms(Atom a, Atom b) {
 
