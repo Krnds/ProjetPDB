@@ -1,5 +1,10 @@
 package main.fr.karinedias.utils;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
 import java.util.StringTokenizer;
 
 public class PDBAtomParser {
@@ -10,11 +15,31 @@ public class PDBAtomParser {
 	
 	
 	//TODO: to be completed
-	public String rawStringOfAtoms(FileReader PDBFile) {
+	public static void rawStringOfAtoms(String pdbFile) {
+
+		Reader r;
+		try {
+			r = new FileReader(pdbFile);
+			BufferedReader reader = new BufferedReader(r);
+			String line;
+			try {
+				while ((line = reader.readLine()) != null) {
+					 if(line.contains("ATOM"))
+		                    System.out.println(line);
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		//argument : File ? FileReader ? 
-		
-		return null;
+		// A FileReader (see the I/O chapter)
+
+		// For each line of input, try matching in it.
+
 	}
 	
 	//TODO: to be completed
@@ -63,6 +88,7 @@ public class PDBAtomParser {
 	
 	public static void main(String[] args) {
 		
+		rawStringOfAtoms("/Users/dias/eclipse-workspace/ProjetPDB/doc/6hk2.cif");
 	}
 	
 	
