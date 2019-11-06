@@ -11,37 +11,47 @@ public class PDBAtomParser {
 	
 	/*
 	 * Class for parsing all 'ATOM' entries of a .cif/.pdb file and all their corresponding info
+	 * TODO: create appropriate object for parsing the file ie instances variables and non-static methods
 	 */
 	
 	
-	//TODO: to be completed
-	public static void rawStringOfAtoms(String pdbFile) {
 
-		Reader r;
-		try {
-			r = new FileReader(pdbFile);
-			BufferedReader reader = new BufferedReader(r);
-			String line;
-			try {
-				while ((line = reader.readLine()) != null) {
-					 if(line.contains("ATOM"))
-		                    System.out.println(line);
-				}
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+	public static String rawStringOfAtoms(String pdbFile) throws IOException {
+
+		Reader reader = new FileReader(pdbFile);
+		BufferedReader bufferedReader = new BufferedReader(reader);
+		String line;
+		String startWithATOM = "";
+
+		while ((line = bufferedReader.readLine()) != null) {
+			if (line.contains("ATOM")) {
+				startWithATOM += line + "\n";
 			}
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-		
-		// A FileReader (see the I/O chapter)
 
-		// For each line of input, try matching in it.
+		return startWithATOM;
 
 	}
 	
+	
+
+	public static String rawStringOfAtoms2(String pdbFile) throws IOException {
+
+		Reader reader = new FileReader(pdbFile);
+		BufferedReader br = new BufferedReader(reader);
+		String startWithATOM = "";
+
+		for (String line = br.readLine(); line != null; line = br.readLine()) {
+			if (line.startsWith("ATOM")) {
+				startWithATOM += line + "\n";
+
+			}
+
+		}
+		return startWithATOM;
+
+	}
+
 	//TODO: to be completed
 	public void atomTokenizer(String atomString) {
 		
@@ -88,7 +98,28 @@ public class PDBAtomParser {
 	
 	public static void main(String[] args) {
 		
-		rawStringOfAtoms("/Users/dias/eclipse-workspace/ProjetPDB/doc/6hk2.cif");
+		String testFile = "/Users/dias/eclipse-workspace/ProjetPDB/doc/3c0p.cif";
+		/*
+		 * Beware, Eclipse limits the output by length, change the setting to see all the output !
+		 */
+		try {
+			String atoms = rawStringOfAtoms(testFile);
+			System.out.println("First test : \n");
+			System.out.println(atoms);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			String atoms = rawStringOfAtoms2(testFile);
+			System.out.println("Second test : \n");
+			System.out.println(atoms);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			e.getMessage();
+		}
 	}
 	
 	
