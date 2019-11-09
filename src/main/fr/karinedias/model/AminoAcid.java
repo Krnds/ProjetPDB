@@ -37,7 +37,7 @@ public class AminoAcid {
 	}
 
 	public void carbonAlphaRetriver(AminoAcid a) {
-		//link to the list of atoms
+		//TODO find in each amino acid entry their alpha carbon
 		if (a.atomsOfAminoAcid.contains("CA")) {
 			
 		}
@@ -121,8 +121,5 @@ public class AminoAcid {
 		// phe71.atomsOfAminoAcid.add("PHE", 'F');
 	}
 
-	public void atomParser(String input) {
-		
-	}
 
 }

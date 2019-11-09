@@ -19,9 +19,11 @@ public class AminoAcidDistanceCalculation {
 		molecularWeight.put("Histidine", 155.2);
 	}
 	
-	/*
-	 * Example of calculation of the distance between 2 residues of 2 distinct molecules of a PDB file :
-	 * static method because it can be called without creating a AminoAcidDistanceCalculation object
+/*
+ * Distance calculation between 2 amino acids : it's the distance between the 2 alpha carbons of each amino acid.
+ * TODO: calculate the distance between the C, N and O atoms 
+ * - first calculate the barycenter of C, N and O atoms of each residue
+ * - second calculate the distance between the 2 barycenters 
 	 */
 
 	public static double distanceBetween2Residues (AminoAcid residue1, AminoAcid residue2) {

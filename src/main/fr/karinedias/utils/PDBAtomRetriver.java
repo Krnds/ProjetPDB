@@ -13,9 +13,14 @@ public class PDBAtomRetriver {
 	 */
 
 	private String pdbFile = null;
-
+	
+	
 	public PDBAtomRetriver(String pdbFile) {
 		this.pdbFile = pdbFile;
+	}
+	
+	public PDBAtomRetriver() {
+		//constructor without parameters calling subclass PDBAtomParser
 	}
 
 	protected String getPdbFile() {

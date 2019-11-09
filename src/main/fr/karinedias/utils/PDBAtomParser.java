@@ -1,8 +1,11 @@
 package main.fr.karinedias.utils;
 
+import java.io.IOException;
 import java.util.StringTokenizer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class PDBAtomParser {
+public class PDBAtomParser extends PDBAtomRetriver {
 
 	/*
 	 * TODO:
@@ -10,37 +13,78 @@ public class PDBAtomParser {
 	 * coordinateX - coordinateY - coordinateZ - residueName - residueSeqName
 	 */
 	
-	// TODO: to be completed
-		public void atomTokenizer(String atomString) {
+	public PDBAtomParser() {
+		super();
+	}
+	
+	public static void coordinatesParser() {
+		
+		//look for coordinates :
+//		Pattern coordinates = Pattern.compile("-?\\d{1-3}.\\d{3}");
+//		Matcher matcher = coordinates.matcher(infosAtomes[k].toString()); //?
+//		while (matcher.find()) {
+//			System.out.println(matcher.toString());
+//		}
+	}
+	
+	/**
+	 * Static method bc can be called without creating a PDBAtomParser object
+	 * @param atomString
+	 * 
+	 */
+		public static void atomTokenizer(String atomString) {
 
-			String delimiter = "\n";
-			StringTokenizer allEntries = new StringTokenizer(atomString, delimiter);
+			String allAtomEnrtiesDelimiter = "\n";
+			StringTokenizer allAtomEntries = new StringTokenizer(atomString, allAtomEnrtiesDelimiter);
+			int n = allAtomEntries.countTokens();
+			String[] listOfAtoms = new String[n];
+			while (allAtomEntries.hasMoreElements()) {
 
-			while (allEntries.hasMoreElements()) {
-				int n = allEntries.countTokens();
-				String[] listeAtomes = new String[n];
-
+			
 				for (int i = 0; i < n; i++) {
-					listeAtomes[i] = allEntries.nextToken();
-					// System.out.print(listeAtomes[i].toString() + "\n");
+					listOfAtoms[i] = allAtomEntries.nextToken();
+					System.out.print(listOfAtoms[i].toString() + "\n");
 				}
 
 				// par exmple entrée n° 5 de l'atome 1602 :
-				System.out.print("Entrée n° 5 \n" + listeAtomes[5].toString() + "\n");
+				System.out.print("Entrée n° 5 \n" + listOfAtoms[5].toString() + "\n");
 
-				for (int j = 0; j < 11; j++) {
-					String[] infosAtomes = new String[11];
+				for (int j = 0; j < n; j++) {
+					
 					String delimiterAtom = " ";
-					StringTokenizer oneEntry = new StringTokenizer(listeAtomes[j], delimiterAtom);
-					for (int k = 0; k < 11; k++) {
-						infosAtomes[k] = oneEntry.nextToken().trim();
-						// System.out.println("entrée n° " + j + " " + infosAtomes[k].toString());
+					StringTokenizer oneEntry = new StringTokenizer(listOfAtoms[j], delimiterAtom);
+					int dataTokens = oneEntry.countTokens();
+					String[] dataOfAtom = new String[n];
+					
+					for (int k = 0; k < dataTokens; k++) {
+						dataOfAtom[k] = oneEntry.nextToken().trim();
+						
+						System.out.println("entrée n° " + j + " " + dataOfAtom[k].toString());
 					}
-					System.out.println("Coordonnées x de l'atome " + j + " = " + infosAtomes[6].toString());
+					//return dataOfAtom;
+					System.out.println("Coordonnées x de l'atome " + j + " = " + dataOfAtom[10].toString());
 				}
-
+				
 			}
+			
 
+		}
+		
+		//FOR TESTING PURPOSES :
+		public static void main(String[] args) {
+		
+			String filename = "/home/karine/src/java/ProjetPDB/doc/3bw7.cif";
+			PDBAtomRetriver myPDBFfile = new PDBAtomRetriver(filename);
+			try {
+				String myPDBfileAtoms = myPDBFfile.getAtoms();
+				//String[] atoms3bw7 = atomTokenizer(myPDBfileAtoms);
+				atomTokenizer(myPDBfileAtoms);
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 
 }
