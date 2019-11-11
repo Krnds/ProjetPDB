@@ -1,0 +1,34 @@
+1. Faire un programme capable d’isoler toutes les structures de la PDB correspondant à
+des complexes moléculaires (au moins 2 molécules).
+2. Faire un programme capable de calculer les distances entre 2 résidus situés dans
+deux molécules d’un complexe de la PDB. Les distances seront celles des carbones
+alpha (option 1) ou celles des barycentres des atomes C, N et O de chaque résidu.
+3. Faire un programme donnant tous les résidus situés à une distance inférieure à un
+seuil donné.
+4. Faire des tests sur 10 complexes de cytokines différentes de la PDB, faits de la
+cytokine et de son récepteur cellulaire. Voir quelles sont les distances obtenues les plus
+faibles. En déduire un cut-off D raisonnable pour définir des “zones d’interaction“.
+5. Définir la zone d’interaction entre deux protéines d’un complexe comme étant les
+résidus situés à une distance inférieure à D. Appliquer cela aux 10 complexes de la
+question précédente et représenter ces complexes en colorant spécifiquement les
+résidus situés dans la zone d’interaction (attention, la zone d’interaction peut être
+discontinue).
+6. Définir pour tout complexe les N zones contenant des résidus les plus proches et les
+colorer sur la représentation graphique. Faire N=3 dans le cas des complexes
+précédents.
+
+### 1. Voir ça en dernier
+
+### 2. Tester le programme avec les carbones alpha pour voir si cela marche
+
+### 3. Quel seuil donné ? Donner tous les résidus situés où ?
+
+### 4. Quelles sont les distances obtenues les plus faibles par rapport à quoi ?
+
+
+
+11/11/19 : 
+
+Problème quand je veux déclarer AminoAcid (car dans le constructeur prend en argument une List<Atom> name = List<Atom>();
+Régler cette histoire de List d'atomes
+Régler le problème de lenteur quand je veux storer tous les atomes et toutes les data associées dans deux ArrayList

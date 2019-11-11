@@ -3,6 +3,11 @@ package main.fr.karinedias.model;
 import java.util.HashMap;
 
 public class AminoAcidDistanceCalculation {
+	
+	/**
+	 * This class only calculates the distance between 2 residues with the CA method. 
+	 * TODO: calculate the distance with the barycenter of C, N, O atoms. 
+	 */
 
 	private HashMap<String, Double> molecularWeight = new HashMap<String, Double>();
 	//TODO: create an amino acid class with all parameters
@@ -43,6 +48,17 @@ public class AminoAcidDistanceCalculation {
 		
 		double distance = Math.sqrt(xDistanceBetweenResidues + yDistanceBetweenResidues + zDistanceBetweenResidues);
 		return distance;
+	}
+	
+	
+	//FOR TESTING PURPOSES
+	public static void main(String[] args) {
+		
+		//ATOM   2785 C  CA  . LEU C 1 48  ? -9.411  16.205  -22.443 1.00 30.64 ? 48  LEU C CA  1 
+		AminoAcid residue1 = new AminoAcid("LEU", 48, (List<Atom> residue1ListOfAtoms = new List()));
+		//TODO: 
+		//ATOM   3062 C  CA  . ASP C 1 85  ? -2.118  3.228   -2.634  1.00 36.83 ? 85  ASP C CA  1 
+		AminoAcid residue2 = new AminoAcid("", 48, (List<Atom> residue1ListOfAtoms = new List()));
 	}
 	
 	
