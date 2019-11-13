@@ -31,7 +31,7 @@ public class AminoAcidDistanceCalculation {
  * - second calculate the distance between the 2 barycenters 
 	 */
 
-	public static double distanceBetween2Residues (AminoAcid residue1, AminoAcid residue2) {
+	public static double distanceBetween2Residues (Residue residue1, Residue residue2) {
 		
 		//creating all variables of the coordinates of each residue :
 		double residue1Xcoordinate = residue1.getCoordAlphaCarbon().get(0);
@@ -55,10 +55,10 @@ public class AminoAcidDistanceCalculation {
 	public static void main(String[] args) {
 		
 		//ATOM   2785 C  CA  . LEU C 1 48  ? -9.411  16.205  -22.443 1.00 30.64 ? 48  LEU C CA  1 
-		AminoAcid residue1 = new AminoAcid("LEU", 48, (List<Atom> residue1ListOfAtoms = new List()));
+		Residue residue1 = new Residue("LEU", 48, (List<Atom> residue1ListOfAtoms = new List()));
 		//TODO: 
 		//ATOM   3062 C  CA  . ASP C 1 85  ? -2.118  3.228   -2.634  1.00 36.83 ? 85  ASP C CA  1 
-		AminoAcid residue2 = new AminoAcid("", 48, (List<Atom> residue1ListOfAtoms = new List()));
+		Residue residue2 = new Residue("", 48, (List<Atom> residue1ListOfAtoms = new List()));
 	}
 	
 	

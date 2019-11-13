@@ -6,12 +6,12 @@ public class Molecule {
 
 	private String entryID = "";
 	private int nChains = 0;
-	private ArrayList<AminoAcid> aminoAcidList = new ArrayList<AminoAcid>();
+	private ArrayList<Residue> aminoAcidList = new ArrayList<Residue>();
 	
 	/*
 	 * Constructor :
 	 */
-	public Molecule(String entryID, int nChains, ArrayList<AminoAcid> aminoAcidList) {
+	public Molecule(String entryID, int nChains, ArrayList<Residue> aminoAcidList) {
 		this.entryID = entryID;
 		this.nChains = nChains;
 		this.aminoAcidList = aminoAcidList;
@@ -36,11 +36,11 @@ public class Molecule {
 		this.nChains = nChains;
 	}
 
-	protected ArrayList<AminoAcid> getAminoAcidList() {
+	protected ArrayList<Residue> getAminoAcidList() {
 		return aminoAcidList;
 	}
 
-	protected void setAminoAcidList(ArrayList<AminoAcid> aminoAcidList) {
+	protected void setAminoAcidList(ArrayList<Residue> aminoAcidList) {
 		this.aminoAcidList = aminoAcidList;
 	}
 	

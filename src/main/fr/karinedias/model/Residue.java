@@ -4,18 +4,25 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class AminoAcid {
+public class Residue {
 
 	HashMap<String, Character> aminoAcidCode = new HashMap<String, Character>();
 	private String residueName;
-	private int aminoAcidNumber = 0;
+	private int residueNumber = 0;
 	private double coordXAlphaCarbon;
 	private double coordYAlphaCarbon;
 	private double coordZAlphaCarbon;
 	private List<Double> coordAlphaCarbon = new ArrayList<Double>(3); // coordinates of the alpha carbon of the residue
 	// TODO: créér une liste d'atomes pour chaque acide aminé
-	private List<Atom> atomsOfAminoAcid = new ArrayList<Atom>(); //TODO: create a metod for storing all the atoms of an AA
+	private List<Atom> atomsOfResidue = new ArrayList<Atom>(); //TODO: create a metod for storing all the atoms of an AA
 
+	public ArrayList<Atom> getListOfAtoms() {
+		
+		//TODO:
+		
+		return null;
+		
+	}
 	
 	protected List<Double> getCoordAlphaCarbon() {
 		return coordAlphaCarbon;
@@ -28,17 +35,17 @@ public class AminoAcid {
 	/*
 	 * Constructor of AminoAcid object
 	 */
-	public AminoAcid(String residueName, int residueSequenceNumber, List<Atom> atomsOfResidue) {
+	public Residue(String residueName, int residueSequenceNumber, List<Atom> atomsOfResidue) {
 		this.residueName = residueName;
-		this.aminoAcidNumber = residueSequenceNumber;
+		this.residueNumber = residueSequenceNumber;
 		// There's the alpha carbon in atomsOfResidue
 		
 
 	}
 
-	public void carbonAlphaRetriver(AminoAcid a) {
+	public void carbonAlphaRetriver(Residue a) {
 		//TODO find in each amino acid entry their alpha carbon
-		if (a.atomsOfAminoAcid.contains("CA")) {
+		if (a.atomsOfResidue.contains("CA")) {
 			
 		}
 	}
@@ -47,7 +54,7 @@ public class AminoAcid {
 
 	private double barycenterOfResidue; // barycentre des atomes C, N et O d'un résidu à faire ensuite
 
-	public AminoAcid(AminoAcidCode code) {
+	public Residue(AminoAcidCode code) {
 		aminoAcidCode.put("GLY", 'G');
 		aminoAcidCode.put("ALA", 'A');
 		aminoAcidCode.put("VAL", 'V');
@@ -105,7 +112,7 @@ public class AminoAcid {
 		 * A OE2 1 ATOM 183 O OE2 B GLU A 1 23 ? 28.205 -22.230 -4.953 0.50 30.31 ? 23
 		 * GLU A OE2 1
 		 */
-		AminoAcid phe71 = new AminoAcid(AminoAcidCode.phenylalanine);
+		Residue phe71 = new Residue(AminoAcidCode.phenylalanine);
 
 		String atomsToParse = "ATOM   1597  N   PHE B  71      -3.488 -10.470   2.444  1.00 10.48           N  \n"
 				+ "ATOM   1598  CA  PHE B  71      -3.362 -10.263   3.894  1.00 13.31           C  \n"

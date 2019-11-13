@@ -77,13 +77,14 @@ public class PDBAtomParser extends PDBAtomRetriver {
 		PDBAtomRetriver myPDBFfile = new PDBAtomRetriver(filename);
 		try {
 			String myPDBfileAtoms = myPDBFfile.getAtoms();
+			System.out.println(myPDBfileAtoms);
+			ArrayList<String> allatomsofPDBfile = getAllAtomEntries(myPDBfileAtoms);
 
-			int iterations = getAllAtomEntries(myPDBfileAtoms).size();
-			for (int i = 0; i < iterations; i++) {
-				System.out.println(getOneAtomEntry(getAllAtomEntries(myPDBfileAtoms)).get(i));
-				// System.out.println(getAllAtomEntries(myPDBfileAtoms).get(i));
-				// does not work
-			}
+//			int iterations = allatomsofPDBfile.size();
+//			for (int i = 0; i < iterations; i++) {
+//				System.out.println(getOneAtomEntry(allatomsofPDBfile).get(i).toString());
+//
+//			}
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
