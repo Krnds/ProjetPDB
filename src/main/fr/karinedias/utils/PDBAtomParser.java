@@ -3,8 +3,6 @@ package main.fr.karinedias.utils;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class PDBAtomParser extends PDBAtomRetriver {
 
@@ -17,14 +15,10 @@ public class PDBAtomParser extends PDBAtomRetriver {
 		super();
 	}
 
-	public static void coordinatesParser() {
+	public static void getListOfResidue() {
 
-		// look for coordinates :
-//		Pattern coordinates = Pattern.compile("-?\\d{1-3}.\\d{3}");
-//		Matcher matcher = coordinates.matcher(infosAtomes[k].toString()); //?
-//		while (matcher.find()) {
-//			System.out.println(matcher.toString());
-//		}
+		//From getAllAtomEntries, delimit the atoms by newline but regroup them by number of residue
+
 	}
 
 	/**
@@ -77,14 +71,18 @@ public class PDBAtomParser extends PDBAtomRetriver {
 		PDBAtomRetriver myPDBFfile = new PDBAtomRetriver(filename);
 		try {
 			String myPDBfileAtoms = myPDBFfile.getAtoms();
-			System.out.println(myPDBfileAtoms);
 			ArrayList<String> allatomsofPDBfile = getAllAtomEntries(myPDBfileAtoms);
 
-//			int iterations = allatomsofPDBfile.size();
-//			for (int i = 0; i < iterations; i++) {
-//				System.out.println(getOneAtomEntry(allatomsofPDBfile).get(i).toString());
-//
-//			}
+//			System.out.println(allatomsofPDBfile.toString());
+			int iterations = allatomsofPDBfile.size();
+			for (int i = 0; i < iterations; i++) {
+				System.out.print(getOneAtomEntry(allatomsofPDBfile).get(i));
+
+			}
+			
+			for (String string : allatomsofPDBfile) {
+				
+			}
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
