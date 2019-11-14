@@ -62,3 +62,4 @@ local.properties
 ### MacOS temp files ###
 .DS_Store
 .DS_Store~
+[#]*[#] 
