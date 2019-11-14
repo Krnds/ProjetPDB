@@ -9,16 +9,12 @@ public class PDBAtomParser extends PDBAtomRetriver {
 	/*
 	 * TODO: create methods for : - atomSerialNumber - alternateLocationIndicator -
 	 * coordinateX - coordinateY - coordinateZ - residueName - residueSeqName
+	 * Change the data structure of ArrayList to Iterator objects (Iterator or listIterator)
+	 * Use forEach loops instead of for loops ?
 	 */
 
 	public PDBAtomParser() {
 		super();
-	}
-
-	public static void getListOfResidue() {
-
-		//From getAllAtomEntries, delimit the atoms by newline but regroup them by number of residue
-
 	}
 
 	/**
@@ -49,7 +45,6 @@ public class PDBAtomParser extends PDBAtomRetriver {
 
 		ArrayList<String> listOfAtomData = new ArrayList<String>(); // données d'une entrée ATOM
 		for (int i = 0; i < nAtoms; i++) {
-			// listOfAtomRecord.addAll(allAtomEntries);
 			StringTokenizer oneAtomEntry = new StringTokenizer(allAtomEntries.get(i), atomRecordDelimiter);
 
 			for (int j = 0; j < oneAtomEntry.countTokens(); j++) {
@@ -67,8 +62,10 @@ public class PDBAtomParser extends PDBAtomRetriver {
 	// FOR TESTING PURPOSES :
 	public static void main(String[] args) {
 
-		String filename = "/home/karine/src/java/ProjetPDB/doc/3bw7.cif";
-		PDBAtomRetriver myPDBFfile = new PDBAtomRetriver(filename);
+		String filenameDebian = "/home/karine/src/java/ProjetPDB/doc/3bw7.cif";
+		String filenameMacOS = "/Users/dias/eclipse-workspace/ProjetPDB/doc/2b5i.cif";
+		
+		PDBAtomRetriver myPDBFfile = new PDBAtomRetriver(filenameMacOS);
 		try {
 			String myPDBfileAtoms = myPDBFfile.getAtoms();
 			ArrayList<String> allatomsofPDBfile = getAllAtomEntries(myPDBfileAtoms);

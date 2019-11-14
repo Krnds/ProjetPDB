@@ -32,3 +32,9 @@ précédents.
 Problème quand je veux déclarer AminoAcid (car dans le constructeur prend en argument une List<Atom> name = List<Atom>();
 Régler cette histoire de List d'atomes
 Régler le problème de lenteur quand je veux storer tous les atomes et toutes les data associées dans deux ArrayList
+
+14/11/19
+Pour le problème d'efficience avec les Arraylist, utiliser une classe de StringWrapper ??
+Utiliser des bytes au lieu de String ?
+"implement a StringWrapper class (contructor with a string arg) that will convert the given string into a byte[] using the encoding "ISO-8859-1" (only 256 char (8 bit instead of 16 bit per char). Than you may use your wrapper in the list/map instead of strings."
+cf. ici : https://coderanch.com/t/478502/java/store-huge-string-array-list
