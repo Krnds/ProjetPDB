@@ -1,3 +1,4 @@
+
 package main.fr.karinedias.utils;
 
 import java.io.BufferedReader;
@@ -23,9 +24,8 @@ public class FileReader {
 	 * @return a StringBuilder containing the file content
 	 */
 
-	private final String filePathMacOS = "/Users/dias/eclipse-workspace/ProjetPDB/doc/6hk2.cif"; // TODO: remove this
-	// String and
-	// replace with ?
+	//TODO: replace with external method which demands filename
+	private final String filePathMacOS = "/Users/dias/eclipse-workspace/ProjetPDB/doc/6hk2.cif";
 	private final String filePathDebian = "/home/karine/src/java/ProjetPDB/doc/3bw7.cif";
 
 

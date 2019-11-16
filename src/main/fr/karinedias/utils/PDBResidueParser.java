@@ -1,6 +1,5 @@
 package main.fr.karinedias.utils;
 
-import java.io.ObjectInputStream.GetField;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,8 +33,10 @@ public class PDBResidueParser {
 	    Matcher m = p.matcher(pdbFile.toString());
 	    List<String> allMatches = new ArrayList<String>();
 	    while (m.find()) {
-	    	allMatches.add(m.group());
+	    	allMatches.add(m.group().trim());
 	    }
+	    
+	    System.out.println(allMatches.get(6).trim());
 	    //TODO: trim all whitespaces when searching for regex
 		
 		if (pdbFile.toString().contains("_entity_poly_seq.hetero")) {
