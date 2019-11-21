@@ -9,7 +9,7 @@ import java.util.StringTokenizer;
 public class PDBAtomRetriver {
 
 	/*
-	 * Class that returns all 'ATOM' entries (type String) from a .cif/.pdb file
+	 * Class that returns all 'ATOM' entries (type String) from a .cif/.pdb file into a String object
 	 */
 
 	private String pdbFile = null;

@@ -19,9 +19,26 @@ public class PDBResidueParser {
 	 * @author Karine Dias 
 	 */
 
-	private final StringBuilder pdbFile = null; // TODO: create a link with the pdb file from FileReader class ?
-
 	
+	/**
+	 * Helper method
+	 */
+	
+	public static void findResidues(StringBuilder pdbFile) {
+		Pattern lineBeforeResiduesEntries = Pattern.compile("_entity_poly_seq.hetero (.*)"); //TODO: the same line 4 all pdb files ?
+		Matcher specificLineMatcher = lineBeforeResiduesEntries.matcher(pdbFile.toString());
+		if (specificLineMatcher.find()) {
+			System.out.println(specificLineMatcher.group(0));
+			System.out.println(specificLineMatcher.group(1));
+		}
+		
+	}
+
+	/**
+	 * Parses the file looking for resisdues entries
+	 * @param pdbFile
+	 * @return
+	 */
 
 	public static ArrayList<String> getListOfResidue(StringBuilder pdbFile) {
 		//search for line "_entity_poly_seq.hetero"
@@ -33,10 +50,15 @@ public class PDBResidueParser {
 	    Matcher m = p.matcher(pdbFile.toString());
 	    List<String> allMatches = new ArrayList<String>();
 	    while (m.find()) {
-	    	allMatches.add(m.group().trim());
+	    	allMatches.add(m.group());
+	    	
 	    }
 	    
-	    System.out.println(allMatches.get(6).trim());
+	    for (int i = 0; i < allMatches.size(); i++) {
+			//System.out.println("ENtrée n° " + i + ": " + allMatches.get(i));
+	    	allMatches.get(i).trim();
+		}
+	    
 	    //TODO: trim all whitespaces when searching for regex
 		
 		if (pdbFile.toString().contains("_entity_poly_seq.hetero")) {
@@ -54,113 +76,10 @@ public class PDBResidueParser {
 	
 	
 	public static void main(String[] args) {
-		StringBuilder test = new StringBuilder("loop_\n" + 
-				"_entity_poly_seq.entity_id \n" + 
-				"_entity_poly_seq.num \n" + 
-				"_entity_poly_seq.mon_id \n" + 
-				"_entity_poly_seq.hetero \n" + 
-				"1 1   VAL n \n" + 
-				"1 2   LEU n \n" + 
-				"1 3   SER n \n" + 
-				"1 4   PRO n \n" + 
-				"1 5   ALA n \n" + 
-				"1 6   ASP n \n" + 
-				"1 7   LYS n \n" + 
-				"1 8   THR n \n" + 
-				"1 9   ASN n \n" + 
-				"1 10  VAL n \n" + 
-				"1 11  LYS n \n" + 
-				"1 12  ALA n \n" + 
-				"1 13  ALA n \n" + 
-				"1 14  TRP n \n" + 
-				"1 15  GLY n \n" + 
-				"1 16  LYS n \n" + 
-				"1 17  VAL n \n" + 
-				"1 18  GLY n \n" + 
-				"1 19  ALA n \n" + 
-				"1 20  HIS n \n" + 
-				"1 21  ALA n \n" + 
-				"1 22  GLY n \n" + 
-				"1 23  GLU n \n" + 
-				"1 24  TYR n \n" + 
-				"1 25  GLY n \n" + 
-				"1 26  ALA n \n" + 
-				"1 27  GLU n \n" + 
-				"1 28  ALA n \n" + 
-				"1 29  LEU n \n" + 
-				"1 30  GLU n \n" + 
-				"1 31  ARG n \n" + 
-				"1 32  MET n \n" + 
-				"1 33  PHE n \n" + 
-				"1 34  LEU n \n" + 
-				"1 35  SER n \n" + 
-				"1 36  PHE n \n" + 
-				"1 37  PRO n \n" + 
-				"1 38  THR n \n" + 
-				"1 39  THR n \n" + 
-				"1 40  LYS n \n" + 
-				"1 41  THR n \n" + 
-				"1 42  TYR n \n" + 
-				"1 43  PHE n \n" + 
-				"1 44  PRO n \n" + 
-				"1 45  HIS n \n" + 
-				"1 46  PHE n \n" + 
-				"1 47  ASP n \n" + 
-				"1 48  LEU n \n" + 
-				"1 49  SER n \n" + 
-				"1 50  HIS n \n" + 
-				"1 51  GLY n \n" + 
-				"1 52  SER n \n" + 
-				"1 53  ALA n \n" + 
-				"1 54  GLN n \n" + 
-				"1 55  VAL n \n" + 
-				"1 56  LYS n \n" + 
-				"1 57  GLY n \n" + 
-				"1 58  HIS n \n" + 
-				"1 59  GLY n \n" + 
-				"1 60  LYS n \n" + 
-				"1 61  LYS n \n" + 
-				"1 62  VAL n \n" + 
-				"1 63  ALA n \n" + 
-				"1 64  ASP n \n" + 
-				"1 65  ALA n \n" + 
-				"1 66  LEU n \n" + 
-				"1 67  THR n \n" + 
-				"1 68  ASN n \n" + 
-				"1 69  ALA n \n" + 
-				"1 70  VAL n \n" + 
-				"1 71  ALA n \n" + 
-				"1 72  HIS n \n" + 
-				"1 73  VAL n \n" + 
-				"1 74  ASP n \n" + 
-				"1 75  ASP n \n" + 
-				"1 76  MET n \n" + 
-				"1 77  PRO n \n" + 
-				"1 78  ASN n \n" + 
-				"1 79  ALA n \n" + 
-				"1 80  LEU n \n" + 
-				"1 81  SER n \n" + 
-				"1 82  ALA n \n" + 
-				"1 83  LEU n \n" + 
-				"1 84  SER n \n" + 
-				"1 85  ASP n \n" + 
-				"1 86  LEU n \n" + 
-				"1 87  HIS n \n" + 
-				"1 88  ALA n \n" + 
-				"1 89  HIS n \n" + 
-				"1 90  LYS n \n" + 
-				"1 91  LEU n \n" + 
-				"1 92  ARG n \n" + 
-				"1 93  VAL n \n" + 
-				"1 94  ASP n \n" + 
-				"1 95  PRO n \n" + 
-				"1 96  VAL n \n" + 
-				"1 97  ASN n \n" + 
-				"1 98  PHE n \n" + 
-				"1 99  LYS n \n" + 
-				"1 100 LEU n ");
 	
-		 System.out.println(getListOfResidue(test));
+		StringBuilder sb = FileReader.reader("/home/karine/src/java/ProjetPDB/doc/3bw7.cif");
+		 System.out.println(getListOfResidue(sb));
+		 findResidues(sb);
 	}
 	
 	

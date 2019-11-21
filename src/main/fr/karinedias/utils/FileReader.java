@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream.GetField;
+import java.io.UncheckedIOException;
 import java.lang.reflect.Field;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -29,6 +30,9 @@ public class FileReader {
 	private final String filePathDebian = "/home/karine/src/java/ProjetPDB/doc/3bw7.cif";
 
 
+	public FileReader(String filename) {
+		getFileName();
+	}
 	public String getFileName() {
 
 		if (System.getProperty("os.name").equalsIgnoreCase("Mac OS X")) {
@@ -112,22 +116,14 @@ public class FileReader {
 	 * Test of reader : prints all the file content
 	 */
 	// source : https://howtodoinjava.com/java/io/java-read-file-to-string-examples/
-	public StringBuilder reader(String filePath) {
+	public static StringBuilder reader(String filePath) {
 		StringBuilder contentBuilder = new StringBuilder();
 		try (Stream<String> stream = Files.lines(Paths.get(filePath), StandardCharsets.UTF_8)) {
 			stream.forEach(s -> contentBuilder.append(s).append("\n"));
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new UncheckedIOException(e);
 		}
 		return contentBuilder;
 	}
 
-	/*
-	 * Tests in method main for all reader methods
-	 */
-	public static void main(String[] args) throws IOException {
-
-		// System.out.println(FileReader.reader("/Users/dias/cnam/projet-cnam/CalculDistancesPDB/doc/1fn3.cif"));
-
-	}
 }
