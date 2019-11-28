@@ -12,28 +12,28 @@ public class PDBAtomRetriver {
 	 * Class that returns all 'ATOM' entries (type String) from a .cif/.pdb file into a String object
 	 */
 
-	private String pdbFile = null;
+	private String pdbFileContent = null;
 	
 	
-	public PDBAtomRetriver(String pdbFile) {
-		this.pdbFile = pdbFile;
+	public PDBAtomRetriver(String pdbFileContent) {
+		this.pdbFileContent = pdbFileContent;
 	}
 	
 	public PDBAtomRetriver() {
 		//constructor without parameters calling subclass PDBAtomParser
 	}
 
-	protected String getPdbFile() {
-		return pdbFile;
+	public String getPdbFile() {
+		return pdbFileContent;
 	}
 
-	protected void setPdbFile(String pdbFile) {
-		this.pdbFile = pdbFile;
+	public void setPdbFile(String pdbFile) {
+		this.pdbFileContent = pdbFile;
 	}
 
 	public String getAtoms() throws IOException {
 
-		Reader reader = new FileReader(pdbFile);
+		Reader reader = new FileReader(pdbFileContent);
 		BufferedReader bufferedReader = new BufferedReader(reader);
 		String line;
 		String startWithATOM = "";
@@ -50,7 +50,7 @@ public class PDBAtomRetriver {
 
 	public String getAtoms2() throws IOException {
 
-		Reader reader = new FileReader(pdbFile);
+		Reader reader = new FileReader(pdbFileContent);
 		BufferedReader bufferedReader = new BufferedReader(reader);
 		String startWithATOM = "";
 
@@ -64,35 +64,6 @@ public class PDBAtomRetriver {
 		bufferedReader.close();
 		return startWithATOM;
 
-	}
-
-
-	public static void main(String[] args) {
-
-		PDBAtomRetriver testFile = new PDBAtomRetriver("/Users/dias/eclipse-workspace/ProjetPDB/doc/3c0p.cif");
-
-		/*
-		 * Beware, Eclipse limits the output by length, change the setting to see all
-		 * the output !
-		 */
-		try {
-			String atoms = testFile.getAtoms();
-			System.out.println("First test : \n");
-			System.out.println(atoms);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		try {
-			String atoms = testFile.getAtoms2();
-			System.out.println("Second test : \n");
-			System.out.println(atoms);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			e.getMessage();
-		}
 	}
 
 

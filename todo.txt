@@ -37,4 +37,18 @@ Régler le problème de lenteur quand je veux storer tous les atomes et toutes l
 Pour le problème d'efficience avec les Arraylist, utiliser une classe de StringWrapper ??
 Utiliser des bytes au lieu de String ?
 "implement a StringWrapper class (contructor with a string arg) that will convert the given string into a byte[] using the encoding "ISO-8859-1" (only 256 char (8 bit instead of 16 bit per char). Than you may use your wrapper in the list/map instead of strings."
-cf. ici : https://coderanch.com/t/478502/java/store-huge-string-array-list
+cf. ici :
+https://coderanch.com/t/478502/java/store-huge-string-array-list
+
+MAJ 24/11/19
+
+Cf. avec Anthony, l'algo à utiliser pour définir les zones
+d'interactions est le "closest pair points" ? à voir
+
+Regarder comment se comporte Jmol ou essayer de faire mon propre
+visualisateur
+Faire des tests unitaires de mes classes en utlisant les librairies
+telles que Java FX Point 3D
+
+Créér une nouvelle branche de développement, appelée "XX" qui va
+permettre de recommencer le projet sur de bonnes bases.

@@ -19,6 +19,7 @@ public class PDBResidueParser {
 	 * @author Karine Dias 
 	 */
 
+	//TODO: Ne fonctionne pas, écrire une classe robuste...
 	
 	/**
 	 * Helper method
@@ -77,9 +78,10 @@ public class PDBResidueParser {
 	
 	public static void main(String[] args) {
 	
-		StringBuilder sb = FileReader.reader("/home/karine/src/java/ProjetPDB/doc/3bw7.cif");
-		 System.out.println(getListOfResidue(sb));
-		 findResidues(sb);
+		FileReader myfile = new FileReader();
+		StringBuilder content = myfile.reader("/home/karine/src/java/ProjetPDB/doc/2b5i.cif");
+		 System.out.println(getListOfResidue(content));
+		// findResidues(content);
 	}
 	
 	
