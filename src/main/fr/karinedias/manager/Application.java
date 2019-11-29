@@ -6,7 +6,7 @@ import java.io.ObjectInputStream.GetField;
 
 import main.fr.karinedias.utils.AtomToken;
 import main.fr.karinedias.utils.FileReader;
-import main.fr.karinedias.utils.PDBAtomRetriver;
+import main.fr.karinedias.utils.PDBAtomRetriever;
 
 public class Application {
 
@@ -24,7 +24,7 @@ public class Application {
 		 * the output !
 		 */
 		//System.out.println(pdbSB.toString());
-		PDBAtomRetriver pdbStringAtoms = new PDBAtomRetriver(pdbSB.toString());
+		PDBAtomRetriever pdbStringAtoms = new PDBAtomRetriever(pdbSB.toString());
 		
 		try {
 			System.out.println("getAtoms method test :");
