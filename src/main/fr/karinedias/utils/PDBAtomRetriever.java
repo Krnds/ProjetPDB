@@ -9,7 +9,7 @@ public class PDBAtomRetriever {
 
 	/*
 	 * Class that returns all 'ATOM' entries (type String) from a .cif/.pdb file
-	 * into a String object
+	 * into a StringBuffer (getAtoms2) or String (getAtoms) object
 	 */
 
 	private String pdbFileContent = null;

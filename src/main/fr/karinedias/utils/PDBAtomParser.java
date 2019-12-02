@@ -4,10 +4,11 @@ import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 import java.util.concurrent.TimeUnit;
 
-public class PDBAtomParser extends PDBAtomRetriever {
+public class PDBAtomParser {
 
 	/*
 	 * TODO: create methods for : - atomSerialNumber - alternateLocationIndicator -
@@ -17,16 +18,16 @@ public class PDBAtomParser extends PDBAtomRetriever {
 	 */
 
 	public PDBAtomParser() {
-		super();
 	}
 
 	// TODO for performance :
-	// use Hashmap instead of ArrayList
-	// use indexOf instead of StringTokenizer
+	// use HashMap instead of List ?
+	// use indexOf instead of StringTokenizer ?
 
 	/**
 	 * This method separates all lines representing atom entries using the line
-	 * break character. Each atom is then stored in an arrayList
+	 * break character. Each atom is then stored in an arrayList Input : String
+	 * representing all ATOMS Output : Transforming the String into ArrayList
 	 * 
 	 * @param atomString a String object containing all lines with the word "ATOM"
 	 * @return an ArrayList of String which stores each ATOM entry of the PDBFile
@@ -45,19 +46,19 @@ public class PDBAtomParser extends PDBAtomRetriever {
 	}
 
 	/**
+	 * Method for storing each data ATOM entry in a ArrayList
 	 * 
 	 * @param allAtomEntries
 	 * @return an ArrayList of String which stores each ATOM entry of the PDBFile
 	 */
 
-	public static ArrayList<String> getOneAtomEntry(ArrayList<String> allAtomEntries) {
+	public static List<String> getOneAtomEntry(List<String> allAtomEntries) {
 
 		String atomRecordDelimiter = " ";
-		int nAtoms = allAtomEntries.size(); // 3795
-		// ArrayList contenant les données de chaque atome : listOfAtomRecord
-
-		ArrayList<String> listOfAtomData = new ArrayList<String>(nAtoms); // données d'une entrée ATOM
-		for (int i = 0; i < nAtoms; i++) {
+		int numberOfAtoms = allAtomEntries.size();
+		// ArrayList for the data of each atom
+		List<String> listOfAtomData = new ArrayList<String>(numberOfAtoms); // data of an ATOM entry
+		for (int i = 0; i < numberOfAtoms; i++) {
 			StringTokenizer oneAtomEntry = new StringTokenizer(allAtomEntries.get(i), atomRecordDelimiter);
 
 			for (int j = 0; j < oneAtomEntry.countTokens(); j++) {
@@ -86,17 +87,18 @@ public class PDBAtomParser extends PDBAtomRetriever {
 
 		PDBAtomRetriever myPDBFfile = new PDBAtomRetriever(filenameWindows);
 		try {
-			String myPDBfileAtoms = myPDBFfile.getAtoms2();// getAtoms() : 3123 ms VS getAtoms2() : 4850 ms
-			ArrayList<String> allatomsofPDBfile = getAllAtomEntries(myPDBfileAtoms);
-			// System.out.println(allatomsofPDBfile.toString());
-			// int iterations = allatomsofPDBfile.size();
-			for (String string : allatomsofPDBfile) {
-				System.out.println(getOneAtomEntry(allatomsofPDBfile).toString());
-			}
 
 			// TESTING EXECUTION TIMES
 			Instant start = Instant.now();
 
+			StringBuffer myPDBfileAtoms = myPDBFfile.getAtoms();// getAtoms() : 3123 ms VS getAtoms2() : 4850 ms
+			String atomsString = myPDBfileAtoms.toString(); // Conversion of StringBuffer into String
+			List<String> listOfAtoms = getAllAtomEntries(atomsString);
+			List<String> atomEntry = getOneAtomEntry(listOfAtoms);
+
+			for (int i = 0; i < atomEntry.size(); i++) {
+				System.out.print(atomEntry.get(i) + "\n");
+			}
 			// Measure execution time for this method
 			methodToTime();
 			Instant finish = Instant.now();
