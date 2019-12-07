@@ -52,3 +52,10 @@ telles que Java FX Point 3D
 
 Créér une nouvelle branche de développement, appelée "XX" qui va
 permettre de recommencer le projet sur de bonnes bases.
+
+
+07/12/19
+
+Pour télécharger les structures de la PDB il faut utiliser cette adresse avec un wget :
+www.pdb.org/pdb/download/downloadFile.do?fileFormat=pdb&compression=NO&structureId=
+en mettant à la fin l'ID de la structure (obtenu grâce à la méthode POST de l'api de la pdb pour avoir par xemple toutes les structures avec 2 entités (des complexes)

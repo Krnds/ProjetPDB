@@ -1,17 +1,18 @@
 package main.fr.karinedias.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Molecule {
 
 	private String entryID = "";
 	private int nChains = 0;
-	private ArrayList<Residue> aminoAcidList = new ArrayList<Residue>();
+	private List<Residue> aminoAcidList = new ArrayList<Residue>();
 	
 	/*
 	 * Constructor :
 	 */
-	public Molecule(String entryID, int nChains, ArrayList<Residue> aminoAcidList) {
+	public Molecule(String entryID, int nChains, List<Residue> aminoAcidList) {
 		this.entryID = entryID;
 		this.nChains = nChains;
 		this.aminoAcidList = aminoAcidList;
@@ -36,7 +37,7 @@ public class Molecule {
 		this.nChains = nChains;
 	}
 
-	protected ArrayList<Residue> getAminoAcidList() {
+	protected List<Residue> getAminoAcidList() {
 		return aminoAcidList;
 	}
 

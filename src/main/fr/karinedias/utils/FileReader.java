@@ -1,6 +1,8 @@
 
 package main.fr.karinedias.utils;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
@@ -44,8 +46,10 @@ public class FileReader {
 		StringBuilder contentBuilder = new StringBuilder();
 		try (Stream<String> stream = Files.lines(Paths.get(filePath), StandardCharsets.UTF_8)) {
 			stream.forEach(s -> contentBuilder.append(s).append("\n"));
-		} catch (IOException e) {
-			throw new UncheckedIOException(e);
+		} catch (FileNotFoundException exception) {
+			System.out.println("The file " + filePath + " was not found.");
+		} catch (IOException exception) {
+			System.out.println(exception);
 		}
 		return contentBuilder;
 	}

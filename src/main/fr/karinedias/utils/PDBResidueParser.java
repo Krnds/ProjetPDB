@@ -1,10 +1,13 @@
 package main.fr.karinedias.utils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import main.fr.karinedias.model.Atom;
 import main.fr.karinedias.model.Residue;
 
 public class PDBResidueParser extends PDBAtomParser {
@@ -27,7 +30,7 @@ public class PDBResidueParser extends PDBAtomParser {
 
 	public static Map<Integer, String> getListOfResidue(StringBuilder pdbFile) {
 
-		// looking for residues entries in pdb file
+		// looking for residues entries in pdb file in the form of : 1 1   VAL n 
 		Pattern residuesEntries = Pattern.compile("(\\d{1})\\s(\\d{1,3})\\s{1,3}([A-Z]{3})\\sn");
 		Matcher residuesLineMatcher = residuesEntries.matcher(pdbFile.toString());
 
@@ -41,11 +44,28 @@ public class PDBResidueParser extends PDBAtomParser {
 		return listOfResidues;
 
 	}
+	
+	//method for isolate from a residue, its list of atoms. Example for residue n° 44 : 
+//	ATOM   1536 N  N   . SER B 2 44  ? -11.077 -7.959  -17.622 1.00 25.51 ? 44  SER B N   1 
+//	ATOM   1537 C  CA  . SER B 2 44  ? -12.181 -8.781  -18.189 1.00 26.24 ? 44  SER B CA  1 
+//	ATOM   1538 C  C   . SER B 2 44  ? -11.823 -10.272 -18.230 1.00 24.54 ? 44  SER B C   1 
+//	ATOM   1539 O  O   . SER B 2 44  ? -12.681 -11.060 -18.684 1.00 24.30 ? 44  SER B O   1 
+//	ATOM   1540 C  CB  . SER B 2 44  ? -12.578 -8.313  -19.561 1.00 28.03 ? 44  SER B CB  1 
+//	ATOM   1541 O  OG  . SER B 2 44  ? -11.528 -8.593  -20.464 1.00 29.63 ? 44  SER B OG  1 
 
-	public static void getListOfAtoms(Residue res) {
+	public static List<Atom> getListOfAtoms(Residue res, StringBuilder pdbfile) {
 
+		List<Atom> atomsOfResidue = new ArrayList<Atom>();
 		int nres = res.getResidueNumber(); // number of residue
+		
+		
+		return atomsOfResidue;
 
+	}
+	
+	public static boolean residueExists(Residue residue) {
+		
+		return false;
 	}
 
 	// for testing purposes

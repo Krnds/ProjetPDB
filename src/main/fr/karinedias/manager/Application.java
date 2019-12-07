@@ -33,22 +33,20 @@ public class Application {
 
 		FileReader myfile = new FileReader();
 		// On Windows OS
-		StringBuilder content = myfile.reader("C:\\Users\\Karine\\eclipse-workspace\\ProjetPDB\\doc\\3c0p.cif");
-		StringBuilder content2 = myfile.reader("C:\\Users\\Karine\\eclipse-workspace\\ProjetPDB\\doc\\6hk2.cif");
-		StringBuilder content3 = myfile.reader("C:\\Users\\Karine\\eclipse-workspace\\ProjetPDB\\doc\\2b5i.cif");
+//		StringBuilder content = myfile.reader("C:\\Users\\Karine\\eclipse-workspace\\ProjetPDB\\doc\\3c0p.cif");
+		// On Debian (Linux)
+		StringBuilder content2 = myfile.reader("/home/karine/src/java/ProjetPDB/doc/6hk2.cif");
 
-		Map<Integer, String> residues, residues2, residues3;
+		Map<Integer, String> residues, residues2;
 
 		residues = new HashMap<Integer, String>();
 		residues2 = new HashMap<Integer, String>();
-		residues3 = new HashMap<Integer, String>();
 
-		residues = PDBResidueParser.getListOfResidue(content);
+//		residues = PDBResidueParser.getListOfResidue(content);
 		residues2 = PDBResidueParser.getListOfResidue(content2);
-		residues3 = PDBResidueParser.getListOfResidue(content3);
-		System.out.println(residues3.values().toString());
-		System.out.println(residues3.keySet().toString());
-		System.out.println(residues.get(35));
+		System.out.println(residues2.values().toString());
+		System.out.println(residues2.keySet().toString());
+		System.out.println("35th residue : " + residues2.get(35));
 	}
 
 }

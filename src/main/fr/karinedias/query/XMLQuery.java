@@ -17,9 +17,7 @@ public class XMLQuery {
 
 	public static void main(String[] args) {
 
-		String xml = "<orgPdbCompositeQuery version=\"1.0\">" +
-
-				"<orgPdbQuery><queryType>org.pdb.query.simple.NumberOfEntitiesQuery</queryType><description>Number of Entities Search : Entity Type=Protein Min Number of Entities=2 Max Number of Entities=2</description><entity.type.>p</entity.type.><struct_asym.numEntities.min>2</struct_asym.numEntities.min><struct_asym.numEntities.max>2</struct_asym.numEntities.max></orgPdbQuery>";
+		String xml = "<orgPdbQuery><queryType>org.pdb.query.simple.NumberOfEntitiesQuery</queryType><description>Number of Entities Search : Entity Type=Protein Min Number of Entities=2 Max Number of Entities=2</description><entity.type.>p</entity.type.><struct_asym.numEntities.min>2</struct_asym.numEntities.min><struct_asym.numEntities.max>2</struct_asym.numEntities.max></orgPdbQuery>";
 
 		XMLQuery t = new XMLQuery();
 
