@@ -1,49 +1,54 @@
 package main.fr.karinedias.manager;
 
-import java.awt.geom.Point2D;
 import java.io.IOException;
-import java.io.ObjectInputStream.GetField;
+import java.util.HashMap;
+import java.util.Map;
 
-import main.fr.karinedias.utils.AtomToken;
 import main.fr.karinedias.utils.FileReader;
 import main.fr.karinedias.utils.PDBAtomRetriever;
+import main.fr.karinedias.utils.PDBResidueParser;
 
 public class Application {
 
-	public static void main(String[] args) {
-//TODO: test all classes from here :
+	/**
+	 * Test all classes in main
+	 */
+	public static void main(String[] args) throws IOException {
+
 		// Read a .pdb file :
 		FileReader pdb = new FileReader();
-		String file = pdb.getFileName();
-		StringBuilder pdbSB = pdb.reader(file);
-		
-		// Test retrieving all ATOMS in form of a String :
-		
+		String filename = pdb.getFileName();
+
 		/*
 		 * Beware, Eclipse limits the output by length, change the setting to see all
 		 * the output !
 		 */
-		//System.out.println(pdbSB.toString());
-		PDBAtomRetriever pdbStringAtoms = new PDBAtomRetriever(pdbSB.toString());
-		
-		try {
-			System.out.println("getAtoms method test :");
-			System.out.println(pdbStringAtoms.getAtoms());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		// Another test with the getAtoms2 method :
-		try {
-			System.out.println("getAtoms2 method test :");
-			System.out.println(pdbStringAtoms.getAtoms2());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		PDBAtomRetriever pdbStringAtoms = new PDBAtomRetriever(filename); // useful ?
+		StringBuffer s = pdbStringAtoms.getAtoms();
+		String s2 = pdbStringAtoms.getAtoms2();
 
-		/// AtomToken atomsPdb = new AtomToken(file) //changer
+		System.out.println(s);
+		System.out.println("\n\n");
+		System.out.println(s2);
+
+		FileReader myfile = new FileReader();
+		// On Windows OS
+		StringBuilder content = myfile.reader("C:\\Users\\Karine\\eclipse-workspace\\ProjetPDB\\doc\\3c0p.cif");
+		StringBuilder content2 = myfile.reader("C:\\Users\\Karine\\eclipse-workspace\\ProjetPDB\\doc\\6hk2.cif");
+		StringBuilder content3 = myfile.reader("C:\\Users\\Karine\\eclipse-workspace\\ProjetPDB\\doc\\2b5i.cif");
+
+		Map<Integer, String> residues, residues2, residues3;
+
+		residues = new HashMap<Integer, String>();
+		residues2 = new HashMap<Integer, String>();
+		residues3 = new HashMap<Integer, String>();
+
+		residues = PDBResidueParser.getListOfResidue(content);
+		residues2 = PDBResidueParser.getListOfResidue(content2);
+		residues3 = PDBResidueParser.getListOfResidue(content3);
+		System.out.println(residues3.values().toString());
+		System.out.println(residues3.keySet().toString());
+		System.out.println(residues.get(35));
 	}
-	
+
 }

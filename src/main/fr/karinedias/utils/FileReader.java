@@ -16,24 +16,25 @@ public class FileReader {
 	 * @return a StringBuilder containing the file content
 	 */
 
-	//TODO: replace with external method which demands filename
+	// TODO: replace with external method which demands filename
 	private final String filePathMacOS = "/Users/dias/eclipse-workspace/ProjetPDB/doc/6hk2.cif";
 	private final String filePathDebian = "/home/karine/src/java/ProjetPDB/doc/3bw7.cif";
-
+	private final String fileWindows = "C:\\Users\\Karine\\eclipse-workspace\\ProjetPDB\\doc\\2b5i.cif";
 
 	public FileReader() {
 		getFileName();
 	}
-	
+
 	public String getFileName() {
 
 		if (System.getProperty("os.name").equalsIgnoreCase("Mac OS X")) {
 			return filePathMacOS;
+		} else if (System.getProperty("os.name").equalsIgnoreCase("Windows 7")) {
+			return fileWindows;
 		} else {
 			return filePathDebian;
 		}
 	}
-
 
 	/*
 	 * Test of reader : prints all the file content

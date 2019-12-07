@@ -12,14 +12,10 @@ public class PDBAtomRetriever {
 	 * into a StringBuffer (getAtoms2) or String (getAtoms) object
 	 */
 
-	private String pdbFileContent = null;
+	private String pdbFileContent;
 
 	public PDBAtomRetriever(String pdbFileContent) {
 		this.pdbFileContent = pdbFileContent;
-	}
-
-	public PDBAtomRetriever() {
-		// constructor without parameters calling subclass PDBAtomParser
 	}
 
 	public String getPdbFile() {
@@ -35,17 +31,15 @@ public class PDBAtomRetriever {
 		Reader reader = new FileReader(pdbFileContent);
 		BufferedReader bufferedReader = new BufferedReader(reader);
 		String line;
-		String startWithATOM = "";
-		StringBuffer startWithATOM2 = new StringBuffer(100000); // 100.000 is pure assumption
+		StringBuffer startWithATOM = new StringBuffer();
 
 		while ((line = bufferedReader.readLine()) != null) {
 			if (line.contains("ATOM")) {
-				// startWithATOM += line + "\n";
-				startWithATOM2.append(line).append("\n"); // testing
+				startWithATOM.append(line).append("\n");
 			}
 		}
 		bufferedReader.close();
-		return startWithATOM2;
+		return startWithATOM;
 
 	}
 
@@ -58,7 +52,6 @@ public class PDBAtomRetriever {
 		for (String line = bufferedReader.readLine(); line != null; line = bufferedReader.readLine()) {
 			if (line.startsWith("ATOM")) {
 				startWithATOM += line + "\n";
-
 			}
 
 		}

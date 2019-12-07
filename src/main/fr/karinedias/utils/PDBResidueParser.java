@@ -5,7 +5,9 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class PDBResidueParser {
+import main.fr.karinedias.model.Residue;
+
+public class PDBResidueParser extends PDBAtomParser {
 
 	/**
 	 * Class for parsing the PDB file and returning all the residues and their atom
@@ -40,6 +42,12 @@ public class PDBResidueParser {
 
 	}
 
+	public static void getListOfAtoms(Residue res) {
+
+		int nres = res.getResidueNumber(); // number of residue
+
+	}
+
 	// for testing purposes
 	public static void main(String[] args) {
 
@@ -49,8 +57,6 @@ public class PDBResidueParser {
 		StringBuilder content2 = myfile.reader("C:\\Users\\Karine\\eclipse-workspace\\ProjetPDB\\doc\\6hk2.cif");
 		StringBuilder content3 = myfile.reader("C:\\Users\\Karine\\eclipse-workspace\\ProjetPDB\\doc\\2b5i.cif");
 
-		// System.out.println(getListOfResidue(content));
-		// findResidues(content);
 		Map<Integer, String> residues = new HashMap<Integer, String>();
 		residues = getListOfResidue(content3);
 		System.out.println(residues.values().toString());
