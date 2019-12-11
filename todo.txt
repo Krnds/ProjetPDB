@@ -59,3 +59,22 @@ permettre de recommencer le projet sur de bonnes bases.
 Pour télécharger les structures de la PDB il faut utiliser cette adresse avec un wget :
 www.pdb.org/pdb/download/downloadFile.do?fileFormat=pdb&compression=NO&structureId=
 en mettant à la fin l'ID de la structure (obtenu grâce à la méthode POST de l'api de la pdb pour avoir par xemple toutes les structures avec 2 entités (des complexes)
+
+
+>>> à mettre dans fichier de commandes git :
+
+- git branch -r : liste toutes les branches du projet
+
+- git checkout <nom-branche> : pour juste switcher de branche
+
+
+>>> Pour télécharger un fichier depuis une URL avec une boite de dialogue : utiliser Spring MVC ?
+
+https://howtodoinjava.com/spring-mvc/spring-mvc-download-file-controller-example/
+http://websystique.com/springmvc/spring-mvc-4-file-download-example/
+https://stackoverflow.com/questions/10318365/downloading-file-with-save-as-dialog-box-in-jsp-how-to-prompt-user-for-save-vi
+donc utiliser plutot JavaFx, interface ServletResponse :https://docs.oracle.com/javaee/6/api/javax/servlet/ServletResponse.html
+
+
+
+ 
