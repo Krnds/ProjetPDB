@@ -1,8 +1,10 @@
-package main.fr.karinedias.model;
+package main.fr.karinedias.math;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import main.fr.karinedias.model.Residue;
 
 public class ResidueDistanceCalculation {
 	

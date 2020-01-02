@@ -47,27 +47,27 @@ public class Residue {
 		this.residueNumber = residueNumber;
 	}
 
-	protected List<Double> getCoordCarbonAtom() {
+	public List<Double> getCoordCarbonAtom() {
 		return coordCarbonAtom;
 	}
 
-	protected void setCoordCarbonAtom(List<Double> coordCarbonAtom) {
+	public void setCoordCarbonAtom(List<Double> coordCarbonAtom) {
 		this.coordCarbonAtom = coordCarbonAtom;
 	}
 
-	protected List<Double> getCoordNitrogenAtom() {
+	public List<Double> getCoordNitrogenAtom() {
 		return coordNitrogenAtom;
 	}
 
-	protected void setCoordNitrogenAtom(List<Double> coordNitrogenAtom) {
+	public void setCoordNitrogenAtom(List<Double> coordNitrogenAtom) {
 		this.coordNitrogenAtom = coordNitrogenAtom;
 	}
 
-	protected List<Double> getCoordOxygenAtom() {
+	public List<Double> getCoordOxygenAtom() {
 		return coordOxygenAtom;
 	}
 
-	protected void setCoordOxygenAtom(List<Double> coordOxygenAtom) {
+	public void setCoordOxygenAtom(List<Double> coordOxygenAtom) {
 		this.coordOxygenAtom = coordOxygenAtom;
 	}
 
@@ -96,7 +96,7 @@ public class Residue {
 		aminoAcidCode.put("MET", 'M');
 	}
 
-	protected double getCoordXAlphaCarbon() {
+	public double getCoordXAlphaCarbon() {
 		return coordXAlphaCarbon;
 	}
 
@@ -104,7 +104,7 @@ public class Residue {
 		this.coordXAlphaCarbon = coordXAlphaCarbon;
 	}
 
-	protected double getCoordYAlphaCarbon() {
+	public double getCoordYAlphaCarbon() {
 		return coordYAlphaCarbon;
 	}
 
@@ -112,7 +112,7 @@ public class Residue {
 		this.coordYAlphaCarbon = coordYAlphaCarbon;
 	}
 
-	protected double getCoordZAlphaCarbon() {
+	public double getCoordZAlphaCarbon() {
 		return coordZAlphaCarbon;
 	}
 

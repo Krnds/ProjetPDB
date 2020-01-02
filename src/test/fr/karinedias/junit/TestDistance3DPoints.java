@@ -1,6 +1,6 @@
 package test.fr.karinedias.junit;
 
-import javax.vecmath.*;
+
 
 import main.fr.karinedias.model.Residue;
 
@@ -28,7 +28,7 @@ public class TestDistance3DPoints {
 	}
 
 	public static void main(String[] args) {
-		Point3d residue1 = new Point3d(5, 7, 3);
+		//Point3d residue1 = new Point3d(5, 7, 3);
 		
 	}
 }

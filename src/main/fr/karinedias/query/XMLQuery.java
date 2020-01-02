@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class XMLQuery {
+	/**
+	 * Source : http://www.rcsb.org/pdb/software/static.do?p=/software/webservices/PostXMLQuery.jsp
+	 */
 
 	public static final String SERVICELOCATION = "https://www.rcsb.org/pdb/rest/search";
 
