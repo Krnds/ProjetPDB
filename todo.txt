@@ -64,3 +64,7 @@ en mettant à la fin l'ID de la structure (obtenu grâce à la méthode POST de 
 
 Au lieu de télécharger par exemple toutes les structures qui ont au moins 2 entités, on peut visualiser le fichier pdb directement dans le navigateur :
 https://files.rcsb.org/view/4hhb.cif
+TODO:
+- enregistrer dans le dossier doc directement
+- lowercase pour les noms des fichiers
+- contrôle du nom avec un regex ? (CHIFFRE-LETTRE-CHIFFREOULETTRE-CHIFFREOULETTRE)
