@@ -59,3 +59,12 @@ permettre de recommencer le projet sur de bonnes bases.
 Pour télécharger les structures de la PDB il faut utiliser cette adresse avec un wget :
 www.pdb.org/pdb/download/downloadFile.do?fileFormat=pdb&compression=NO&structureId=
 en mettant à la fin l'ID de la structure (obtenu grâce à la méthode POST de l'api de la pdb pour avoir par xemple toutes les structures avec 2 entités (des complexes)
+
+02/01/20
+
+Au lieu de télécharger par exemple toutes les structures qui ont au moins 2 entités, on peut visualiser le fichier pdb directement dans le navigateur :
+https://files.rcsb.org/view/4hhb.cif
+TODO:
+- enregistrer dans le dossier doc directement
+- lowercase pour les noms des fichiers
+- contrôle du nom avec un regex ? (CHIFFRE-LETTRE-CHIFFREOULETTRE-CHIFFREOULETTRE)
