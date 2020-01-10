@@ -73,12 +73,12 @@ public class PDBResidueParser extends PDBAtomParser {
 
 		FileReader myfile = new FileReader();
 		// On Windows OS
-		StringBuilder content = myfile.reader("C:\\Users\\Karine\\eclipse-workspace\\ProjetPDB\\doc\\3c0p.cif");
-		StringBuilder content2 = myfile.reader("C:\\Users\\Karine\\eclipse-workspace\\ProjetPDB\\doc\\6hk2.cif");
-		StringBuilder content3 = myfile.reader("C:\\Users\\Karine\\eclipse-workspace\\ProjetPDB\\doc\\2b5i.cif");
+//		StringBuilder content = myfile.reader("C:\\Users\\Karine\\eclipse-workspace\\ProjetPDB\\doc\\3c0p.cif");
+//		StringBuilder content2 = myfile.reader("C:\\Users\\Karine\\eclipse-workspace\\ProjetPDB\\doc\\6hk2.cif");
+		StringBuilder debianExample = myfile.reader("/home/karine/src/java/ProjetPDB/doc/6rj4.cif");
 
 		Map<Integer, String> residues = new HashMap<Integer, String>();
-		residues = getListOfResidue(content3);
+		residues = getListOfResidue(debianExample);
 		System.out.println(residues.values().toString());
 		System.out.println(residues.keySet().toString());
 

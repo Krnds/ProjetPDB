@@ -132,7 +132,7 @@ public class PDBAtomParser {
 		String filenameMacOS = "/Users/dias/eclipse-workspace/ProjetPDB/doc/2b5i.cif";
 		String filenameWindows = "C:\\Users\\Karine\\eclipse-workspace\\ProjetPDB\\doc\\2b5i.cif";
 
-		PDBAtomRetriever myPDBFfile = new PDBAtomRetriever(filenameWindows);
+		PDBAtomRetriever myPDBFfile = new PDBAtomRetriever(filenameDebian);
 		try {
 
 			StringBuffer myPDBfileAtoms = myPDBFfile.getAtoms();// getAtoms() : 3123 ms VS getAtoms2() : 4850 ms
