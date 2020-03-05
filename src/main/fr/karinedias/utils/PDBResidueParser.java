@@ -1,6 +1,7 @@
 package main.fr.karinedias.utils;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -79,8 +80,18 @@ public class PDBResidueParser extends PDBAtomParser {
 
 		Map<Integer, String> residues = new HashMap<Integer, String>();
 		residues = getListOfResidue(debianExample);
+
+		for (int i = 0; i < residues.size(); i++) {
+			//Atom atoms = residues.get(i);
+		}
+		
+		Collection<String> s = residues.values();
+		System.out.println("--------CLASS RESIDUE PARSER---------\n\nList of residues :\n");
 		System.out.println(residues.values().toString());
 		System.out.println(residues.keySet().toString());
+		System.out.println("\n--------CLASS RESIDUE PARSER---------\n\nList of atoms :\n");
+		
+		//atoms = getListOfAtoms(s.addAll(c), pdbfile)
 
 	}
 
