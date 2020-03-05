@@ -1,6 +1,7 @@
 package main.fr.karinedias.utils;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -73,14 +74,24 @@ public class PDBResidueParser extends PDBAtomParser {
 
 		FileReader myfile = new FileReader();
 		// On Windows OS
-		StringBuilder content = myfile.reader("C:\\Users\\Karine\\eclipse-workspace\\ProjetPDB\\doc\\3c0p.cif");
-		StringBuilder content2 = myfile.reader("C:\\Users\\Karine\\eclipse-workspace\\ProjetPDB\\doc\\6hk2.cif");
-		StringBuilder content3 = myfile.reader("C:\\Users\\Karine\\eclipse-workspace\\ProjetPDB\\doc\\2b5i.cif");
+//		StringBuilder content = myfile.reader("C:\\Users\\Karine\\eclipse-workspace\\ProjetPDB\\doc\\3c0p.cif");
+//		StringBuilder content2 = myfile.reader("C:\\Users\\Karine\\eclipse-workspace\\ProjetPDB\\doc\\6hk2.cif");
+		StringBuilder debianExample = myfile.reader("/home/karine/src/java/ProjetPDB/doc/6rj4.cif");
 
 		Map<Integer, String> residues = new HashMap<Integer, String>();
-		residues = getListOfResidue(content3);
+		residues = getListOfResidue(debianExample);
+
+		for (int i = 0; i < residues.size(); i++) {
+			//Atom atoms = residues.get(i);
+		}
+		
+		Collection<String> s = residues.values();
+		System.out.println("--------CLASS RESIDUE PARSER---------\n\nList of residues :\n");
 		System.out.println(residues.values().toString());
 		System.out.println(residues.keySet().toString());
+		System.out.println("\n--------CLASS RESIDUE PARSER---------\n\nList of atoms :\n");
+		
+		//atoms = getListOfAtoms(s.addAll(c), pdbfile)
 
 	}
 

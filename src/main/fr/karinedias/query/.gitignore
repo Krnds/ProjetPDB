@@ -1,2 +1,6 @@
 /XMLQuery.class
 /DownloadPDB.class
+/DownloadPDB2.class
+/PDBFile.class
+/Query.class
+/FetchStructure.class

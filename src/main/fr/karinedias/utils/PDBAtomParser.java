@@ -105,14 +105,6 @@ public class PDBAtomParser {
 	}
 
 	// TODO WTF ? useful ?
-//	ATOM   157  N N   . LEU A 1 25  ? 5.780   -29.926 34.503  1.00 60.26 ? 25  LEU A N   1 
-//			ATOM   158  C CA  . LEU A 1 25  ? 6.098   -29.478 35.846  1.00 61.13 ? 25  LEU A CA  1 
-//			ATOM   159  C C   . LEU A 1 25  ? 5.569   -30.437 36.914  1.00 61.53 ? 25  LEU A C   1 
-//			ATOM   160  O O   . LEU A 1 25  ? 6.310   -30.833 37.822  1.00 61.71 ? 25  LEU A O   1 
-//			ATOM   161  C CB  . LEU A 1 25  ? 5.580   -28.051 36.081  1.00 61.10 ? 25  LEU A CB  1 
-//			ATOM   162  C CG  . LEU A 1 25  ? 5.989   -27.423 37.422  1.00 61.53 ? 25  LEU A CG  1 
-//			ATOM   163  C CD1 . LEU A 1 25  ? 7.431   -26.905 37.383  1.00 61.18 ? 25  LEU A CD1 1 
-//			ATOM   164  C CD2 . LEU A 1 25  ? 5.029   -26.312 37.805  1.00 60.62 ? 25  LEU A CD2 1 
 
 	public static void getListOfAtoms(int resNumber, List<String> allAtomEntries) { // change name
 
@@ -132,7 +124,7 @@ public class PDBAtomParser {
 		String filenameMacOS = "/Users/dias/eclipse-workspace/ProjetPDB/doc/2b5i.cif";
 		String filenameWindows = "C:\\Users\\Karine\\eclipse-workspace\\ProjetPDB\\doc\\2b5i.cif";
 
-		PDBAtomRetriever myPDBFfile = new PDBAtomRetriever(filenameWindows);
+		PDBAtomRetriever myPDBFfile = new PDBAtomRetriever(filenameDebian);
 		try {
 
 			StringBuffer myPDBfileAtoms = myPDBFfile.getAtoms();// getAtoms() : 3123 ms VS getAtoms2() : 4850 ms
@@ -142,26 +134,26 @@ public class PDBAtomParser {
 			// System.out.println(allAtomEntries.get(0));
 			System.out.println(getAtomTokens(allAtomEntries).get(0));
 
-//			List<String> atomEntry = getAtomTokens(allAtomEntries);
-//
-//			// print result of oneAtomEntry :
-//			for (int i = 0; i < atomEntry.size(); i++) {
-//				System.out.println("AtomEntry number " + i + " : " + atomEntry.get(i));
-//			}
-//
-//			// print result of getAtomTokens :
-//			List<String> atomTokens = getAtomTokens2(atomsString);
-//			int n = atomTokens.size();
-//			for (int i = 0; i < n; i++) {
-//				System.out.println("AtomToken number " + i + " : " + atomTokens.get(i));
-//			}
+			List<String> atomEntry = getAtomTokens(allAtomEntries);
+
+			// print result of oneAtomEntry :
+			for (int i = 0; i < atomEntry.size(); i++) {
+				System.out.println("AtomEntry number " + i + " : " + atomEntry.get(i));
+			}
+
+			// print result of getAtomTokens :
+			List<String> atomTokens = getAtomTokens2(atomsString);
+			int n = atomTokens.size();
+			for (int i = 0; i < n; i++) {
+				System.out.println("AtomToken number " + i + " : " + atomTokens.get(i));
+			}
 
 			// test the method getAtomCoordinates :
-//			List<String> myatom = getAtomTokens(allAtomEntries.get(254));
-//			HashMap<String, List<Double>> mycoordinates = new HashMap<String, List<Double>>();
-//			mycoordinates = getAtomCoordinates(myatom);
-//			System.out.println(mycoordinates.toString());
-//			System.exit(0);
+			List<String> myatom = getAtomTokens(allAtomEntries);
+			HashMap<String, List<Double>> mycoordinates = new HashMap<String, List<Double>>();
+			mycoordinates = getAtomCoordinates(myatom);
+			System.out.println(mycoordinates.toString());
+			System.exit(0);
 
 		} catch (IOException e) {
 			e.printStackTrace();

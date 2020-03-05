@@ -27,15 +27,15 @@ public class Application {
 		StringBuffer s = pdbStringAtoms.getAtoms();
 		String s2 = pdbStringAtoms.getAtoms2();
 
-		System.out.println(s);
+		System.out.println(s.toString());
 		System.out.println("\n\n");
-		System.out.println(s2);
+		System.out.println(s2.toString());
 
 		FileReader myfile = new FileReader();
-		// On Windows OS
-//		StringBuilder content = myfile.reader("C:\\Users\\Karine\\eclipse-workspace\\ProjetPDB\\doc\\3c0p.cif");
+		// On Mac OS
+		//StringBuilder content = myfile.reader("/Users/dias/eclipse-workspace/ProjetPDB/doc/3c0p.cif");
 		// On Debian (Linux)
-		StringBuilder content2 = myfile.reader("/home/karine/src/java/ProjetPDB/doc/6hk2.cif");
+		 StringBuilder content2 = myfile.reader("/home/karine/src/java/ProjetPDB/doc/2na8.cif");
 
 		Map<Integer, String> residues, residues2;
 
@@ -44,6 +44,7 @@ public class Application {
 
 //		residues = PDBResidueParser.getListOfResidue(content);
 		residues2 = PDBResidueParser.getListOfResidue(content2);
+		
 		System.out.println(residues2.values().toString());
 		System.out.println(residues2.keySet().toString());
 		System.out.println("35th residue : " + residues2.get(35));

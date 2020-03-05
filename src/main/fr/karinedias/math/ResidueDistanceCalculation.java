@@ -1,8 +1,12 @@
-package main.fr.karinedias.model;
+package main.fr.karinedias.math;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import main.fr.karinedias.model.Residue;
+import main.fr.karinedias.utils.PDBAtomParser;
+import main.fr.karinedias.utils.PDBAtomRetriever;
 
 public class ResidueDistanceCalculation {
 	
@@ -44,7 +48,7 @@ public class ResidueDistanceCalculation {
 		
 		//x, y, z coordinates of each atom (C,N,O) of residue1 : 
 		List<Double> res1coordC = new ArrayList<Double>(3);
-		//adding all coordinates from the C atom :
+		//adding all coordinates from the Carbon atom :
 		residue1.getCoordCarbonAtom().addAll(res1coordC);
 		//Same with the Nitrogen atom : 
 		List<Double> res1coordN = new ArrayList<Double>(3);
@@ -112,6 +116,11 @@ public class ResidueDistanceCalculation {
 	//FOR TESTING PURPOSES
 	public static void main(String[] args) {
 
+		PDBAtomRetriever pdbatomretriver = new PDBAtomRetriever("/home/karine/src/java/ProjetPDB/doc/6rj4.cif");
+		//String atoms = pdbatomretriver.getAtoms2();
+		PDBAtomParser pdbatomparser = new PDBAtomParser();
+		//pdbatomparser.
+		//Residue test = new Residue("Residue1", 44, atomsOfResidue);
 	}
 	
 	
