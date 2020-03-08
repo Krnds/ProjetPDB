@@ -1,4 +1,4 @@
-package main.fr.karinedias.model;
+package src.main.fr.karinedias.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
