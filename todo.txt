@@ -89,3 +89,18 @@ TODO:
 - lowercase pour les noms des fichiers
 - contrôle du nom avec un regex ? (CHIFFRE-LETTRE-CHIFFREOULETTRE-CHIFFREOULETTRE)
 >>>>>>> feature-maven
+
+07/03/20 :
+
+FetchStructure : permet à partir de l'ID d'un complexe moléculaire de
+télécharger le fichier cif avec le contenu de sa structure.
+
+Query : grâce à une requête XML, cherche sur le PDN webservice toutes
+les structures qui entrent dans la définition de complexe moléculaire,
+les liste et en renvoie une au hasard.
+
+TODO LIST :
+- Ne pas appeler de méthodes externes dans le constructeur d'un objet
+  (bug et foireux)
+- Plutôt regarder du côté de Singleton design pattern ou encore du Factory
+  method pattern.

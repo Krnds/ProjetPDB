@@ -1,4 +1,4 @@
-package main.fr.karinedias.query;
+package src.main.fr.karinedias.query;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -9,7 +9,6 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Scanner;
 
 public class FetchStructure {
 
@@ -25,22 +24,12 @@ public class FetchStructure {
 	 */
 
 	private static final String URL = "https://files.rcsb.org/view/";
-	private String id;
+	private final String STRUCTUREID;
 
-	public FetchStructure() {
+	public FetchStructure() throws IOException {
+		STRUCTUREID = Query.getRandomID(); //use singleton design pattern ?
 	}
 
-	// TODO: control of the ID with regex ?
-	public String getID() {
-
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Enter the ID of the structure to download :\n");
-		String id = sc.nextLine();
-//		id = this.id; // correct ??
-		sc.close();
-		return id;
-
-	}
 
 	public void getPDBFile(String id) {
 
@@ -78,12 +67,12 @@ public class FetchStructure {
 	}
 
 	// FOR TESTING PURPOSES
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 
 		
 		FetchStructure test = new FetchStructure();
 		//ask for id
-		String id = test.getID();
+		String id = test.STRUCTUREID;
 		test.getPDBFile(id);
 		
 		
