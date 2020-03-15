@@ -1,9 +1,9 @@
-package main.fr.karinedias.utils;
+package src.main.fr.karinedias.utils;
 
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
-import main.fr.karinedias.model.AminoAcidCode;
+import src.main.fr.karinedias.model.AminoAcidCode;
 
 public class AtomToken {
 

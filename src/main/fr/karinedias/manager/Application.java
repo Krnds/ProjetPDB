@@ -1,12 +1,12 @@
-package main.fr.karinedias.manager;
+package src.main.fr.karinedias.manager;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import main.fr.karinedias.utils.FileReader;
-import main.fr.karinedias.utils.PDBAtomRetriever;
-import main.fr.karinedias.utils.PDBResidueParser;
+import src.main.fr.karinedias.utils.FileReader;
+import src.main.fr.karinedias.utils.PDBAtomRetriever;
+import src.main.fr.karinedias.utils.PDBResidueParser;
 
 public class Application {
 
@@ -48,6 +48,8 @@ public class Application {
 		System.out.println(residues2.values().toString());
 		System.out.println(residues2.keySet().toString());
 		System.out.println("35th residue : " + residues2.get(35));
+		
+		
 	}
 
 }

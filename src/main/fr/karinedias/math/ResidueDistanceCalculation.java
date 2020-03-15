@@ -1,12 +1,12 @@
-package main.fr.karinedias.math;
+package src.main.fr.karinedias.math;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import main.fr.karinedias.model.Residue;
-import main.fr.karinedias.utils.PDBAtomParser;
-import main.fr.karinedias.utils.PDBAtomRetriever;
+import src.main.fr.karinedias.model.Residue;
+import src.main.fr.karinedias.utils.PDBAtomParser;
+import src.main.fr.karinedias.utils.PDBAtomRetriever;
 
 public class ResidueDistanceCalculation {
 	
@@ -121,6 +121,10 @@ public class ResidueDistanceCalculation {
 		PDBAtomParser pdbatomparser = new PDBAtomParser();
 		//pdbatomparser.
 		//Residue test = new Residue("Residue1", 44, atomsOfResidue);
+		double d = 0;
+		//TODO : avoir une classe qui renvoie une liste de tous les residus selon les caractéristiques de l'objet Residue
+		//et pouvoir en choisir deux selon cette liste :
+		
 	}
 	
 	

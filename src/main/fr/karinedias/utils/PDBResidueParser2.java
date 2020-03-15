@@ -1,4 +1,4 @@
-package main.fr.karinedias.utils;
+package src.main.fr.karinedias.utils;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -7,8 +7,8 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.fr.karinedias.model.Atom;
-import main.fr.karinedias.model.Residue;
+import src.main.fr.karinedias.model.Atom;
+import src.main.fr.karinedias.model.Residue;
 
 public class PDBResidueParser2 {
 	
@@ -91,7 +91,7 @@ public class PDBResidueParser2 {
 	//FOR TESTING PURPORSES :
 	public static void main(String[] args) {
 		
-		main.fr.karinedias.utils.FileReader testfile = new main.fr.karinedias.utils.FileReader();
+		src.main.fr.karinedias.utils.FileReader testfile = new src.main.fr.karinedias.utils.FileReader();
 				
 		PDBResidueParser2 test = new PDBResidueParser2(testfile.reader("/home/karine/src/java/ProjetPDB/doc/3bw7.cif"));
 		String s = test.toString();

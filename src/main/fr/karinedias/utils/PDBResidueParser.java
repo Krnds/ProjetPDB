@@ -1,4 +1,4 @@
-package main.fr.karinedias.utils;
+package src.main.fr.karinedias.utils;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -8,8 +8,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import main.fr.karinedias.model.Atom;
-import main.fr.karinedias.model.Residue;
+import src.main.fr.karinedias.model.Atom;
+import src.main.fr.karinedias.model.Residue;
 
 public class PDBResidueParser extends PDBAtomParser {
 

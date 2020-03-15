@@ -1,4 +1,4 @@
-package test.fr.karinedias.junit;
+package src.test.fr.karinedias.junit;
 
 import static org.junit.jupiter.api.Assertions.*;
 

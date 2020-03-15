@@ -1,8 +1,8 @@
-package test.fr.karinedias.junit;
+package src.test.fr.karinedias.junit;
 
 
 
-import main.fr.karinedias.model.Residue;
+import src.main.fr.karinedias.model.Residue;
 
 /**
  * Beware, the javax is from the Java SE edition (13.0.1 used here) The external
