@@ -24,7 +24,7 @@ public class FetchStructure {
 	 */
 
 	private static final String URL = "https://files.rcsb.org/view/";
-	private final String STRUCTUREID;
+	private static String STRUCTUREID;
 
 	public FetchStructure() throws IOException {
 		STRUCTUREID = Query.getRandomID(); //use singleton design pattern ?
@@ -72,18 +72,31 @@ public class FetchStructure {
 		
 		FetchStructure test = new FetchStructure();
 		//ask for id
-		String id = test.STRUCTUREID;
+		String id = FetchStructure.STRUCTUREID;
 		test.getPDBFile(id);
-		
+		String pathOfCif = FetchStructure.getPathStructure();
+		System.out.println(pathOfCif);
 		
 	}
 
+	
 	/*
 	 * Method for finding the path of the doc directory
 	 */
 
-	public static String getPathOfPDBFiles() {
+	public String getPathOfPDBFiles() {
 
 		return System.getProperty("user.dir") + File.separator + "doc" + File.separator;
 	}
+	
+	public static String getPathStructure() {
+		
+		return System.getProperty("user.dir") + File.separator + "doc" + File.separator + getSTRUCTUREID() + ".cif";
+	}
+
+
+	protected static String getSTRUCTUREID() {
+		return STRUCTUREID;
+	}
+	
 }

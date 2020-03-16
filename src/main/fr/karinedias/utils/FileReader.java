@@ -8,6 +8,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
+import src.main.fr.karinedias.query.FetchStructure;
+
 public class FileReader {
 
 	/**
@@ -18,7 +20,7 @@ public class FileReader {
 
 	// TODO: replace with external method which demands filename
 	private final String filePathMacOS = "/Users/dias/eclipse-workspace/ProjetPDB/doc/6hk2.cif";
-	private final String filePathDebian = "/home/karine/src/java/ProjetPDB/doc/3bw7.cif";
+	public String filePathDebian = FetchStructure.getPathStructure();
 	private final String fileWindows = "C:\\Users\\Karine\\eclipse-workspace\\ProjetPDB\\doc\\2b5i.cif";
 
 	public FileReader() {

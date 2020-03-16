@@ -1,0 +1,811 @@
+data_3TNW
+# 
+_entry.id   3TNW 
+# 
+_audit_conform.dict_name       mmcif_pdbx.dic 
+_audit_conform.dict_version    5.279 
+_audit_conform.dict_location   http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic 
+# 
+loop_
+_database_2.database_id 
+_database_2.database_code 
+PDB   3TNW         
+RCSB  RCSB067703   
+WWPDB D_1000067703 
+# 
+_pdbx_database_status.entry_id                        3TNW 
+_pdbx_database_status.status_code                     REL 
+_pdbx_database_status.deposit_site                    RCSB 
+_pdbx_database_status.process_site                    RCSB 
+_pdbx_database_status.recvd_initial_deposition_date   2011-09-02 
+_pdbx_database_status.status_code_sf                  REL 
+_pdbx_database_status.status_code_mr                  ? 
+_pdbx_database_status.SG_entry                        ? 
+_pdbx_database_status.status_code_cs                  ? 
+_pdbx_database_status.pdb_format_compatible           Y 
+# 
+loop_
+_audit_author.name 
+_audit_author.pdbx_ordinal 
+'Baumli, S.'     1 
+'Hole, A.J.'     2 
+'Endicott, J.A.' 3 
+# 
+_citation.id                        primary 
+_citation.title                     
+'The CDK9 C-helix Exhibits Conformational Plasticity That May Explain the Selectivity of CAN508.' 
+_citation.journal_abbrev            'Acs Chem.Biol.' 
+_citation.journal_volume            7 
+_citation.page_first                811 
+_citation.page_last                 816 
+_citation.year                      2012 
+_citation.journal_id_ASTM           ? 
+_citation.country                   US 
+_citation.journal_id_ISSN           1554-8929 
+_citation.journal_id_CSD            ? 
+_citation.book_publisher            ? 
+_citation.pdbx_database_id_PubMed   22292676 
+_citation.pdbx_database_id_DOI      10.1021/cb2004516 
+# 
+loop_
+_citation_author.citation_id 
+_citation_author.name 
+_citation_author.ordinal 
+primary 'Baumli, S.'     1 
+primary 'Hole, A.J.'     2 
+primary 'Noble, M.E.'    3 
+primary 'Endicott, J.A.' 4 
+# 
+_cell.entry_id           3TNW 
+_cell.length_a           74.050 
+_cell.length_b           134.570 
+_cell.length_c           148.280 
+_cell.angle_alpha        90.00 
+_cell.angle_beta         90.00 
+_cell.angle_gamma        90.00 
+_cell.Z_PDB              8 
+_cell.pdbx_unique_axis   ? 
+_cell.length_a_esd       ? 
+_cell.length_b_esd       ? 
+_cell.length_c_esd       ? 
+_cell.angle_alpha_esd    ? 
+_cell.angle_beta_esd     ? 
+_cell.angle_gamma_esd    ? 
+# 
+_symmetry.entry_id                         3TNW 
+_symmetry.space_group_name_H-M             'P 21 21 21' 
+_symmetry.pdbx_full_space_group_name_H-M   ? 
+_symmetry.cell_setting                     ? 
+_symmetry.Int_Tables_number                19 
+_symmetry.space_group_name_Hall            ? 
+# 
+loop_
+_entity.id 
+_entity.type 
+_entity.src_method 
+_entity.pdbx_description 
+_entity.formula_weight 
+_entity.pdbx_number_of_molecules 
+_entity.pdbx_ec 
+_entity.pdbx_mutation 
+_entity.pdbx_fragment 
+_entity.details 
+1 polymer     man 'Cyclin-dependent kinase 2'                           34200.602 2   2.7.11.22 ? ? ? 
+2 polymer     man Cyclin-A2                                             30018.631 2   ?         ? 
+'cyclin boxes, UNP resdiues 169-430' ? 
+3 non-polymer syn '4-[(E)-(3,5-DIAMINO-1H-PYRAZOL-4-YL)DIAZENYL]PHENOL' 218.215   2   ?         ? ? ? 
+4 non-polymer syn 'SODIUM ION'                                          22.990    2   ?         ? ? ? 
+5 water       nat water                                                 18.015    912 ?         ? ? ? 
+# 
+loop_
+_entity_name_com.entity_id 
+_entity_name_com.name 
+1 'Cell division protein kinase 2, p33 protein kinase' 
+2 Cyclin-A                                             
+# 
+loop_
+_entity_poly.entity_id 
+_entity_poly.type 
+_entity_poly.nstd_linkage 
+_entity_poly.nstd_monomer 
+_entity_poly.pdbx_seq_one_letter_code 
+_entity_poly.pdbx_seq_one_letter_code_can 
+_entity_poly.pdbx_strand_id 
+_entity_poly.pdbx_target_identifier 
+1 'polypeptide(L)' no yes 
+;GSMENFQKVEKIGEGTYGVVYKARNKLTGEVVALKKIRLDTETEGVPSTAIREISLLKELNHPNIVKLLDVIHTENKLYL
+VFEFLHQDLKKFMDASALTGIPLPLIKSYLFQLLQGLAFCHSHRVLHRDLKPQNLLINTEGAIKLADFGLARAFGVPVRT
+Y(TPO)HEVVTLWYRAPEILLGCKYYSTAVDIWSLGCIFAEMVTRRALFPGDSEIDQLFRIFRTLGTPDEVVWPGVTSMP
+DYKPSFPKWARQDFSKVVPPLDEDGRSLLSQMLHYDPNKRISAKAALAHPFFQDVTKPVPHLRL
+;
+;GSMENFQKVEKIGEGTYGVVYKARNKLTGEVVALKKIRLDTETEGVPSTAIREISLLKELNHPNIVKLLDVIHTENKLYL
+VFEFLHQDLKKFMDASALTGIPLPLIKSYLFQLLQGLAFCHSHRVLHRDLKPQNLLINTEGAIKLADFGLARAFGVPVRT
+YTHEVVTLWYRAPEILLGCKYYSTAVDIWSLGCIFAEMVTRRALFPGDSEIDQLFRIFRTLGTPDEVVWPGVTSMPDYKP
+SFPKWARQDFSKVVPPLDEDGRSLLSQMLHYDPNKRISAKAALAHPFFQDVTKPVPHLRL
+;
+A,C ? 
+2 'polypeptide(L)' no no  
+;SVNEVPDYHEDIHTYLREMEVKCKPKVGYMKKQPDITNSMRAILVDWLVEVGEEYKLQNETLHLAVNYIDRFLSSMSVLR
+GKLQLVGTAAMLLASKFEEIYPPEVAEFVYITDDTYTKKQVLRMEHLVLKVLAFDLAAPTINQFLTQYFLHQQPANCKVE
+SLAMFLGELSLIDADPYLKYLPSVIAAAAFHLALYTVTGQSWPESLVQKTGYTLETLKPCLLDLHQTYLRAPQHAQQSIR
+EKYKNSKYHGVSLLNPPETLNV
+;
+;SVNEVPDYHEDIHTYLREMEVKCKPKVGYMKKQPDITNSMRAILVDWLVEVGEEYKLQNETLHLAVNYIDRFLSSMSVLR
+GKLQLVGTAAMLLASKFEEIYPPEVAEFVYITDDTYTKKQVLRMEHLVLKVLAFDLAAPTINQFLTQYFLHQQPANCKVE
+SLAMFLGELSLIDADPYLKYLPSVIAAAAFHLALYTVTGQSWPESLVQKTGYTLETLKPCLLDLHQTYLRAPQHAQQSIR
+EKYKNSKYHGVSLLNPPETLNV
+;
+B,D ? 
+# 
+loop_
+_entity_poly_seq.entity_id 
+_entity_poly_seq.num 
+_entity_poly_seq.mon_id 
+_entity_poly_seq.hetero 
+1 1   GLY n 
+1 2   SER n 
+1 3   MET n 
+1 4   GLU n 
+1 5   ASN n 
+1 6   PHE n 
+1 7   GLN n 
+1 8   LYS n 
+1 9   VAL n 
+1 10  GLU n 
+1 11  LYS n 
+1 12  ILE n 
+1 13  GLY n 
+1 14  GLU n 
+1 15  GLY n 
+1 16  THR n 
+1 17  TYR n 
+1 18  GLY n 
+1 19  VAL n 
+1 20  VAL n 
+1 21  TYR n 
+1 22  LYS n 
+1 23  ALA n 
+1 24  ARG n 
+1 25  ASN n 
+1 26  LYS n 
+1 27  LEU n 
+1 28  THR n 
+1 29  GLY n 
+1 30  GLU n 
+1 31  VAL n 
+1 32  VAL n 
+1 33  ALA n 
+1 34  LEU n 
+1 35  LYS n 
+1 36  LYS n 
+1 37  ILE n 
+1 38  ARG n 
+1 39  LEU n 
+1 40  ASP n 
+1 41  THR n 
+1 42  GLU n 
+1 43  THR n 
+1 44  GLU n 
+1 45  GLY n 
+1 46  VAL n 
+1 47  PRO n 
+1 48  SER n 
+1 49  THR n 
+1 50  ALA n 
+1 51  ILE n 
+1 52  ARG n 
+1 53  GLU n 
+1 54  ILE n 
+1 55  SER n 
+1 56  LEU n 
+1 57  LEU n 
+1 58  LYS n 
+1 59  GLU n 
+1 60  LEU n 
+1 61  ASN n 
+1 62  HIS n 
+1 63  PRO n 
+1 64  ASN n 
+1 65  ILE n 
+1 66  VAL n 
+1 67  LYS n 
+1 68  LEU n 
+1 69  LEU n 
+1 70  ASP n 
+1 71  VAL n 
+1 72  ILE n 
+1 73  HIS n 
+1 74  THR n 
+1 75  GLU n 
+1 76  ASN n 
+1 77  LYS n 
+1 78  LEU n 
+1 79  TYR n 
+1 80  LEU n 
+1 81  VAL n 
+1 82  PHE n 
+1 83  GLU n 
+1 84  PHE n 
+1 85  LEU n 
+1 86  HIS n 
+1 87  GLN n 
+1 88  ASP n 
+1 89  LEU n 
+1 90  LYS n 
+1 91  LYS n 
+1 92  PHE n 
+1 93  MET n 
+1 94  ASP n 
+1 95  ALA n 
+1 96  SER n 
+1 97  ALA n 
+1 98  LEU n 
+1 99  THR n 
+1 100 GLY n 
+1 101 ILE n 
+1 102 PRO n 
+1 103 LEU n 
+1 104 PRO n 
+1 105 LEU n 
+1 106 ILE n 
+1 107 LYS n 
+1 108 SER n 
+1 109 TYR n 
+1 110 LEU n 
+1 111 PHE n 
+1 112 GLN n 
+1 113 LEU n 
+1 114 LEU n 
+1 115 GLN n 
+1 116 GLY n 
+1 117 LEU n 
+1 118 ALA n 
+1 119 PHE n 
+1 120 CYS n 
+1 121 HIS n 
+1 122 SER n 
+1 123 HIS n 
+1 124 ARG n 
+1 125 VAL n 
+1 126 LEU n 
+1 127 HIS n 
+1 128 ARG n 
+1 129 ASP n 
+1 130 LEU n 
+1 131 LYS n 
+1 132 PRO n 
+1 133 GLN n 
+1 134 ASN n 
+1 135 LEU n 
+1 136 LEU n 
+1 137 ILE n 
+1 138 ASN n 
+1 139 THR n 
+1 140 GLU n 
+1 141 GLY n 
+1 142 ALA n 
+1 143 ILE n 
+1 144 LYS n 
+1 145 LEU n 
+1 146 ALA n 
+1 147 ASP n 
+1 148 PHE n 
+1 149 GLY n 
+1 150 LEU n 
+1 151 ALA n 
+1 152 ARG n 
+1 153 ALA n 
+1 154 PHE n 
+1 155 GLY n 
+1 156 VAL n 
+1 157 PRO n 
+1 158 VAL n 
+1 159 ARG n 
+1 160 THR n 
+1 161 TYR n 
+1 162 TPO n 
+1 163 HIS n 
+1 164 GLU n 
+1 165 VAL n 
+1 166 VAL n 
+1 167 THR n 
+1 168 LEU n 
+1 169 TRP n 
+1 170 TYR n 
+1 171 ARG n 
+1 172 ALA n 
+1 173 PRO n 
+1 174 GLU n 
+1 175 ILE n 
+1 176 LEU n 
+1 177 LEU n 
+1 178 GLY n 
+1 179 CYS n 
+1 180 LYS n 
+1 181 TYR n 
+1 182 TYR n 
+1 183 SER n 
+1 184 THR n 
+1 185 ALA n 
+1 186 VAL n 
+1 187 ASP n 
+1 188 ILE n 
+1 189 TRP n 
+1 190 SER n 
+1 191 LEU n 
+1 192 GLY n 
+1 193 CYS n 
+1 194 ILE n 
+1 195 PHE n 
+1 196 ALA n 
+1 197 GLU n 
+1 198 MET n 
+1 199 VAL n 
+1 200 THR n 
+1 201 ARG n 
+1 202 ARG n 
+1 203 ALA n 
+1 204 LEU n 
+1 205 PHE n 
+1 206 PRO n 
+1 207 GLY n 
+1 208 ASP n 
+1 209 SER n 
+1 210 GLU n 
+1 211 ILE n 
+1 212 ASP n 
+1 213 GLN n 
+1 214 LEU n 
+1 215 PHE n 
+1 216 ARG n 
+1 217 ILE n 
+1 218 PHE n 
+1 219 ARG n 
+1 220 THR n 
+1 221 LEU n 
+1 222 GLY n 
+1 223 THR n 
+1 224 PRO n 
+1 225 ASP n 
+1 226 GLU n 
+1 227 VAL n 
+1 228 VAL n 
+1 229 TRP n 
+1 230 PRO n 
+1 231 GLY n 
+1 232 VAL n 
+1 233 THR n 
+1 234 SER n 
+1 235 MET n 
+1 236 PRO n 
+1 237 ASP n 
+1 238 TYR n 
+1 239 LYS n 
+1 240 PRO n 
+1 241 SER n 
+1 242 PHE n 
+1 243 PRO n 
+1 244 LYS n 
+1 245 TRP n 
+1 246 ALA n 
+1 247 ARG n 
+1 248 GLN n 
+1 249 ASP n 
+1 250 PHE n 
+1 251 SER n 
+1 252 LYS n 
+1 253 VAL n 
+1 254 VAL n 
+1 255 PRO n 
+1 256 PRO n 
+1 257 LEU n 
+1 258 ASP n 
+1 259 GLU n 
+1 260 ASP n 
+1 261 GLY n 
+1 262 ARG n 
+1 263 SER n 
+1 264 LEU n 
+1 265 LEU n 
+1 266 SER n 
+1 267 GLN n 
+1 268 MET n 
+1 269 LEU n 
+1 270 HIS n 
+1 271 TYR n 
+1 272 ASP n 
+1 273 PRO n 
+1 274 ASN n 
+1 275 LYS n 
+1 276 ARG n 
+1 277 ILE n 
+1 278 SER n 
+1 279 ALA n 
+1 280 LYS n 
+1 281 ALA n 
+1 282 ALA n 
+1 283 LEU n 
+1 284 ALA n 
+1 285 HIS n 
+1 286 PRO n 
+1 287 PHE n 
+1 288 PHE n 
+1 289 GLN n 
+1 290 ASP n 
+1 291 VAL n 
+1 292 THR n 
+1 293 LYS n 
+1 294 PRO n 
+1 295 VAL n 
+1 296 PRO n 
+1 297 HIS n 
+1 298 LEU n 
+1 299 ARG n 
+1 300 LEU n 
+2 1   SER n 
+2 2   VAL n 
+2 3   ASN n 
+2 4   GLU n 
+2 5   VAL n 
+2 6   PRO n 
+2 7   ASP n 
+2 8   TYR n 
+2 9   HIS n 
+2 10  GLU n 
+2 11  ASP n 
+2 12  ILE n 
+2 13  HIS n 
+2 14  THR n 
+2 15  TYR n 
+2 16  LEU n 
+2 17  ARG n 
+2 18  GLU n 
+2 19  MET n 
+2 20  GLU n 
+2 21  VAL n 
+2 22  LYS n 
+2 23  CYS n 
+2 24  LYS n 
+2 25  PRO n 
+2 26  LYS n 
+2 27  VAL n 
+2 28  GLY n 
+2 29  TYR n 
+2 30  MET n 
+2 31  LYS n 
+2 32  LYS n 
+2 33  GLN n 
+2 34  PRO n 
+2 35  ASP n 
+2 36  ILE n 
+2 37  THR n 
+2 38  ASN n 
+2 39  SER n 
+2 40  MET n 
+2 41  ARG n 
+2 42  ALA n 
+2 43  ILE n 
+2 44  LEU n 
+2 45  VAL n 
+2 46  ASP n 
+2 47  TRP n 
+2 48  LEU n 
+2 49  VAL n 
+2 50  GLU n 
+2 51  VAL n 
+2 52  GLY n 
+2 53  GLU n 
+2 54  GLU n 
+2 55  TYR n 
+2 56  LYS n 
+2 57  LEU n 
+2 58  GLN n 
+2 59  ASN n 
+2 60  GLU n 
+2 61  THR n 
+2 62  LEU n 
+2 63  HIS n 
+2 64  LEU n 
+2 65  ALA n 
+2 66  VAL n 
+2 67  ASN n 
+2 68  TYR n 
+2 69  ILE n 
+2 70  ASP n 
+2 71  ARG n 
+2 72  PHE n 
+2 73  LEU n 
+2 74  SER n 
+2 75  SER n 
+2 76  MET n 
+2 77  SER n 
+2 78  VAL n 
+2 79  LEU n 
+2 80  ARG n 
+2 81  GLY n 
+2 82  LYS n 
+2 83  LEU n 
+2 84  GLN n 
+2 85  LEU n 
+2 86  VAL n 
+2 87  GLY n 
+2 88  THR n 
+2 89  ALA n 
+2 90  ALA n 
+2 91  MET n 
+2 92  LEU n 
+2 93  LEU n 
+2 94  ALA n 
+2 95  SER n 
+2 96  LYS n 
+2 97  PHE n 
+2 98  GLU n 
+2 99  GLU n 
+2 100 ILE n 
+2 101 TYR n 
+2 102 PRO n 
+2 103 PRO n 
+2 104 GLU n 
+2 105 VAL n 
+2 106 ALA n 
+2 107 GLU n 
+2 108 PHE n 
+2 109 VAL n 
+2 110 TYR n 
+2 111 ILE n 
+2 112 THR n 
+2 113 ASP n 
+2 114 ASP n 
+2 115 THR n 
+2 116 TYR n 
+2 117 THR n 
+2 118 LYS n 
+2 119 LYS n 
+2 120 GLN n 
+2 121 VAL n 
+2 122 LEU n 
+2 123 ARG n 
+2 124 MET n 
+2 125 GLU n 
+2 126 HIS n 
+2 127 LEU n 
+2 128 VAL n 
+2 129 LEU n 
+2 130 LYS n 
+2 131 VAL n 
+2 132 LEU n 
+2 133 ALA n 
+2 134 PHE n 
+2 135 ASP n 
+2 136 LEU n 
+2 137 ALA n 
+2 138 ALA n 
+2 139 PRO n 
+2 140 THR n 
+2 141 ILE n 
+2 142 ASN n 
+2 143 GLN n 
+2 144 PHE n 
+2 145 LEU n 
+2 146 THR n 
+2 147 GLN n 
+2 148 TYR n 
+2 149 PHE n 
+2 150 LEU n 
+2 151 HIS n 
+2 152 GLN n 
+2 153 GLN n 
+2 154 PRO n 
+2 155 ALA n 
+2 156 ASN n 
+2 157 CYS n 
+2 158 LYS n 
+2 159 VAL n 
+2 160 GLU n 
+2 161 SER n 
+2 162 LEU n 
+2 163 ALA n 
+2 164 MET n 
+2 165 PHE n 
+2 166 LEU n 
+2 167 GLY n 
+2 168 GLU n 
+2 169 LEU n 
+2 170 SER n 
+2 171 LEU n 
+2 172 ILE n 
+2 173 ASP n 
+2 174 ALA n 
+2 175 ASP n 
+2 176 PRO n 
+2 177 TYR n 
+2 178 LEU n 
+2 179 LYS n 
+2 180 TYR n 
+2 181 LEU n 
+2 182 PRO n 
+2 183 SER n 
+2 184 VAL n 
+2 185 ILE n 
+2 186 ALA n 
+2 187 ALA n 
+2 188 ALA n 
+2 189 ALA n 
+2 190 PHE n 
+2 191 HIS n 
+2 192 LEU n 
+2 193 ALA n 
+2 194 LEU n 
+2 195 TYR n 
+2 196 THR n 
+2 197 VAL n 
+2 198 THR n 
+2 199 GLY n 
+2 200 GLN n 
+2 201 SER n 
+2 202 TRP n 
+2 203 PRO n 
+2 204 GLU n 
+2 205 SER n 
+2 206 LEU n 
+2 207 VAL n 
+2 208 GLN n 
+2 209 LYS n 
+2 210 THR n 
+2 211 GLY n 
+2 212 TYR n 
+2 213 THR n 
+2 214 LEU n 
+2 215 GLU n 
+2 216 THR n 
+2 217 LEU n 
+2 218 LYS n 
+2 219 PRO n 
+2 220 CYS n 
+2 221 LEU n 
+2 222 LEU n 
+2 223 ASP n 
+2 224 LEU n 
+2 225 HIS n 
+2 226 GLN n 
+2 227 THR n 
+2 228 TYR n 
+2 229 LEU n 
+2 230 ARG n 
+2 231 ALA n 
+2 232 PRO n 
+2 233 GLN n 
+2 234 HIS n 
+2 235 ALA n 
+2 236 GLN n 
+2 237 GLN n 
+2 238 SER n 
+2 239 ILE n 
+2 240 ARG n 
+2 241 GLU n 
+2 242 LYS n 
+2 243 TYR n 
+2 244 LYS n 
+2 245 ASN n 
+2 246 SER n 
+2 247 LYS n 
+2 248 TYR n 
+2 249 HIS n 
+2 250 GLY n 
+2 251 VAL n 
+2 252 SER n 
+2 253 LEU n 
+2 254 LEU n 
+2 255 ASN n 
+2 256 PRO n 
+2 257 PRO n 
+2 258 GLU n 
+2 259 THR n 
+2 260 LEU n 
+2 261 ASN n 
+2 262 VAL n 
+# 
+loop_
+_entity_src_gen.entity_id 
+_entity_src_gen.pdbx_src_id 
+_entity_src_gen.pdbx_alt_source_flag 
+_entity_src_gen.pdbx_seq_type 
+_entity_src_gen.pdbx_beg_seq_num 
+_entity_src_gen.pdbx_end_seq_num 
+_entity_src_gen.gene_src_common_name 
+_entity_src_gen.gene_src_genus 
+_entity_src_gen.pdbx_gene_src_gene 
+_entity_src_gen.gene_src_species 
+_entity_src_gen.gene_src_strain 
+_entity_src_gen.gene_src_tissue 
+_entity_src_gen.gene_src_tissue_fraction 
+_entity_src_gen.gene_src_details 
+_entity_src_gen.pdbx_gene_src_fragment 
+_entity_src_gen.pdbx_gene_src_scientific_name 
+_entity_src_gen.pdbx_gene_src_ncbi_taxonomy_id 
+_entity_src_gen.pdbx_gene_src_variant 
+_entity_src_gen.pdbx_gene_src_cell_line 
+_entity_src_gen.pdbx_gene_src_atcc 
+_entity_src_gen.pdbx_gene_src_organ 
+_entity_src_gen.pdbx_gene_src_organelle 
+_entity_src_gen.pdbx_gene_src_cell 
+_entity_src_gen.pdbx_gene_src_cellular_location 
+_entity_src_gen.host_org_common_name 
+_entity_src_gen.pdbx_host_org_scientific_name 
+_entity_src_gen.pdbx_host_org_ncbi_taxonomy_id 
+_entity_src_gen.host_org_genus 
+_entity_src_gen.pdbx_host_org_gene 
+_entity_src_gen.pdbx_host_org_organ 
+_entity_src_gen.host_org_species 
+_entity_src_gen.pdbx_host_org_tissue 
+_entity_src_gen.pdbx_host_org_tissue_fraction 
+_entity_src_gen.pdbx_host_org_strain 
+_entity_src_gen.pdbx_host_org_variant 
+_entity_src_gen.pdbx_host_org_cell_line 
+_entity_src_gen.pdbx_host_org_atcc 
+_entity_src_gen.pdbx_host_org_culture_collection 
+_entity_src_gen.pdbx_host_org_cell 
+_entity_src_gen.pdbx_host_org_organelle 
+_entity_src_gen.pdbx_host_org_cellular_location 
+_entity_src_gen.pdbx_host_org_vector_type 
+_entity_src_gen.pdbx_host_org_vector 
+_entity_src_gen.host_org_details 
+_entity_src_gen.expression_system_id 
+_entity_src_gen.plasmid_name 
+_entity_src_gen.plasmid_details 
+_entity_src_gen.pdbx_description 
+1 1 sample ? ? ? human  ? CDK2          ? ? ? ? ? ? 'Homo sapiens' 9606 ? ? ? ? ? ? ? ? 'Escherichia coli' 562 ? ? ? ? ? ? ? ? ? ? 
+? ? ? ? ? ? ? ? ? ? ? 
+2 1 sample ? ? ? bovine ? 'CCNA, CCNA2' ? ? ? ? ? ? 'Bos taurus'   9913 ? ? ? ? ? ? ? ? 'Escherichia coli' 562 ? ? ? ? ? ? ? ? ? ? 
+? ? ? ? ? ? ? ? ? ? ? 
+# 
+loop_
+_struct_ref.id 
+_struct_ref.db_name 
+_struct_ref.db_code 
+_struct_ref.pdbx_db_accession 
+_struct_ref.entity_id 
+_struct_ref.pdbx_seq_one_letter_code 
+_struct_ref.pdbx_align_begin 
+_struct_ref.pdbx_db_isoform 
+1 UNP CDK2_HUMAN  P24941 1 
+;MENFQKVEKIGEGTYGVVYKARNKLTGEVVALKKIRLDTETEGVPSTAIREISLLKELNHPNIVKLLDVIHTENKLYLVF
+EFLHQDLKKFMDASALTGIPLPLIKSYLFQLLQGLAFCHSHRVLHRDLKPQNLLINTEGAIKLADFGLARAFGVPVRTYT
+HEVVTLWYRAPEILLGCKYYSTAVDIWSLGCIFAEMVTRRALFPGDSEIDQLFRIFRTLGTPDEVVWPGVTSMPDYKPSF
+PKWARQDFSKVVPPLDEDGRSLLSQMLHYDPNKRISAKAALAHPFFQDVTKPVPHLRL
+;
+1   ? 
+2 UNP CCNA2_BOVIN P30274 2 
+;SVNEVPDYHEDIHTYLREMEVKCKPKVGYMKKQPDITNSMRAILVDWLVEVGEEYKLQNETLHLAVNYIDRFLSSMSVLR
+GKLQLVGTAAMLLASKFEEIYPPEVAEFVYITDDTYTKKQVLRMEHLVLKVLAFDLAAPTINQFLTQYFLHQQPANCKVE
+SLAMFLGELSLIDADPYLKYLPSVIAAAAFHLALYTVTGQSWPESLVQKTGYTLETLKPCLLDLHQTYLRAPQHAQQSIR
+EKYKNSKYHGVSLLNPPETLNV
+;
+169 ? 
+# 
+loop_
+_struct_ref_seq.align_id 
+_struct_ref_seq.ref_id 
+_struct_ref_seq.pdbx_PDB_id_code 
+_struct_ref_seq.pdbx_strand_id 
+_struct_ref_seq.seq_align_beg 
+_struct_ref_seq.pdbx_seq_align_beg_ins_code 
+_struct_ref_seq.seq_align_end 
+_struct_ref_seq.pdbx_seq_align_end_ins_code 
+_struct_ref_seq.pdbx_db_accession 
+_struct_ref_seq.db_align_beg 
+_struct_ref_seq.pdbx_db_align_beg_ins_code 
+_struct_ref_seq.db_align_end 
+_struct_ref_seq.pdbx_db_align_end_ins_code 
+_struct_ref_seq.pdbx_auth_seq_align_beg 
+_struct_ref_seq.pdbx_auth_seq_align_end 
+1 1 3TNW A 3 ? 300 ? P24941 1   ? 298 ? 1   298 
+2 2 3TNW B 1 ? 262 ? P30274 169 ? 430 ? 171 432 
+3 1 3TNW C 3 ? 300 ? P24941 1   ? 298 ? 1   298 
+4 2 3TNW D 1 ? 262 ? P30274 169 ? 430 ? 171 432 
+# 
+loop_
+_struct_ref_seq_dif.align_id 
+_struct_ref_seq_dif.pdbx_pdb_id_code 
+_struct_ref_seq_dif.mon_id 
+_stru
