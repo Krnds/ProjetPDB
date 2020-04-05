@@ -58,7 +58,7 @@ public class Query {
 	 * @throws IOException 
 	 */
 
-	public static String getRandomID() throws IOException {
+	final static String getRandomID() throws IOException {
 
 		//store all molecular comlexes into arraylist :
 		postQuery();
