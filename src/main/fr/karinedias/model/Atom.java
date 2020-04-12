@@ -1,117 +1,90 @@
 package src.main.fr.karinedias.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Atom {
 
 	// Add "final" modifier for all fields ?
-	private String recordName = "";
-	private int serialNumber;
+
+	private int atomNumber;
 	private char atomName;
 	private String alternateLocIndicator;
 	// Create an enumeration for amino residues ?
-	private String residueName = "ALA";
-	private int chainIdentifier = 1;
-	private int residueSequenceNumber = 88;
-	private List<Double> orthogonalCoordinates = new ArrayList<Double>(); // contains the coordinates for each atom
+	private String residueName;
+	private char chainNameIdentifier;
+	private int chainNumberIdentifier;
+	private int residueSequenceNumber;
+	// coordinates :
+	private float xAtomCoordinate;
+	private float yAtomCoordinate;
+	private float zAtomCoordinate;
 
-	public Atom(String recordName, int serialNumber, char atomName, String alternateLocIndicator, String residueName,
-			int chainIdentifier, int residueSequenceNumber) {
-		this.recordName = recordName;
-		this.serialNumber = serialNumber;
-		this.atomName = atomName;
-		this.alternateLocIndicator = alternateLocIndicator;
-		this.residueName = residueName;
-		this.chainIdentifier = chainIdentifier;
-		this.residueSequenceNumber = residueSequenceNumber;
+	public Atom(int atomNumber, char atomName, String altLoc, String resName, char chainName, int chainNumber, int resNumber, float xCoord, float yCoord, float zCoord) {
+
+			this.atomNumber = atomNumber;
+			this.atomName = atomName;
+			this.alternateLocIndicator = altLoc;
+			this.residueName = resName;
+			this.chainNameIdentifier = chainName;
+			this.chainNumberIdentifier = chainNumber;
+			this.residueSequenceNumber = resNumber;
+			this.xAtomCoordinate = xCoord;
+			this.yAtomCoordinate = yCoord;
+			this.zAtomCoordinate = zCoord;
 	}
 
 	public Atom() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ArrayList<Double> atomCoordinates(Double x, Double y, Double z) {
-
-		orthogonalCoordinates.add(x);
-		orthogonalCoordinates.add(y);
-		orthogonalCoordinates.add(x);
-
-		return (ArrayList<Double>) orthogonalCoordinates;
+	protected int getAtomNumber() {
+		return atomNumber;
 	}
 
-	public String getRecordName() {
-		return recordName;
-	}
-
-	public void setRecordName(String recordName) {
-		this.recordName = recordName;
-	}
-
-	public int getSerialNumber() {
-		return serialNumber;
-	}
-
-	public void setSerialNumber(int serialNumber) {
-		this.serialNumber = serialNumber;
-	}
-
-	public char getAtomName() {
+	protected char getAtomName() {
 		return atomName;
 	}
 
-	public void setAtomName(char atomName) {
-		this.atomName = atomName;
-	}
-
-	public String getAlternateLocIndicator() {
+	protected String getAlternateLocIndicator() {
 		return alternateLocIndicator;
 	}
 
-	public void setAlternateLocIndicator(String alternateLocIndicator) {
-		this.alternateLocIndicator = alternateLocIndicator;
-	}
-
-	public String getResidueName() {
+	protected String getResidueName() {
 		return residueName;
 	}
 
-	public void setResidueName(String residueName) {
-		this.residueName = residueName;
+	protected char getChainNameIdentifier() {
+		return chainNameIdentifier;
 	}
 
-	public int getChainIdentifier() {
-		return chainIdentifier;
+	protected int getChainNumberIdentifier() {
+		return chainNumberIdentifier;
 	}
 
-	public void setChainIdentifier(int chainIdentifier) {
-		this.chainIdentifier = chainIdentifier;
-	}
-
-	public int getResidueSequenceNumber() {
+	protected int getResidueSequenceNumber() {
 		return residueSequenceNumber;
 	}
 
-	public void setResidueSequenceNumber(int residueSequenceNumber) {
-		this.residueSequenceNumber = residueSequenceNumber;
+	protected float getxAtomCoordinate() {
+		return xAtomCoordinate;
 	}
 
-	public List<Double> getOrthogonalCoordinates() {
-		return orthogonalCoordinates;
+	protected float getyAtomCoordinate() {
+		return yAtomCoordinate;
 	}
 
-	public void setOrthogonalCoordinates(List<Double> orthogonalCoordinates) {
-		this.orthogonalCoordinates = orthogonalCoordinates;
+	protected float getzAtomCoordinate() {
+		return zAtomCoordinate;
 	}
 
 	@Override
 	public String toString() {
-		return "Atom [" + (recordName != null ? "recordName=" + recordName + ", " : "") + "serialNumber=" + serialNumber
-				+ ", atomName=" + atomName + ", "
+		return "Atom [atomNumber=" + atomNumber + ", atomName=" + atomName + ", "
 				+ (alternateLocIndicator != null ? "alternateLocIndicator=" + alternateLocIndicator + ", " : "")
-				+ (residueName != null ? "residueName=" + residueName + ", " : "") + "chainIdentifier="
-				+ chainIdentifier + ", residueSequenceNumber=" + residueSequenceNumber + ", "
-				+ (orthogonalCoordinates != null ? "orthogonalCoordinates=" + orthogonalCoordinates : "") + "]";
+				+ (residueName != null ? "residueName=" + residueName + ", " : "") + "chainNameIdentifier="
+				+ chainNameIdentifier + ", chainNumberIdentifier=" + chainNumberIdentifier + ", residueSequenceNumber="
+				+ residueSequenceNumber + ", xAtomCoordinate=" + xAtomCoordinate + ", yAtomCoordinate="
+				+ yAtomCoordinate + ", zAtomCoordinate=" + zAtomCoordinate + "]";
 	}
+
+
 
 }
