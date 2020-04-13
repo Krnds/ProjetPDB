@@ -13,13 +13,12 @@ import src.main.fr.karinedias.model.Residue;
 public class PDBResidueParser2 {
 	
 	/**
-	 * Parser for molecular file that return a list of residues and a list of atoms
-	 * in the form of Residue and Atom objects.
+	 * Parsing residues from molecular structure files (.cif) and returning them in a form of Residue objects
 	 * @param args
 	 */
 	
 	/**
-	 * Objects storing the residues & atoms of the file
+	 * Lists of Residues & Atoms of the file
 	 */
 
 	List<Residue> listOfesidues = new ArrayList<Residue>();

@@ -5,8 +5,11 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import src.main.fr.karinedias.model.Atom;
 import src.main.fr.karinedias.model.Residue;
@@ -64,6 +67,35 @@ public class PDBResidueParser extends PDBAtomParser {
 
 	}
 	
+	private Set<Map<Integer, String>> setFromMap(Map<Integer, String> map) {
+		
+		//Convert Map to HashMap ?
+
+        Set<Integer> keySet=map.keySet().stream().collect(Collectors.toSet());
+        keySet.forEach(key-> System.out.println(key));
+
+        Set<String> valueSet=map.values().stream().collect(Collectors.toSet());
+        valueSet.forEach(value-> System.out.println(value));
+		
+		return Set<Map<Integer,String>> maps;
+		
+	}
+	
+	public Residue getResidueObject(Map<Integer, String> residue) {
+		
+//		Set<Integer, String> setFromMap = set.stream()
+//			    .collect(Collectors.toMap(Entry::getKey, Entry::getValue));
+//		Residue test = new Residue(residue.get(0), residue., atomsOfResidue)
+		
+		HashMap<Integer, String> residueHashMap = new HashMap<Integer, String>();
+		residue.forEach((k, v) -> residueHashMap.putAll(residueHashMap));
+		
+		Residue res = new Residue(residueName, residueSequenceNumber,)
+		residueHashMap.forEach((k, v) -> r;
+		
+	}
+	
+	//TODO: what is this method ??
 	public static boolean residueExists(Residue residue) {
 		
 		return false;

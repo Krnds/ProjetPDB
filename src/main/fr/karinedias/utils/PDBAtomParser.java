@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,13 +14,9 @@ import src.main.fr.karinedias.model.Atom;
 
 public class PDBAtomParser {
 
-	/*
-	 * TODO: create methods for : - atomSerialNumber - alternateLocationIndicator -
-	 * coordinateX - coordinateY - coordinateZ - residueName - residueSeqName Change
-	 * the data structure of ArrayList to Iterator objects (Iterator or
-	 * listIterator) Use forEach loops instead of for loops ?
-	 */
-
+/**
+ * From the content of a file save in a StringBuilder, parse Atoms and store them into Atom objects.  
+ */
 	private StringBuilder content = null;
 	public List<Atom> listOfAtoms = new ArrayList<Atom>();
 
@@ -40,18 +37,38 @@ public class PDBAtomParser {
 	 * @param contentAtom a String object containing all lines with the word "ATOM"
 	 * @return an ArrayList of String which stores each ATOM entry of the PDBFile
 	 */
-	public static List<String> getAllAtomEntries(String contentAtom) {
+	
+	
+	//TODO: change way of doing, because too long, use stringtokenizer and 
+	//@date : 12/04/2020
+	public List<String> getAllAtomEntries() {
 
-		String atomEntryDelimiter = "\n";
-		StringTokenizer allAtomEntries = new StringTokenizer(contentAtom, atomEntryDelimiter);
-		int tokens = allAtomEntries.countTokens(); // number of iterations of atom entries
-		List<String> listOfAtoms = new ArrayList<String>(tokens); // create an ArrayList of n atomic entries
+		String[] lines = content.toString().split("\\n");
+		// TODO compare with StringTokenizer instead of using string array
+		List<String> atomEntries = new ArrayList<String>();
 
-		for (int i = 0; i < tokens; i++) {
-			listOfAtoms.add(allAtomEntries.nextToken());
+		for (int i = 0; i < lines.length; i++) {
+			if (lines[i].startsWith("ATOM")) { // quid using contains() ?
+				atomEntries.add(lines[i]);
+			}
 		}
-		return listOfAtoms;
+		return atomEntries;
 	}
+		
+	
+//
+//		String atomEntryDelimiter = "\n";
+//		StringTokenizer allAtomEntries = new StringTokenizer(content, atomEntryDelimiter);
+//		int tokens = allAtomEntries.countTokens(); // number of iterations of atom entries
+//		List<String> listOfAtoms = new ArrayList<String>(tokens); // create an ArrayList of n atomic entries
+//
+//		for (int i = 0; i < tokens; i++) {
+//			listOfAtoms.add(allAtomEntries.nextToken());
+//		}
+//		return listOfAtoms;
+		
+
+
 
 	/**
 	 * Method for storing each data ATOM entry in a ArrayList
@@ -104,28 +121,29 @@ public class PDBAtomParser {
 		atomData = atomData.replaceAll("\\s+", "");
 		System.out.println(atomData);
 		
-		// pattern only catches : ATOM 1541 O OG
-		String pattern = "ATOM(\\d{1,5})+([CNO]{1})+([CNO][A-Z]{0,2})";
-		
-		//ATOM   3385 O OE1   . GLN A 1 469 ? 50.483 -13.845 -3.263  1.00 37.80 ? 487  GLN A OE1   1
-		String pattern2 = "ATOM\\s+(\\d{1,5})\\s+([CNO]{1})\\s+([CNO][A-Z]{0,2})\\s+[.]\\s([A-Z]{3})";
-		String pattern3 = "ATOM(\\d{1,5})"
-				+ "([CNO]{1})"
-				+ "([CNO]{1}[A-Z]{0,2}|[CNO]{1}[A-Z]{1}[0-9]{0,3})" //rewrite to catch C/O/CB, CG1, NH1, NE, 
-				+ "[.]([A-Z]{3})"
-				+ "([A-Z]{1})"
-				+ "([0-9]{1}[0-9]{1,3}).+"
-				+ "(-?[0-9]{1,4}\\.[0-9]{3})"
-				+ "(-?[0-9]{1,4}\\.[0-9]{3})";
+		String pattern3 = "ATOM(\\d{1,5})" //group 1 : atom number
+				+ "([CNO]{1})" //group 2 : atom name
+				+ "([CNO]{1}[A-Z]{0,2}|[CNO]{1}[A-Z]{1}[0-9]{0,3})" //group 3 : atom's alternate location  
+				+ "[.]([A-Z]{3})" // group 4 : residue of the atom
+				+ "([A-Z]{1})" //group 5 : chain name identifier (single character)
+				+ "([0-9]{1})" //group 6 : chain number identifier (single digit)
+				+ "([0-9]{1,3})" //group 7 : number of the residue
+				+ "([?]{1})" //group 8 : Code for insertion of residues TODO: tester !!!
+				+ "(-?[0-9]{1,4}\\.[0-9]{3})" //group 9 : X orthogonal coordinate of the atom
+				+ "(-?[0-9]{1,4}\\.[0-9]{3})" // group 10 : Y orthogonal coordinate of the atom
+				+ "(-?[0-9]{1,4}\\.[0-9]{3})"; // group 11 : Z rthogonal coordinate of the atom
+	
 
-		
 		Pattern atomEntry = Pattern.compile(pattern3);
 		Matcher m = atomEntry.matcher(atomData);
 
-		System.out.println("Je compte " + m.groupCount() + " groupes");
+		System.out.println("Il y a  " + m.groupCount() + " groupes\n\n");
 		
 		if (m.find()) {
+			
 			int atomSerialNumber1 = Integer.parseInt(m.group(1));
+			
+			
 			System.out.println("1. ATOM NUMBER : " + atomSerialNumber1);
 			
 			char atomName = m.group(2).charAt(0);
@@ -137,12 +155,43 @@ public class PDBAtomParser {
 			String residueName = m.group(4);
 			System.out.println("4. RESIDUE NAME : " + residueName);
 			
-			char chainIndentifier = m.group(5).charAt(0);
-			System.out.println("5. CHAIN IDENTIFIER : " + chainIndentifier + "\n");
+			char chainNameIndentifier = m.group(5).charAt(0);
+			System.out.println("5. CHAIN NAME IDENTIFIER : " + chainNameIndentifier);
+			
+			int chainNumerIdentifier = Integer.parseInt(m.group(6));
+			System.out.println("6. CHAIN NUMBER INDENTIFIER : " + chainNumerIdentifier);
+			
+			int residueNumer = Integer.parseInt(m.group(7));
+			System.out.println("7. REDIDUE NUMBER : " + residueNumer);
+			
+			char codeInsertionResidue = m.group(8).charAt(0);
+			
+			System.out.println("8. CODE INSERTION RESIDUE : " + codeInsertionResidue);
+			
+			float xOrthogonalCoordinate = Float.parseFloat(m.group(9));
+			
+			System.out.println("9. ORTHONAL COORDINATE OF X AXIS : " + xOrthogonalCoordinate);
+			
+			float yOrthogonalCoordinate = Float.parseFloat(m.group(10));
+			
+			System.out.println("10. ORTHONAL COORDINATE OF Y AXIS : " + yOrthogonalCoordinate);
+			
+			float zOrthogonalCoordinate = Float.parseFloat(m.group(11));
+			
+			System.out.println("11. ORTHONAL COORDINATE OF Z AXIS : " + zOrthogonalCoordinate);
+			
 		} else {
 			System.out.println("NO MATCH");
 		}
 		
+	}
+	
+	//Convert the data retrieved by parseAllAtomEntries in the form of an Atom object
+	public Atom convertDataToAtom(int atomNumer, char atomName, String altLoc, String resName, char chainName, int chainNumber, int residueNumber, float xCoord, float yCoord, float zCoord) {
+		
+		Atom atomCreated = new Atom(atomNumer, atomName, altLoc, resName, chainName, chainNumber, residueNumber, xCoord, yCoord, zCoord);
+		
+		return atomCreated;
 	}
 
 	// From a list of AtomTokens return a HashMap of coordinates with the number of
@@ -215,29 +264,56 @@ public class PDBAtomParser {
 		
 		
 		//testing parsing of atoms parseAllAtomEntries(List<String> atoms)
-		String test1 = "ATOM  1536 N  N   . SER B 2 44  ? -11.077 -7.959  -17.622 1.00 25.51 ? 44  SER B N   1 \n";
-		String test2 = "ATOM   1537 C  CA  . SER B 2 44  ? -12.181 -8.781  -18.189 1.00 26.24 ? 44  SER B CA  1 \n";
-		String test3 = "ATOM   1538 C  C   . SER B 2 44  ? -11.823 -10.272 -18.230 1.00 24.54 ? 44  SER B C   1 \n";
-		String test4 = "ATOM   3316 C CD2   . LEU A 1 460 ? 43.943 -4.280  -7.943  1.00 23.17 ? 478  LEU A CD2   1\n"; 
-		String test5 = "ATOM   3317 N N     . ARG A 1 461 ? 47.184 -4.522  -12.278 1.00 20.43 ? 479  ARG A N     1\n"; 
-		String test6 = "ATOM   1541 O  OG  . SER B 2 44  ? -11.528 -8.593  -20.464 1.00 29.63 ? 44  SER B OG  1";
-		String test7 = "ATOM  tzrzfz O  OG  . SER B 2 44  ? -11.528 -8.593  -20.464 1.00 29.63 ? 44  SER B OG  1";
-		String test8 = "";
-		String test9 = null;
+//		String test1 = "ATOM  1536 N  N   . SER B 2 44  ? -11.077 -7.959  -17.622 1.00 25.51 ? 44  SER B N   1 \n";
+//		String test2 = "ATOM   1537 C  CA  . SER B 2 44  ? -12.181 -8.781  -18.189 1.00 26.24 ? 44  SER B CA  1 \n";
+//		String test3 = "ATOM   1538 C  C   . SER B 2 44  ? -11.823 -10.272 -18.230 1.00 24.54 ? 44  SER B C   1 \n";
+//		String test4 = "ATOM   3316 C CD2   . LEU A 1 460 ? 43.943 -4.280  -7.943  1.00 23.17 ? 478  LEU A CD2   1\n"; 
+//		String test5 = "ATOM   3317 N N     . ARG A 1 461 ? 47.184 -4.522  -12.278 1.00 20.43 ? 479  ARG A N     1\n"; 
+//		String test6 = "ATOM   1541 O  OG  . SER B 2 44  ? -11.528 -8.593  -20.464 1.00 29.63 ? 44  SER B OG  1";
+//		String test7 = "ATOM  tzrzfz O  OG  . SER B 2 44  ? -11.528 -8.593  -20.464 1.00 29.63 ? 44  SER B OG  1";
+//		String test8 = "";
+//		String test9 = null;
+//
+//		parseAllAtomEntries(test1);
+//		parseAllAtomEntries(test2);
+//		parseAllAtomEntries(test3);
+//		parseAllAtomEntries(test4);
+//		parseAllAtomEntries(test5);
+//		parseAllAtomEntries(test6);
+//		parseAllAtomEntries(test7);
+//		parseAllAtomEntries(test8);
+//		try {
+//		parseAllAtomEntries(test9);
+//		} catch (NullPointerException exc) {
+//			System.out.println("The String was empty");
+//		}
+		
+		
+		//TEST GET ALL ATOM ENTRIES WITH A FILE :
+		//TESTING EXECUTION TIME :
+		//TODO: change way to do, bc 47 sec. for execution...
+		long startTime = System.nanoTime();
+		
+		FileReader testfile = new FileReader();
+		String path = testfile.getFilePath();
+		System.out.println("Calling PDBAtomParser...");
+		PDBAtomParser fileToParse = new PDBAtomParser(testfile.reader(path));
+		System.out.println("Parsing all atoms...");	
 
-		parseAllAtomEntries(test1);
-		parseAllAtomEntries(test2);
-		parseAllAtomEntries(test3);
-		parseAllAtomEntries(test4);
-		parseAllAtomEntries(test5);
-		parseAllAtomEntries(test6);
-		parseAllAtomEntries(test7);
-		parseAllAtomEntries(test8);
-		try {
-		parseAllAtomEntries(test9);
-		} catch (NullPointerException exc) {
-			System.out.println("The String was empty");
-		}
+
+		List<String> atoms = new ArrayList<String>();
+		atoms.addAll(fileToParse.getAllAtomEntries());
+
+		System.out.println(atoms.get(8));
+
+		
+		
+		long endTime = System.nanoTime();
+
+		long durationInNano = (endTime - startTime); // Total execution time in nano seconds
+		long durationInSeconds = TimeUnit.NANOSECONDS.toSeconds(durationInNano);
+		
+		System.out.println("Elapsed time in seconds = " + durationInSeconds);
 	}
 
 	public StringBuilder getContent() {
