@@ -45,7 +45,7 @@ public class FetchStructure {
 			url = new java.net.URL(finalUrl);
 
 			BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
-			FileWriter pdbPath = new FileWriter(getPathOfPDBFiles() + STRUCTUREID + ".cif");
+			FileWriter pdbPath = new FileWriter(getPDBPathDirectory() + STRUCTUREID + ".cif");
 			BufferedWriter writer = new BufferedWriter(pdbPath);
 
 			String line;
@@ -74,12 +74,12 @@ public class FetchStructure {
 	 * Method for finding the path of the doc directory
 	 */
 
-	public String getPathOfPDBFiles() {
+	public String getPDBPathDirectory() {
 
 		return System.getProperty("user.dir") + File.separator + "doc" + File.separator;
 	}
 	
-	public String getPathStructure() {
+	public String getPath() {
 		
 		return System.getProperty("user.dir") + File.separator + "doc" + File.separator + getSTRUCTUREID() + ".cif";
 	}
