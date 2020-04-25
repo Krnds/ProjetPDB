@@ -1,13 +1,15 @@
 package src.main.fr.karinedias.utils;
 
-import java.io.BufferedReader;
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Scanner;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import src.main.fr.karinedias.exceptions.AtomNotFoundException;
 import src.main.fr.karinedias.model.Atom;
 
 public class AtomParser {
@@ -20,9 +22,9 @@ public class AtomParser {
 
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws AtomNotFoundException {
 		// TODO Auto-generated method stub
-		long startTime = System.nanoTime();
+		
 
 		////////////////// TEST PARSER///////////////
 		// testing parsing of atoms parseAllAtomEntries(List<String> atoms)
@@ -36,46 +38,38 @@ public class AtomParser {
 		String test8 = "";
 		String test9 = null;
 
-		Atom atom1 = parseAtomData(test1);
+		Atom atom1 = getAtoms(test1);
 		System.out.println(atom1.toString());
 
-		Atom atom2 = parseAtomData(test2);
+		Atom atom2 = getAtoms(test2);
 		System.out.println(atom2.toString());
 
-		Atom atom3 = parseAtomData(test3);
+		Atom atom3 = getAtoms(test3);
 		System.out.println(atom3.toString());
 
-		Atom atom4 = parseAtomData(test4);
+		Atom atom4 = getAtoms(test4);
 		System.out.println(atom4.toString());
 
 		try {
-			parseAtomData(test9);
+			getAtoms(test9);
 		} catch (NullPointerException exc) {
 			System.out.println("The String was empty");
 		}
 
-		/////// TEST FOR PARSING ALL LINES SEARCHING FOR ATOM VALUES
 
+		System.out.println("Starting the interesting part...\n");
+		long startTime = System.nanoTime();
+		String fileTestPath = "/home/karine/src/java/ProjetPDB/doc/1XQY.cif";
+		FileReader fileTest = new FileReader();
+		StringBuilder content = fileTest.reader(fileTestPath);
+		AtomParser atomsTest = new AtomParser(content);
+		//TEST
+		List<String> atomsFound = new ArrayList<String>();
+		atomsFound.addAll(atomsTest.parseAtomLines());
+		System.out.println("I've found " + atomsFound.size() + " atoms ! Here they are : \n");
+		System.out.println(atomsFound.toString());
 		
-		BufferedReader br;
-		String line;
-		StringBuilder sb = new StringBuilder();
 		
-		try {
-			java.io.FileReader testFile = new java.io.FileReader("/home/karine/src/java/ProjetPDB/doc/4URT.cif");
-			br = new BufferedReader(testFile);
-			line = br.readLine();
-			
-			while (line != null) {
-				sb.append(line);
-			}
-			
-			parseAtomData(sb.toString());
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
 		long endTime = System.nanoTime();
 
 		long durationInNano = (endTime - startTime); // Total execution time in nano seconds
@@ -89,11 +83,11 @@ public class AtomParser {
 		return contentOfFile;
 	}
 
-	public static Atom parseAtomData(String atomLine) {
+	public static Atom getAtoms(String atomLine) throws AtomNotFoundException {
 
 		// trim all whitespaces from string
 		atomLine = atomLine.replaceAll("\\s+", "");
-
+		
 		String dataPattern = "ATOM(\\d{1,5})" // group 1 : atom number
 				+ "([CNO]{1})" // group 2 : atom name
 				+ "([CNO]{1}[A-Z]{0,2}|[CNO]{1}[A-Z]{1}[0-9]{0,3})" // group 3 : atom's alternate location
@@ -109,7 +103,7 @@ public class AtomParser {
 		Pattern atomEntry = Pattern.compile(dataPattern);
 		Matcher m = atomEntry.matcher(atomLine);
 
-		// create all variables to catch
+		// create all variables to catch and assign default values
 		int atomNumber = 0, chainNumberIdentifier = 0, residueNumber = 0;
 		char atomName = '\u0000', chainNameIdentifier = '\u0000', codeInsertionResidue = '\u0000';
 		String alternateLocationIndicator = null, residueName = null;
@@ -131,8 +125,8 @@ public class AtomParser {
 			zOrthogonalCoordinate = Float.parseFloat(m.group(11));
 
 		} else {
-			// else create a null object optionnal
-			System.out.println("NO MATCH");
+			//TODO: don't use if/else instead use try/catch and catch below custom exception: 
+			throw new AtomNotFoundException("No atoms were found while parsing the file");
 		}
 
 		Atom atom = new Atom(atomNumber, atomName, alternateLocationIndicator, residueName, chainNameIdentifier,
@@ -142,27 +136,22 @@ public class AtomParser {
 		return atom;
 
 	}
-	
-	//TODO: arg : String or StringBuffer ?
-	public List<String> parseAtomLines (String fileContent) {
-		
-		Scanner sc = new Scanner(fileContent);
-		String lineBeforeAtoms = "_atom_site.pdbx_PDB_model_num";
-		
-		
-		while (sc.hasNextLine()) {
-			if (sc.hasNext(lineBeforeAtoms)) {
-				
+
+
+	public Set<String> parseAtomLines() {
+
+		List<String> atomLines = new ArrayList<String>();
+		String[] lines = getContentOfFile().toString().split("\\n");
+		for (String s : lines) {
+			if (s.startsWith("ATOM")) {
+				atomLines.add(s);
 			}
 		}
+		//TODO: compare execution of List<String> VS Set<String>
+		Set<String> set = new HashSet<>(Arrays.asList(lines));
 
-		
-		
-		return null;
-		
+		return set;
+
 	}
-	
-	
-
 
 }
