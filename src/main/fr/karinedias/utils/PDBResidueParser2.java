@@ -13,8 +13,7 @@ import src.main.fr.karinedias.model.Residue;
 public class PDBResidueParser2 {
 	
 	/**
-	 * Parsing residues from molecular structure files (.cif) and returning them in a form of Residue objects
-	 * @param args
+	 * TODO: delete
 	 */
 	
 	/**
@@ -26,7 +25,7 @@ public class PDBResidueParser2 {
 	String file;
 	
 	public PDBResidueParser2(StringBuilder file) {
-		//TODO ??? how to ? constructor necessary ??
+		//TODO ??? how to ? constructor necessary ?? ?
 	}
 	
 	//method taken from PDBAtomRetriver for finding all ATOM entries :
@@ -55,37 +54,7 @@ public class PDBResidueParser2 {
 		System.out.println(atomsUnformatted.toString());
 		bufferedReader.close();
 		
-//		for (int i = 0; i < nEntries; i++) {
-//			
-//			
-//			//atomsUnformatted.addAll(startWithATOM.toString().split("\\r?\\n", -1)); //regex for matching newlines character on UNIX and Windows systems and removing empty values with the -1
-//		}
-		
-
 	}
-	
-//	public List<Residue> getListOfResidues(StringBuilder contentOfFile) {
-//		
-//		// looking for residues entries in pdb file in the form of : 1 1   VAL n 
-//		Pattern residuesEntries = Pattern.compile("(\\d{1})\\s(\\d{1,3})\\s{1,3}([A-Z]{3})\\sn");
-//		Matcher residuesLineMatcher = residuesEntries.matcher(contentOfFile.toString());
-//
-//		//TODO: looking for atoms related to each residue :
-//		//search for all atoms with the entity_id equals to the residue number :
-//		Pattern atomsWithCorrectEntityID =  Pa
-//		
-//		// Format residues entries to store them into HashMap data set :
-//		
-//		Map<Integer, String> residuesFound = new HashMap<Integer, String>();
-//		listOfesidues.addAll((Collection<? extends Residue>) residuesFound);
-//
-//		while (residuesLineMatcher.find()) {
-//			residuesFound.put(Integer.parseInt(residuesLineMatcher.group(2)), residuesLineMatcher.group(3));
-//		}
-//		
-//		listOfesidues.add(e)
-//	}
-	
 	
 	//FOR TESTING PURPORSES :
 	public static void main(String[] args) {

@@ -6,9 +6,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 //for the measure of elapsed time :
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
@@ -42,7 +39,6 @@ public class FileReader {
 	}
 
 
-
 	/*
 	 * Test of reader : prints all the file content
 	 */
@@ -58,29 +54,7 @@ public class FileReader {
 		}
 		return contentBuilder;
 	}
-	
 
-	//TODO: 13/04/2020
-	public Set<String> getAtomEntries(StringBuilder content) {
-		
-		//TODO initial capacity and load factor of hashset ?
-		HashSet<String> atomEntries = new HashSet<String>(); //spécifier init capacity & load factor
-		
-		String delimiter = "\n";
-		
-	String contentToString = content.toString();
-	
-	String[] array = new String[contentToString.length()];
-	Set<String> set = new HashSet<>(Arrays.asList(array));
-	//set.addAll(contentToString.split("\n"));
-	
-
- 
-    
-		
-		return set;
-		
-	}
 
 	// TO DELETE
 	public static void main(String[] args) {
