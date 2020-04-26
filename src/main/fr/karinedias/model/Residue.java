@@ -8,7 +8,7 @@ public class Residue {
 
 	HashMap<String, Character> aminoAcidCode = new HashMap<String, Character>();
 	private String residueName;
-
+	private int chainNumber = 0; //useful ?
 	private int residueNumber = 0;
 	private double coordXAlphaCarbon;
 	private double coordYAlphaCarbon;

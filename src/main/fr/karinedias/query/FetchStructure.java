@@ -25,6 +25,7 @@ public class FetchStructure {
 
 	private static final String URL = "https://files.rcsb.org/view/";
 	private static String STRUCTUREID;
+	private String givenStructureID = null;
 
 	public FetchStructure() {
 		try {
@@ -32,6 +33,11 @@ public class FetchStructure {
 		} catch (IOException exception) {
 			exception.printStackTrace();
 		}
+	}
+	
+	//Specify structure ID when calling the constructor :
+	public FetchStructure(String id) {
+		givenStructureID = id;
 	}
 
 	public void getPDBFile() {
@@ -58,6 +64,48 @@ public class FetchStructure {
 			writer.close();
 			System.out.println("Successfully Downloaded !");
 
+		//TODO: rewrite exception handling
+		} catch (java.util.InputMismatchException | UnsupportedEncodingException e) {
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
+	/**
+	 * Download wanted .cif file with the ID given in argument
+	 * @return
+	 */
+	
+	public void getPDBFileWithID(String id) {
+
+		URL url;
+
+		try {
+
+			String finalUrl = URL + id.toLowerCase() + ".cif"; //or use getUrl ??
+			System.out.println(finalUrl);
+			url = new java.net.URL(finalUrl);
+
+			BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
+			FileWriter pdbPath = new FileWriter(getPDBPathDirectory() + id.toLowerCase() + ".cif");
+			BufferedWriter writer = new BufferedWriter(pdbPath);
+
+			String line;
+			while ((line = reader.readLine()) != null) {
+				writer.write(line);
+				writer.newLine();
+			}
+
+			reader.close();
+			writer.close();
+			System.out.println("Successfully Downloaded !");
+
+		//TODO: rewrite exception handling
 		} catch (java.util.InputMismatchException | UnsupportedEncodingException e) {
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
@@ -87,6 +135,14 @@ public class FetchStructure {
 
 	protected static String getSTRUCTUREID() {
 		return STRUCTUREID;
+	}
+
+	public String getGivenStructureID() {
+		return givenStructureID;
+	}
+
+	public void setGivenStructureID(String givenStructureID) {
+		this.givenStructureID = givenStructureID;
 	}
 	
 }
