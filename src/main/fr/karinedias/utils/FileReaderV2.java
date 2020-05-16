@@ -7,8 +7,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
-import src.main.fr.karinedias.query.FetchStructure;
-
 public class FileReaderV2 {
 
 	/**
@@ -17,9 +15,7 @@ public class FileReaderV2 {
 	 * @return a StringBuilder containing the file content
 	 */
 
-	private final FetchStructure structureFile = new FetchStructure();
-	private String filePath; //
-	private StringBuilder contentOfFile;
+	private String filePath;
 
 	public FileReaderV2(String path) {
 		this.filePath = path;
@@ -37,12 +33,12 @@ public class FileReaderV2 {
 	 * Test of reader : prints all the file content
 	 */
 	// source : https://howtodoinjava.com/java/io/java-read-file-to-string-examples/
-	public StringBuilder reader(String path) {
+	public StringBuilder reader() {
 		StringBuilder contentBuilder = new StringBuilder();
-		try (Stream<String> stream = Files.lines(Paths.get(path), StandardCharsets.UTF_8)) {
+		try (Stream<String> stream = Files.lines(Paths.get(filePath), StandardCharsets.UTF_8)) {
 			stream.forEach(s -> contentBuilder.append(s).append("\n"));
 		} catch (FileNotFoundException exception) {
-			System.out.println("The file " + path + " was not found.");
+			System.out.println("The file " + filePath + " was not found.");
 		} catch (IOException exception) {
 			System.out.println(exception);
 		}

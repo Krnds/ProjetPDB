@@ -99,18 +99,24 @@ public class ResidueParser {
 
 	}
 
-	public List<String> parseResidueLines() {
+	private List<String>  parseResidueLines() {
 
 		List<String> residueLines = new ArrayList<String>();
 		String[] lines = getContentOfFile().toString().split("\\n");
-
+		String pattern = "\\d{1,2}\\s\\d{1,3}\\s+{1,3}[A-Z]{3}\\sn\\s+";
+		int nLines = residueLines.size();
+		
 		for (String s : lines) {
-			if (s.matches("\\d{1,2}\\s\\d{1,3}\\s{1,3}[A-Z]{3}\\s[n]")) {
+			if (s.matches(pattern)) {
 				residueLines.add(s);
+			} else {
+				if (nLines > 0) {
+					break;
+				}
 			}
 		}
-
 		return residueLines;
+		
 	}
 
 	// FOR TESTING PURPOSES
@@ -122,18 +128,22 @@ public class ResidueParser {
 		String fileTestPath = "/home/karine/src/java/ProjetPDB/doc/3qt2.cif";
 		// FileReader fileTest = new FileReader();
 		FileReaderV2 fileTest = new FileReaderV2(fileTestPath);
-		StringBuilder content = fileTest.reader(fileTestPath);
+		StringBuilder content = fileTest.reader();
 
 		ResidueParser rp = new ResidueParser(content);
 		List<String> residueLines = new ArrayList<String>();
 		residueLines.addAll(rp.parseResidueLines());
-		List<Residue> found = new ArrayList<Residue>();
-		for (String string : residueLines) {
-
-			found.add(rp.getResidues(string));
-		}
-
-		System.out.println(found.get(21));
+		System.out.println(residueLines.size() + " Lignes de résidus trouvées !");
+		System.out.println(residueLines.get(15));
+		//TODO: tester dimanche 10 mai !
+//		residueLines.addAll(rp.parseResidueLines());
+//		List<Residue> found = new ArrayList<Residue>();
+//		for (String string : residueLines) {
+//
+//			found.add(rp.getResidues(string));
+//		}
+//
+//		found.get(22).toString();
 
 		long endTime = System.nanoTime();
 

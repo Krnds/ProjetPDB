@@ -11,7 +11,7 @@ import src.main.fr.karinedias.model.Atom;
 
 public class AtomParser {
 
-	private StringBuilder contentOfFile; //TODO: useful ?
+	private final StringBuilder contentOfFile; //TgetODO: useful ?
 
 	public AtomParser(StringBuilder content) {
 
@@ -28,7 +28,7 @@ public class AtomParser {
 		String fileTestPath = "/home/karine/src/java/ProjetPDB/doc/3qt2.cif";
 		//FileReader fileTest = new FileReader();
 		FileReaderV2 fileTest = new FileReaderV2(fileTestPath);
-		StringBuilder content = fileTest.reader(fileTestPath);
+		StringBuilder content = fileTest.reader();
 //		System.out.println(content.toString());
 		AtomParser atomsTest = new AtomParser(content);
 		//TEST WITH A LIST<STRING> CONTAINING ATOM LINES
