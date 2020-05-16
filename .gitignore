@@ -65,3 +65,6 @@ local.properties
 .DS_Store~
 [#]*[#] 
 /target/
+
+### Ignore doc/ folder for feature-general-parser
+doc/
