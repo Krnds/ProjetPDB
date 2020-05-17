@@ -294,10 +294,9 @@ public class PDBAtomParser {
 		//TODO: change way to do, bc 47 sec. for execution...
 		long startTime = System.nanoTime();
 		
-		FileReader testfile = new FileReader();
-		String path = testfile.getFilePath();
+		FileReader testfile = new FileReader("/home/karine/src/java/ProjetPDB/doc/4NCC.cif");
 		System.out.println("Calling PDBAtomParser...");
-		PDBAtomParser fileToParse = new PDBAtomParser(testfile.reader(path));
+		PDBAtomParser fileToParse = new PDBAtomParser(testfile.reader());
 		System.out.println("Parsing all atoms...");	
 
 

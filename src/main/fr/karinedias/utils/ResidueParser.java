@@ -127,7 +127,7 @@ public class ResidueParser {
 		long startTime = System.nanoTime();
 		String fileTestPath = "/home/karine/src/java/ProjetPDB/doc/3qt2.cif";
 		// FileReader fileTest = new FileReader();
-		FileReaderV2 fileTest = new FileReaderV2(fileTestPath);
+		FileReader fileTest = new FileReader(fileTestPath);
 		StringBuilder content = fileTest.reader();
 
 		ResidueParser rp = new ResidueParser(content);

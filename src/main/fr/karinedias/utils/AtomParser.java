@@ -27,7 +27,7 @@ public class AtomParser {
 		long startTime = System.nanoTime();
 		String fileTestPath = "/home/karine/src/java/ProjetPDB/doc/3qt2.cif";
 		//FileReader fileTest = new FileReader();
-		FileReaderV2 fileTest = new FileReaderV2(fileTestPath);
+		FileReader fileTest = new FileReader(fileTestPath);
 		StringBuilder content = fileTest.reader();
 //		System.out.println(content.toString());
 		AtomParser atomsTest = new AtomParser(content);

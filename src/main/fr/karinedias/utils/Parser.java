@@ -63,7 +63,7 @@ public class Parser {
 
 	public static void main(String[] args) {
 		String fileTestPath = "/home/karine/src/java/ProjetPDB/doc/2b5i.cif";
-		FileReaderV2 filereader = new FileReaderV2(fileTestPath);
+		FileReader filereader = new FileReader(fileTestPath);
 		StringBuilder content = filereader.reader();
 		Parser p = new Parser();
 		MoleculeParser test = p.new MoleculeParser(content);
