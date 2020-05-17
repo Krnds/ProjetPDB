@@ -6,16 +6,16 @@ import java.util.List;
 public class Molecule {
 
 	private String entryID = "";
-	private int nChains = 0;
-	private List<Residue> aminoAcidList = new ArrayList<Residue>();
+	private List<Chain> chains;
+	private List<Residue> aminoAcidList = new ArrayList<Residue>(); //to delete -> into Chain object 
 	
 	/*
 	 * Constructor :
 	 */
-	public Molecule(String entryID, int nChains, List<Residue> aminoAcidList) {
+	public Molecule(String entryID, List<Chain> chains, List<Residue> aminoAcidList) {
 		this.entryID = entryID;
-		this.nChains = nChains;
-		this.aminoAcidList = aminoAcidList;
+		this.chains = chains;
+		this.aminoAcidList = aminoAcidList;//to delete -> into Chain object
 	}
 
 	/*
@@ -29,12 +29,13 @@ public class Molecule {
 		this.entryID = entryID;
 	}
 
-	protected int getnChains() {
-		return nChains;
+	protected List<Chain> getnChains() {
+		return chains;
 	}
 
-	protected void setnChains(int nChains) {
-		this.nChains = nChains;
+	// add a chain to know chains
+	protected void setnChains(Chain chain) {
+		this.chains.add(chain);
 	}
 
 	protected List<Residue> getAminoAcidList() {
