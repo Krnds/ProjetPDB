@@ -1,52 +1,48 @@
 package src.main.fr.karinedias.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Molecule {
 
-	private String entryID = "";
-	private List<Chain> chains;
-	private List<Residue> aminoAcidList = new ArrayList<Residue>(); //to delete -> into Chain object 
+	private int id = 0;
+	private String name = "";
+	private String type = ""; //TODO: create enumeration for polymer/non-polymer/water (3 types only)
+	private int numberOfMolecules = 0;
+	private List<Chain> chains; // useful ??
+
 	
 	/*
 	 * Constructor :
 	 */
-	public Molecule(String entryID, List<Chain> chains, List<Residue> aminoAcidList) {
-		this.entryID = entryID;
-		this.chains = chains;
-		this.aminoAcidList = aminoAcidList;//to delete -> into Chain object
+	public Molecule(int id, String name, String type, int nMolecules) {
+		this.id = id;
+		this.name = name;
+		this.type = type;
+		numberOfMolecules = nMolecules;
 	}
+
 
 	/*
-	 * Getters and setters from the Molecule object fields :
+	 * Getters for Molecules attributes :
 	 */
-	protected String getEntryID() {
-		return entryID;
-	}
-
-	protected void setEntryID(String entryID) {
-		this.entryID = entryID;
-	}
-
-	protected List<Chain> getnChains() {
-		return chains;
-	}
-
-	// add a chain to know chains
-	protected void setnChains(Chain chain) {
-		this.chains.add(chain);
-	}
-
-	protected List<Residue> getAminoAcidList() {
-		return aminoAcidList;
-	}
-
-	protected void setAminoAcidList(ArrayList<Residue> aminoAcidList) {
-		this.aminoAcidList = aminoAcidList;
-	}
 	
-	
-	
+	protected int getId() {
+		return id;
+	}
+
+
+	protected String getName() {
+		return name;
+	}
+
+
+	protected String getType() {
+		return type;
+	}
+
+
+	protected int getNumberOfMolecules() {
+		return numberOfMolecules;
+	}
 	
 }

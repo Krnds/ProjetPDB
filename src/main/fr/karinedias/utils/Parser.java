@@ -7,7 +7,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import src.main.fr.karinedias.model.Molecule;
 
 public class Parser {
 
@@ -17,9 +16,8 @@ public class Parser {
 
 	@SuppressWarnings("unused")
 	private StringBuilder contentOfFile = null;
-	public Molecule Molecule;
-	
-	//general method for extracting lines of interest in cif file
+
+	// general method for extracting lines of interest in cif file
 	private String getBetweenStrings(String text, String textFrom, String textTo) {
 
 		String result = "";
@@ -32,18 +30,14 @@ public class Parser {
 	}
 
 	/**
-	 * Use inner classes for parsing each object needed
-	 * 
-	 * @author Karine Dias
-	 *
+	 * Parsing each object data with inner classes
 	 */
-	public class MoleculeParser {
-
-		public MoleculeParser(StringBuilder contentOfFile) {
-
+	public class ComplexParser {
+		
+		public ComplexParser(StringBuilder contentOfFile) {
+			
 			Parser.this.contentOfFile = contentOfFile;
 		}
-
 		private String parseEntryID() {
 
 			String id = null;
@@ -58,24 +52,32 @@ public class Parser {
 			}
 			return id;
 		}
+		
+	}
+	
+	
+	public class MoleculeParser {
+
+		public MoleculeParser(StringBuilder contentOfFile) {
+
+			Parser.this.contentOfFile = contentOfFile;
+		}
+
 
 		private List<Character> parseChainsOfMolecule() {
-			
+
 			String lines = contentOfFile.toString();
-			String[] linesToSearch = getBetweenStrings(lines, "_struct.entry_id",
-					"_atom_site.group_PDB").split("\\n");
+			String[] linesToSearch = getBetweenStrings(lines, "_struct.entry_id", "_atom_site.group_PDB").split("\\n");
 			List<String> listOfLinesToSearch = Arrays.asList(linesToSearch);
 			// Filter chains of molecule by their name (one capital letter)
-			List<Character> chains = listOfLinesToSearch.stream()
-					.filter(Pattern.compile("(^[A-Z])\\sN").asPredicate())
-					.map(s -> s.charAt(0))
-					.collect(Collectors.toList());
+			List<Character> chains = listOfLinesToSearch.stream().filter(Pattern.compile("(^[A-Z])\\sN").asPredicate())
+					.map(s -> s.charAt(0)).collect(Collectors.toList());
 			if (chains.isEmpty())
-				//TODO: cases of empty chains ?
-				//search for chains in atom parser or initialize to null ?
-				chains.add('\u0000');//add null character
+				// TODO: cases of empty chains ?
+				// search for chains in atom parser or initialize to null ?
+				chains.add('\u0000');// add null character
 			return chains;
-			
+
 		}
 
 		private void parseMoleculeLines() {
@@ -95,52 +97,52 @@ public class Parser {
 
 		}
 
-
-
 	}
 
 	// TESTING :
-	//TODO create method for returning Molecule object + Chain object ? + Residue and Atom objects
+	// TODO create method for returning Molecule object + Chain object ? + Residue
+	// and Atom objects
 
 	public static void main(String[] args) {
 		long startTime = System.nanoTime();
 		String file1 = "/home/karine/src/java/ProjetPDB/doc/4NCC.cif";
 		String file2 = "/home/karine/src/java/ProjetPDB/doc/3dcu.cif";
 		String file3 = "/home/karine/src/java/ProjetPDB/doc/3l3t.cif";
-		
+
 		FileReader filereader = new FileReader(file3);
 		StringBuilder content = filereader.reader();
 		Parser p = new Parser();
 		MoleculeParser test = p.new MoleculeParser(content);
 		test.parseMoleculeLines();
-
+		ComplexParser complexparser = p.new ComplexParser(content);
+		//Complex myFirstComplex = new Complex(complexparser.parseEntryID(),);
 		long endTime = System.nanoTime();
 		long durationInNano = (endTime - startTime); // Total execution time in nano seconds
 		long durationInMilliseconds = TimeUnit.NANOSECONDS.toMillis(durationInNano);
 		System.out.println("Elapsed time in milliseconds = " + durationInMilliseconds);
-		System.out.println("ID: " + test.parseEntryID());
-		test.parseChainsOfMolecule();
+		for (int i = 0; i < test.parseChainsOfMolecule().size(); i++) {
+			System.out.println(test.parseChainsOfMolecule().get(i));
+		}
 	}
-	
+
 	public class ChainParser {
-		
+
 		public ChainParser(StringBuilder contentOfFile) {
 
 			Parser.this.contentOfFile = contentOfFile;
 		}
 	}
-	
+
 	public class ResidueParser {
-		
+
 		public ResidueParser(StringBuilder contentOfFile) {
 
 			Parser.this.contentOfFile = contentOfFile;
 		}
 	}
-	
-	
+
 	public class AtomParser {
-		
+
 		public AtomParser(StringBuilder contentOfFile) {
 
 			Parser.this.contentOfFile = contentOfFile;
