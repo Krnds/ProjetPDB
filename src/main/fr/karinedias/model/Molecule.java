@@ -4,21 +4,24 @@ import java.util.List;
 
 public class Molecule {
 
-	private int id = 0;
-	private String name = "";
+	private int moleculeID = 0;
 	private String type = ""; //TODO: create enumeration for polymer/non-polymer/water (3 types only)
-	private int numberOfMolecules = 0;
+	private String description = "";
 	private List<Chain> chains; // useful ??
 
 	
+	public Molecule(int moleculeID, String type) {
+		this.moleculeID = moleculeID;
+		this.type = type;
+	}
+
 	/*
 	 * Constructor :
 	 */
-	public Molecule(int id, String name, String type, int nMolecules) {
-		this.id = id;
-		this.name = name;
+	public Molecule(int id, String description, String type) {
+		this.moleculeID = id;
+		this.description = description;
 		this.type = type;
-		numberOfMolecules = nMolecules;
 	}
 
 
@@ -27,12 +30,12 @@ public class Molecule {
 	 */
 	
 	protected int getId() {
-		return id;
+		return moleculeID;
 	}
 
 
-	protected String getName() {
-		return name;
+	protected String getDescription() {
+		return description;
 	}
 
 
@@ -40,9 +43,12 @@ public class Molecule {
 		return type;
 	}
 
-
-	protected int getNumberOfMolecules() {
-		return numberOfMolecules;
+	@Override
+	public String toString() {
+		return "Molecule [moleculeID=" + moleculeID + ", " + (type != null ? "type=" + type + ", " : "")
+				+ (description != null ? "description=" + description : "") + "]";
 	}
+
+
 	
 }
