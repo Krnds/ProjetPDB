@@ -10,7 +10,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import src.main.fr.karinedias.exceptions.AtomNotFoundException;
+import src.main.fr.karinedias.exceptions.ResidueNotFoundException;
+import src.main.fr.karinedias.model.Atom;
 import src.main.fr.karinedias.model.Molecule;
+import src.main.fr.karinedias.model.Residue;
 
 public class Parser {
 
@@ -154,8 +158,76 @@ public class Parser {
 			Parser.this.contentOfFile = contentOfFile;
 		}
 		
+		//TODO regroup all residues in once like Molecules
+		public Residue getResidues(String residueLine) throws ResidueNotFoundException, AtomNotFoundException {
+
+			// trim all whitespaces from string
+			residueLine = residueLine.replaceAll("\\s+", "");
+
+			String residuePattern = "(\\d{1,2})" // group 1 : chain number
+					+ "(\\d{1,3})" // group 2 : residueNumber
+					+ "([A-Z]{3})" // group 3 : residueName
+					+ "[n]"; // not used
+
+			Pattern residueEntry = Pattern.compile(residuePattern);
+			Matcher m = residueEntry.matcher(residueLine);
+
+			// create all variables to catch and assign default values
+			int chainNumberIdentifier = 0, residueNumber = 0;
+			// TODO: modify String with Interface AminoAcid ?
+			// TODO: add checker for known amino acids
+			String residueName = null;
+
+			if (m.find()) {
+
+				chainNumberIdentifier = Integer.parseInt(m.group(1));
+				residueNumber = Integer.parseInt(m.group(2));
+				residueName = m.group(3);
+
+			} else {
+				// TODO: don't use if/else instead use try/catch and catch below custom
+				// exception:
+				throw new ResidueNotFoundException("No residues were found while parsing the file");
+			}
+			// for getting atoms list :
+			AtomParser atomParser = new AtomParser(contentOfFile);
+
+			List<String> listOfAtoms = new ArrayList<String>();
+			listOfAtoms.addAll(atomParser.parseAtomLines()); // return List<String>
+
+			List<Atom> atoms = new ArrayList<Atom>(listOfAtoms.size());
+			// Test getAtoms method :
+			for (String string : listOfAtoms) { // ????
+				atoms.add(atomParser.getAtoms(string));
+			}
+
+			Residue residue = new Residue(residueName, residueNumber, atoms);
+
+			return residue;
+
+		}
+
+		private List<String> parseResidueLines() {
+
+			List<String> residueLines = new ArrayList<String>();
+			String[] lines = contentOfFile.toString().split("\\n");
+			String pattern = "\\d{1,2}\\s\\d{1,3}\\s+{1,3}[A-Z]{3}\\sn\\s+";
+			int nLines = residueLines.size();
+			
+			for (String s : lines) {
+				if (s.matches(pattern)) {
+					residueLines.add(s);
+				} else {
+					if (nLines > 0) {
+						break;
+					}
+				}
+			}
+			return residueLines;
+			
+		}
 		
-		
+
 		
 	}
 
@@ -164,6 +236,75 @@ public class Parser {
 		public AtomParser(StringBuilder contentOfFile) {
 
 			Parser.this.contentOfFile = contentOfFile;
+		}
+		
+		public Atom getAtoms(String atomLine) throws AtomNotFoundException {
+
+			// trim all whitespaces from string
+			atomLine = atomLine.replaceAll("\\s+", "");
+			
+			String dataPattern = "ATOM(\\d{1,5})" // group 1 : atom number
+					+ "([CNOS]{1})" // group 2 : atom name
+					+ "([CNOS]{1}[A-Z]{0,2}|[CNOS]{1}[A-Z]{1}[0-9]{0,3})" // group 3 : atom's alternate location
+					+ "[.]([A-Z]{3})" // group 4 : residue of the atom
+					+ "([A-Z]{1})" // group 5 : chain name identifier (single character)
+					+ "([0-9]{1})" // group 6 : chain number identifier (single digit)
+					+ "([0-9]{1,3})" // group 7 : number of the residue
+					+ "([?]{1})" // group 8 : Code for insertion of residues
+					+ "(-?[0-9]{1,4}\\.[0-9]{3})" // group 9 : X orthogonal coordinate of the atom
+					+ "(-?[0-9]{1,4}\\.[0-9]{3})" // group 10 : Y orthogonal coordinate of the atom
+					+ "(-?[0-9]{1,4}\\.[0-9]{3})"; // group 11 : Z orthogonal coordinate of the atom
+
+			Pattern atomEntry = Pattern.compile(dataPattern);
+			Matcher m = atomEntry.matcher(atomLine);
+
+			// create all variables to catch and assign default values
+			int atomNumber = 0, chainNumberIdentifier = 0, residueNumber = 0;
+			char atomName = '\u0000', chainNameIdentifier = '\u0000', codeInsertionResidue = '\u0000';
+			String alternateLocationIndicator = null, residueName = null;
+			float xOrthogonalCoordinate = 0.0f, yOrthogonalCoordinate = 0.0f, zOrthogonalCoordinate = 0.0f;
+
+			if (m.find()) {
+
+				atomNumber = Integer.parseInt(m.group(1));
+				atomName = m.group(2).charAt(0);
+				alternateLocationIndicator = m.group(3);
+				// TODO : verify if it's a know residue of the file ??
+				residueName = m.group(4);
+				chainNameIdentifier = m.group(5).charAt(0);
+				chainNumberIdentifier = Integer.parseInt(m.group(6));
+				residueNumber = Integer.parseInt(m.group(7));
+				codeInsertionResidue = m.group(8).charAt(0);
+				xOrthogonalCoordinate = Float.parseFloat(m.group(9));
+				yOrthogonalCoordinate = Float.parseFloat(m.group(10));
+				zOrthogonalCoordinate = Float.parseFloat(m.group(11));
+
+			} else {
+				//TODO: don't use if/else instead use try/catch and catch below custom exception: 
+				throw new AtomNotFoundException("No atoms were found while parsing the file");
+			}
+
+			Atom atom = new Atom(atomNumber, atomName, alternateLocationIndicator, residueName, chainNameIdentifier,
+					chainNumberIdentifier, residueNumber, xOrthogonalCoordinate, yOrthogonalCoordinate,
+					zOrthogonalCoordinate);
+
+			return atom;
+
+		}
+
+
+		public List<String> parseAtomLines() {
+
+			List<String> atomLines = new ArrayList<String>();
+			String[] lines = contentOfFile.toString().split("\\n");
+			for (String s : lines) {
+				if (s.startsWith("ATOM")) {
+					atomLines.add(s);
+				}
+			}
+
+			return atomLines;
+
 		}
 	}
 
@@ -181,8 +322,10 @@ public class Parser {
 		FileReader filereader = new FileReader(file2);
 		StringBuilder content = filereader.reader();
 		Parser parser = new Parser(content);
+		
+		//Complex
 		ComplexParser complexParser = parser.new ComplexParser(content);
-
+		//Molecules
 		MoleculeParser moleculeParser = parser.new MoleculeParser(content);
 		List<String> moleculeLines = new ArrayList<String>(moleculeParser.parseMoleculeLines());
 		List<Molecule> molecules = new ArrayList<Molecule>(moleculeParser.getAllMolecules(moleculeLines));
@@ -190,9 +333,45 @@ public class Parser {
 		System.out.println(molecules.size() + " molecules were found");
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Which one do you want to display ?");
-		int choice = sc.nextInt();
-		System.out.println(molecules.get(choice - 1).toString());
+		int molculeChoice = sc.nextInt();
+		System.out.println(molecules.get(molculeChoice - 1).toString());
+		
+		//Residues 
+		ResidueParser rp = parser.new ResidueParser(content);
+		List<String> residueLines = new ArrayList<String>();
+		residueLines.addAll(rp.parseResidueLines());
+		System.out.println(residueLines.size() + " residues were found");
+		System.out.println("Which one do you want to display ?");
+		int residueChoice = sc.nextInt();
+		System.out.println(re.get(residueChoice - 1).toString());
 
+		//Atoms
+		AtomParser atomsTest = parser.new AtomParser(content);
+		//TEST WITH A LIST<STRING> CONTAINING ATOM LINES
+		List<String> atomsFound = new ArrayList<String>();
+		atomsFound.addAll(atomsTest.parseAtomLines());
+		System.out.println(atomsFound.size() + " atoms were found");
+		List<Atom> atoms = new ArrayList<Atom>(atomsFound.size());
+		//Test getAtoms method :
+		for (String string : atomsFound) { //????
+			try {
+				atoms.add(atomsTest.getAtoms(string));
+			} catch (AtomNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		System.out.println("Which one do you want to display ?");
+		int atomChoice = sc.nextInt();
+		System.out.println(atoms.get(atomChoice - 1).toString());
+
+//		Atom n88 = atoms.get(88);
+//		Atom n535 = atoms.get(535);
+//		Atom n8445 = atoms.get(8445);
+//		System.out.println(n88.toString() + "\n" 
+//				+ n535.toString() + "\n" 
+//				+ n8445.toString());
+		
 		long endTime = System.nanoTime();
 		long durationInNano = (endTime - startTime); // Total execution time in nano seconds
 		long durationInMilliseconds = TimeUnit.NANOSECONDS.toMillis(durationInNano);

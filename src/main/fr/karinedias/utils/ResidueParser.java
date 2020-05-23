@@ -2,7 +2,6 @@ package src.main.fr.karinedias.utils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -119,37 +118,4 @@ public class ResidueParser {
 		
 	}
 
-	// FOR TESTING PURPOSES
-	public static void main(String[] args) throws AtomNotFoundException, ResidueNotFoundException {
-
-		// CALLING GETATOMS METHOD :
-
-		long startTime = System.nanoTime();
-		String fileTestPath = "/home/karine/src/java/ProjetPDB/doc/3qt2.cif";
-		// FileReader fileTest = new FileReader();
-		FileReader fileTest = new FileReader(fileTestPath);
-		StringBuilder content = fileTest.reader();
-
-		ResidueParser rp = new ResidueParser(content);
-		List<String> residueLines = new ArrayList<String>();
-		residueLines.addAll(rp.parseResidueLines());
-		System.out.println(residueLines.size() + " Lignes de résidus trouvées !");
-		System.out.println(residueLines.get(15));
-		//TODO: tester dimanche 10 mai !
-//		residueLines.addAll(rp.parseResidueLines());
-//		List<Residue> found = new ArrayList<Residue>();
-//		for (String string : residueLines) {
-//
-//			found.add(rp.getResidues(string));
-//		}
-//
-//		found.get(22).toString();
-
-		long endTime = System.nanoTime();
-
-		long durationInNano = (endTime - startTime); // Total execution time in nano seconds
-		long durationInSeconds = TimeUnit.NANOSECONDS.toSeconds(durationInNano);
-
-		System.out.println("Elapsed time in seconds = " + durationInSeconds);
-	}
 }
