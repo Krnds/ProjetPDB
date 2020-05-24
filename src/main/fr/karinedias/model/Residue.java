@@ -120,4 +120,16 @@ public class Residue {
 		this.coordZAlphaCarbon = coordZAlphaCarbon;
 	}
 
+	@Override
+	public String toString() {
+		return "Residue [" + (aminoAcidCode != null ? "aminoAcidCode=" + aminoAcidCode + ", " : "")
+				+ (residueName != null ? "residueName=" + residueName + ", " : "") + "chainNumber=" + chainNumber
+				+ ", residueNumber=" + residueNumber + ", coordXAlphaCarbon=" + coordXAlphaCarbon
+				+ ", coordYAlphaCarbon=" + coordYAlphaCarbon + ", coordZAlphaCarbon=" + coordZAlphaCarbon + ", "
+				+ (coordCarbonAtom != null ? "coordCarbonAtom=" + coordCarbonAtom + ", " : "")
+				+ (coordNitrogenAtom != null ? "coordNitrogenAtom=" + coordNitrogenAtom + ", " : "")
+				+ (coordOxygenAtom != null ? "coordOxygenAtom=" + coordOxygenAtom + ", " : "") + "barycenterOfResidue="
+				+ barycenterOfResidue + "]";
+	}
+
 }

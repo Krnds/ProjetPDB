@@ -76,9 +76,10 @@ public class Parser {
 			return id;
 		}
 
-		// private Complex getComplex(String entryID) {
-
-		// return new Complex(entryID, molecules);
+//		private Complex getComplex(String entryID) {
+//
+//			return new Complex(entryID, List<Molecule> MoleculeParser);
+//		}
 
 	}
 
@@ -98,30 +99,38 @@ public class Parser {
 		private List<String> parseMoleculeLines() {
 
 			String lines = contentOfFile.toString();
-			String[] linesToSearch = getBetweenStrings(lines, "_entity.pdbx_number_of_molecules",
+			String[] linesToSearch = getBetweenStrings(lines, "_entity.id",
 					"_entity_poly.entity_id").split("\\n");
+			
 			List<String> listOfLinesToSearch = Arrays.asList(linesToSearch);
+			// Search for "polymer" word between those lines
+
 			// Filter molecule lines with chains entities : polymer, non-polymer and water
-			List<String> molecules = listOfLinesToSearch.stream()
+			List<String> moleculesold = listOfLinesToSearch.stream()
 					.filter(Pattern.compile("^\\d\\s(polymer|non-polymer|water)").asPredicate())
 					.collect(Collectors.toList());
+			List<String> molecules = listOfLinesToSearch.stream()
+					.filter(Pattern.compile("polymer").asPredicate())
+					.collect(Collectors.toList());
 			return molecules;
+			}
+		
 
-		}
-
-		private List<Molecule> getAllMolecules(List<String> moleculeLines) {
+		public List<Molecule> getAllMolecules(List<String> moleculeLines) {
 			return moleculeLines.stream().map(str -> parseMolecule(str)).filter(Objects::nonNull)
 					.collect(Collectors.toList());
 		}
-
+		
+		// parse only polymer molecules (non-polymer and water are not made of residues)
 		private Molecule parseMolecule(String moleculeLine) {
-			String moleculePattern = "(\\d)\\s(polymer|non-polymer|water)\\s+(man|nat|syn)\\s+([^\\']*.+?\\').*";
+			//String moleculePatternOld = "(\\d)\\s(polymer|non-polymer|water)\\s+(man|nat|syn)\\s+([^\\']*.+?\\').*";
+			String moleculePattern = "(\\d)\\s(polymer)\\s+(man|nat|syn)\\s+([^\\']*.+?\\').*";
 			Pattern moleculeEntry = Pattern.compile(moleculePattern);
 			Matcher m = moleculeEntry.matcher(moleculeLine);
 			if (m.matches()) {
 				return new Molecule(Integer.parseInt(m.group(1)), m.group(4), m.group(2));
 			} else {
-				return new Molecule(0, null, null); // TODO: change behaviour -> null object pattern ?
+				return null;// TODO: change behaviour -> null object pattern ?
 			}
 		}
 	}
@@ -158,8 +167,22 @@ public class Parser {
 			Parser.this.contentOfFile = contentOfFile;
 		}
 		
-		//TODO regroup all residues in once like Molecules
-		public Residue getResidues(String residueLine) throws ResidueNotFoundException, AtomNotFoundException {
+		private List<Residue> getAllResidues(List<String> residueLines) {
+			return residueLines.stream().map(str -> {
+				try {
+					return parseResidue(str);
+				} catch (ResidueNotFoundException | AtomNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return null;
+			}).filter(Objects::nonNull).collect(Collectors.toList());
+		}
+		
+//		return moleculeLines.stream().map(str -> parseMolecule(str)).filter(Objects::nonNull)
+//				.collect(Collectors.toList());
+//		
+		public Residue parseResidue(String residueLine) throws ResidueNotFoundException, AtomNotFoundException {
 
 			// trim all whitespaces from string
 			residueLine = residueLine.replaceAll("\\s+", "");
@@ -196,17 +219,16 @@ public class Parser {
 			listOfAtoms.addAll(atomParser.parseAtomLines()); // return List<String>
 
 			List<Atom> atoms = new ArrayList<Atom>(listOfAtoms.size());
-			// Test getAtoms method :
+			// TODO: use stream 
 			for (String string : listOfAtoms) { // ????
-				atoms.add(atomParser.getAtoms(string));
+				atoms.add(atomParser.parseAtom(string));
 			}
 
-			Residue residue = new Residue(residueName, residueNumber, atoms);
-
-			return residue;
+			return new Residue(residueName, residueNumber, atoms);
 
 		}
 
+		//TODO : use outter class method for not going through all the lines + decrease exec time
 		private List<String> parseResidueLines() {
 
 			List<String> residueLines = new ArrayList<String>();
@@ -238,7 +260,35 @@ public class Parser {
 			Parser.this.contentOfFile = contentOfFile;
 		}
 		
-		public Atom getAtoms(String atomLine) throws AtomNotFoundException {
+		// Helper method for searching all atoms used in molecule
+//		private void getAtomType () {
+//			String atomTypeSymbolLines = getBetweenStrings(contentOfFile.toString(), "_atom_type.symbol", "loop_");
+//			
+//			String atomTypeSymbolPattern = "([A-Z]|[a-z]{1,2}"; 
+//
+//			Pattern atomTypePattern = Pattern.compile(atomTypeSymbolPattern);
+//			Matcher m = atomTypePattern.matcher(atomTypeSymbolLines);
+//			
+//			List<String> atomTypeSymbols = atomTypeSymbolLines.ma
+//			System.out.println(s);
+//			
+//		}
+		
+		private List<Atom> getAllAtoms(List<String> atomLines) {
+
+			return atomLines.stream().map(str -> {
+				try {
+					return parseAtom(str);
+				} catch (AtomNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return null;
+			}).filter(Objects::nonNull)
+					.collect(Collectors.toList());
+		}
+		
+		public Atom parseAtom(String atomLine) throws AtomNotFoundException {
 
 			// trim all whitespaces from string
 			atomLine = atomLine.replaceAll("\\s+", "");
@@ -246,7 +296,7 @@ public class Parser {
 			String dataPattern = "ATOM(\\d{1,5})" // group 1 : atom number
 					+ "([CNOS]{1})" // group 2 : atom name
 					+ "([CNOS]{1}[A-Z]{0,2}|[CNOS]{1}[A-Z]{1}[0-9]{0,3})" // group 3 : atom's alternate location
-					+ "[.]([A-Z]{3})" // group 4 : residue of the atom
+					+ "[.|A-Z]([A-Z]{3})" // group 4 : residue of the atom
 					+ "([A-Z]{1})" // group 5 : chain name identifier (single character)
 					+ "([0-9]{1})" // group 6 : chain number identifier (single digit)
 					+ "([0-9]{1,3})" // group 7 : number of the residue
@@ -292,7 +342,7 @@ public class Parser {
 
 		}
 
-
+		//TODO : use outter class method for not going through all the lines + decrease exec time
 		public List<String> parseAtomLines() {
 
 			List<String> atomLines = new ArrayList<String>();
@@ -307,7 +357,6 @@ public class Parser {
 
 		}
 	}
-
 	
 	
 	// TESTING :
@@ -315,11 +364,17 @@ public class Parser {
 	// and Atom objects
 	public static void main(String[] args) {
 		long startTime = System.nanoTime();
-		String file1 = "/home/karine/src/java/ProjetPDB/doc/4NCC.cif";
-		String file2 = "/home/karine/src/java/ProjetPDB/doc/3dcu.cif";
-		String file3 = "/home/karine/src/java/ProjetPDB/doc/3l3t.cif";
+		List<String> listOfFiles = Arrays.asList("1fn3.cif","2b5i.cif","2na8.cif","3bw7.cif","3c0p.cif","3dcu.cif","3l3t.cif","3qt2.cif",
+		"3tnw.cif","4NCC.cif","6rj4.cif");
+		int index = 0;
+		for(String s : listOfFiles)
+		    System.out.print((index++)+": [" + s + "]  ");
+		System.out.println("\nChoose a molecule from the list : \n");
+		Scanner sc = new Scanner(System.in);
+		int fileChosen = sc.nextInt();
+		String file = "/home/karine/src/java/ProjetPDB/doc/" + listOfFiles.get(fileChosen);
 
-		FileReader filereader = new FileReader(file2);
+		FileReader filereader = new FileReader(file);
 		StringBuilder content = filereader.reader();
 		Parser parser = new Parser(content);
 		
@@ -331,46 +386,29 @@ public class Parser {
 		List<Molecule> molecules = new ArrayList<Molecule>(moleculeParser.getAllMolecules(moleculeLines));
 
 		System.out.println(molecules.size() + " molecules were found");
-		Scanner sc = new Scanner(System.in);
 		System.out.println("Which one do you want to display ?");
 		int molculeChoice = sc.nextInt();
 		System.out.println(molecules.get(molculeChoice - 1).toString());
 		
 		//Residues 
-		ResidueParser rp = parser.new ResidueParser(content);
-		List<String> residueLines = new ArrayList<String>();
-		residueLines.addAll(rp.parseResidueLines());
-		System.out.println(residueLines.size() + " residues were found");
+		ResidueParser residueParser = parser.new ResidueParser(content);
+		List<String> residueLines = new ArrayList<String>(residueParser.parseResidueLines());
+		List<Residue> residues = new ArrayList<Residue>(residueParser.getAllResidues(residueLines));
+		
+		System.out.println(residues.size() + " residues were found");
 		System.out.println("Which one do you want to display ?");
 		int residueChoice = sc.nextInt();
-		System.out.println(re.get(residueChoice - 1).toString());
+		System.out.println(residues.get(residueChoice - 1).toString());
 
 		//Atoms
-		AtomParser atomsTest = parser.new AtomParser(content);
-		//TEST WITH A LIST<STRING> CONTAINING ATOM LINES
-		List<String> atomsFound = new ArrayList<String>();
-		atomsFound.addAll(atomsTest.parseAtomLines());
-		System.out.println(atomsFound.size() + " atoms were found");
-		List<Atom> atoms = new ArrayList<Atom>(atomsFound.size());
-		//Test getAtoms method :
-		for (String string : atomsFound) { //????
-			try {
-				atoms.add(atomsTest.getAtoms(string));
-			} catch (AtomNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+		AtomParser atomParser = parser.new AtomParser(content);
+	
+		List<String> atomLines = new ArrayList<String>(atomParser.parseAtomLines());
+		List<Atom> atoms = new ArrayList<Atom>(atomParser.getAllAtoms(atomLines));
+		System.out.println(atoms.size() + " atoms were found");
 		System.out.println("Which one do you want to display ?");
 		int atomChoice = sc.nextInt();
 		System.out.println(atoms.get(atomChoice - 1).toString());
-
-//		Atom n88 = atoms.get(88);
-//		Atom n535 = atoms.get(535);
-//		Atom n8445 = atoms.get(8445);
-//		System.out.println(n88.toString() + "\n" 
-//				+ n535.toString() + "\n" 
-//				+ n8445.toString());
 		
 		long endTime = System.nanoTime();
 		long durationInNano = (endTime - startTime); // Total execution time in nano seconds
