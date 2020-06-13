@@ -224,6 +224,7 @@ public class Parser {
 				atoms.add(atomParser.parseAtom(string));
 			}
 
+			//TODO: chnage type of Residue to int, int, Atom
 			return new Residue(residueName, residueNumber, atoms);
 
 		}
