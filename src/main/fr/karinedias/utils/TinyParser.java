@@ -233,7 +233,12 @@ public class TinyParser {
 		List<String> lines = rp.parseResidueLines();
 		
 		for (String string : lines) {
-			System.out.println(string);
+			try {
+				rp.parseResidue(string);
+			} catch (ResidueNotFoundException | AtomNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		//AtomParser ap = tinyParser.new AtomParser(content);
