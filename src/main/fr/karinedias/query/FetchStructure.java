@@ -1,4 +1,4 @@
-package src.main.fr.karinedias.query;
+package main.fr.karinedias.query;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
