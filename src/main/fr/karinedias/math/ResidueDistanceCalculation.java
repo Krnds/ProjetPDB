@@ -1,102 +1,26 @@
 package src.main.fr.karinedias.math;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import src.main.fr.karinedias.model.Residue;
-import src.main.fr.karinedias.utils.PDBAtomParser;
-import src.main.fr.karinedias.utils.PDBAtomRetriever;
 
 public class ResidueDistanceCalculation {
 	
 	/**
-	 * This class only calculates the distance between 2 residues with the CA method. 
-	 * TODO: calculate the distance with the barycenter of C, N, O atoms. 
+	 * This class only calculates the distance between 2 residues with the Alpha Carbons method. 
+	 * TODO: calculate the distance with the barycenter of C, N, O atoms ?
 	 */
-
-	private HashMap<String, Double> molecularWeight = new HashMap<String, Double>();
-	//TODO: create an amino acid class with all parameters
-	
-	public ResidueDistanceCalculation() {
-		molecularWeight.put("Alanine", 89.1);
-		molecularWeight.put("Arginine", 174.2);
-		molecularWeight.put("Asparagine", 132.1);
-		molecularWeight.put("Aspartate", 133.1);
-		molecularWeight.put("Cysteine", 121.2);
-		molecularWeight.put("Glutamate", 147.1);
-		molecularWeight.put("Glutamine", 146.2);
-		molecularWeight.put("Glycine", 75.1);
-		molecularWeight.put("Histidine", 155.2);
-	}
-	
-	
-/*
- * Distance calculation between 2 amino acids : it's the distance between the 2 alpha carbons of each amino acid.
- * TODO: calculate the distance between the C, N and O atoms 
- * - first calculate the barycenter of C, N and O atoms of each residue
- * - second calculate the distance between the 2 barycenters 
-	 */
-
 	
 	/**
-	 * Calculate the distance between 2 residues with the barycenter of atoms CNO.
+	 * Returns the distance between 2 residues with the coordinates of the
+	 * alpha carbons
 	 * @param residue1
 	 * @param residue2
+	 * @return atomic distance in Å between the residues
 	 */
-	public static double distanceBetween2Residues (Residue residue1, Residue residue2) {
-		
-		//x, y, z coordinates of each atom (C,N,O) of residue1 : 
-		List<Double> res1coordC = new ArrayList<Double>(3);
-		//adding all coordinates from the Carbon atom :
-		residue1.getCoordCarbonAtom().addAll(res1coordC);
-		//Same with the Nitrogen atom : 
-		List<Double> res1coordN = new ArrayList<Double>(3);
-		residue1.getCoordNitrogenAtom().addAll(res1coordN);
-		//Same with the Oxygen atom :
-		List<Double> res1coordO = new ArrayList<Double>(3);
-		residue1.getCoordOxygenAtom().addAll(res1coordO);
-		
-		// calculate the barycenter of the residue :
-		double sumXcoordRes1 = res1coordC.get(0) + res1coordN.get(0) + res1coordO.get(0);
-		double sumYcoordRes1 = res1coordC.get(1) + res1coordN.get(1) + res1coordO.get(1);
-		double sumZcoordRes1 = res1coordC.get(2) + res1coordN.get(2) + res1coordO.get(2);
-		
-		double barycenterRes1 = (sumXcoordRes1 + sumYcoordRes1 + sumZcoordRes1) / 9;
-		
-		/*
-		 * /x, y, z coordinates of each atom (C,N,O) of residue2 : 
-		 */
-		List<Double> res2coordC = new ArrayList<Double>(3);
-		//adding all coordinates from the C atom :
-		residue2.getCoordCarbonAtom().addAll(res2coordC);
-		//Same with the Nitrogen atom : 
-		List<Double> res2coordN = new ArrayList<Double>(3);
-		residue2.getCoordNitrogenAtom().addAll(res2coordN);
-		//Same with the Oxygen atom :
-		List<Double> res2coordO = new ArrayList<Double>(3);
-		residue2.getCoordOxygenAtom().addAll(res2coordO);
-		
-		// calculate the barycenter of the residue1 :
-		double sumXcoordRes2 = res2coordC.get(0) + res2coordN.get(0) + res2coordO.get(0);
-		double sumYcoordRes2 = res2coordC.get(1) + res2coordN.get(1) + res2coordO.get(1);
-		double sumZcoordRes2 = res2coordC.get(2) + res2coordN.get(2) + res2coordO.get(2);
-		
-		double barycenterRes2 = (sumXcoordRes2 + sumYcoordRes2 + sumZcoordRes2) / 9;
-		
-
-		/*
-		 * Calculate the final distance between the 2 residues :
-		 */
-		double barycenter = Math.abs(barycenterRes2 - barycenterRes1);
-		return barycenter;
-	}
-	
 	
 	public static double distanceBetween2ResiduesAlphaCarbon (Residue residue1, Residue residue2) {
 		
 		//creating all variables of the coordinates of each residue :
-		double residue1Xcoordinate = residue1.getCoordXAlphaCarbon();
+		double residue1Xcoordinate = residue1.getAlphaCarbon()
 		double residue1Ycoordinate = residue1.getCoordYAlphaCarbon();
 		double residue1Zcoordinate = residue1.getCoordZAlphaCarbon();
 		
@@ -116,14 +40,9 @@ public class ResidueDistanceCalculation {
 	//FOR TESTING PURPOSES
 	public static void main(String[] args) {
 
-		PDBAtomRetriever pdbatomretriver = new PDBAtomRetriever("/home/karine/src/java/ProjetPDB/doc/6rj4.cif");
-		//String atoms = pdbatomretriver.getAtoms2();
-		PDBAtomParser pdbatomparser = new PDBAtomParser();
-		//pdbatomparser.
-		//Residue test = new Residue("Residue1", 44, atomsOfResidue);
-		double d = 0;
-		//TODO : avoir une classe qui renvoie une liste de tous les residus selon les caractéristiques de l'objet Residue
-		//et pouvoir en choisir deux selon cette liste :
+		//Residue 1 :
+		//ATOM   919  C  CA  . TRP A  1 121 ? -25.537 5.860   27.678  1.00 25.73  ? 141 TRP A CA  1
+		Residue res121 = new Residue("TRP", residueSequenceNumber, atomsOfResidue)
 		
 	}
 	

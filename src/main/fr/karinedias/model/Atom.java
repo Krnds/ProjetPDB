@@ -35,43 +35,43 @@ public class Atom {
 		// TODO Auto-generated constructor stub
 	}
 
-	protected int getAtomNumber() {
+	public int getAtomNumber() {
 		return atomNumber;
 	}
 
-	protected char getAtomName() {
+	public char getAtomName() {
 		return atomName;
 	}
 
-	protected String getAlternateLocIndicator() {
+	public String getAlternateLocIndicator() {
 		return alternateLocIndicator;
 	}
 
-	protected String getResidueName() {
+	public String getResidueName() {
 		return residueName;
 	}
 
-	protected char getChainNameIdentifier() {
+	public char getChainNameIdentifier() {
 		return chainNameIdentifier;
 	}
 
-	protected int getChainNumberIdentifier() {
+	public int getChainNumberIdentifier() {
 		return chainNumberIdentifier;
 	}
 
-	protected int getResidueSequenceNumber() {
+	public int getResidueSequenceNumber() {
 		return residueSequenceNumber;
 	}
 
-	protected float getxAtomCoordinate() {
+	public float getxAtomCoordinate() {
 		return xAtomCoordinate;
 	}
 
-	protected float getyAtomCoordinate() {
+	public float getyAtomCoordinate() {
 		return yAtomCoordinate;
 	}
 
-	protected float getzAtomCoordinate() {
+	public float getzAtomCoordinate() {
 		return zAtomCoordinate;
 	}
 
