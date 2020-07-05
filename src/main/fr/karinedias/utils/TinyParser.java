@@ -31,37 +31,11 @@ public class TinyParser {
 			TinyParser.this.contentOfFile = contentOfFile;
 		}
 
+		// TODO Search only atoms and match Residue
+		public Residue parseResidues(List<String> residueLine) throws ResidueNotFoundException, AtomNotFoundException {
 
-		public List<Residue> parseResidues(String residueLine) throws ResidueNotFoundException, AtomNotFoundException {
+			Residue residueFound = null;
 
-			// trim all whitespaces from string
-			residueLine = residueLine.replaceAll("\\s+", "");
-
-			String residuePattern = "(\\d{1,2})" // group 1 : chain number
-					+ "(\\d{1,3})" // group 2 : residueNumber
-					+ "([A-Z]{3})" // group 3 : residueName
-					+ "[n]"; // not used
-
-			Pattern residueEntry = Pattern.compile(residuePattern);
-			Matcher m = residueEntry.matcher(residueLine);
-
-			// create all variables to catch and assign default values
-			int chainNumberIdentifier = 0, residueNumber = 0;
-			// TODO: modify String with Interface AminoAcid ?
-			// TODO: add checker for known amino acids
-			String residueName = null;
-
-			if (m.find()) {
-
-				chainNumberIdentifier = Integer.parseInt(m.group(1));
-				residueNumber = Integer.parseInt(m.group(2));
-				residueName = m.group(3);
-
-			} else {
-				// TODO: don't use if/else instead use try/catch and catch below custom
-				// exception:
-				throw new ResidueNotFoundException("No residues were found while parsing the file");
-			}
 			// for getting alpha carbon of the residue:
 			AtomParser atomParser = new AtomParser(contentOfFile);
 			List<String> listOfAlphaCarbons = new ArrayList<String>();
@@ -70,18 +44,59 @@ public class TinyParser {
 			List<Atom> carbonsAlpha = new ArrayList<Atom>(listOfAlphaCarbons.size());
 			// TODO: test this
 			carbonsAlpha.addAll(atomParser.parseAlphaCarbons(listOfAlphaCarbons));
-			List<Residue> residuesFound = new ArrayList<Residue>();
-			for (Atom atom : carbonsAlpha) {
-				if (atom.getResidueName().equals(residueName) && atom.getResidueSequenceNumber() == residueNumber) {
-					Residue res = new Residue(residueName, residueNumber, atom);
-					residuesFound.add(res);
+
+			// Loop for each string representing a residue
+			for (String string : residueLine) {
+
+				// trim all whitespaces from string
+				string = string.replaceAll("\\s+", "");
+
+				String residuePattern = "(\\d{1,2})" // group 1 : chain number
+						+ "(\\d{1,3})" // group 2 : residueNumber
+						+ "([A-Z]{3})" // group 3 : residueName
+						+ "[n]"; // not used
+
+				Pattern residueEntry = Pattern.compile(residuePattern);
+				Matcher m = residueEntry.matcher(string);
+
+				// create all variables to catch and assign default values
+				int chainNumberIdentifier = 0, residueNumber = 0;
+				// TODO: modify String with Interface AminoAcid ?
+				// TODO: add checker for known amino acids
+				String residueName = null;
+
+				if (m.find()) {
+
+					chainNumberIdentifier = Integer.parseInt(m.group(1));
+					residueNumber = Integer.parseInt(m.group(2));
+					residueName = m.group(3);
+
+				} else {
+					continue;
+					// TODO: don't use if/else instead use try/catch and catch below custom
+					// exception:
+					// throw new ResidueNotFoundException("No residues were found while parsing the
+					// file");
 				}
 
-			}
-			return residuesFound;
-		}
+				// List<Residue> residuesFound = new ArrayList<Residue>();
 
-		// return new Residue(residueName, residueNumber, atoms);
+				for (Atom atom : carbonsAlpha) {
+					if (atom.getResidueName().equals(residueName) && atom.getResidueSequenceNumber() == residueNumber) {
+						residueFound = new Residue(residueName, residueNumber, atom);
+
+					}
+				}
+
+				if (residueFound.getAlphaCarbon().getAtomName() == '\u0000'
+						&& residueFound.getAlphaCarbon().getAtomNumber() == 0
+						&& residueFound.getAlphaCarbon().getResidueName().equals(null)) {
+					System.out.println("Residue not found");
+				}
+			}
+			return residueFound;
+
+		}
 
 		// TODO : use outter class method for not going through all the lines + decrease
 		// exec time
@@ -216,38 +231,38 @@ public class TinyParser {
 	}
 
 	// TEST
-	public static void main(String[] args) {
-
-		String Windowsfile = "C:\\Users\\Karine\\eclipse-workspace\\ProjetPDB\\doc\\3l3t.cif";
-		String file = "/home/karine/src/java/ProjetPDB/doc/3l3t.cif";
-		
-		FileReader filereader = new FileReader(file);
-		StringBuilder content = filereader.reader();
-		TinyParser tinyParser = new TinyParser(content);
-
-		// instances for ResidueParser & AtomParser :
-		AtomParser ap = tinyParser.new AtomParser(content);
-		List<String> atomLines = ap.parseAtomLines();
-		try {
-			List<Atom> atomsFound = ap.parseAlphaCarbons(atomLines);
-		} catch (AtomNotFoundException e) {
-			e.printStackTrace();
-		}
-
-		ResidueParser rp = tinyParser.new ResidueParser(content);
-		// Find all lines with residues
-		List<String> lines = rp.parseResidueLines();
-		List<Residue> res = new ArrayList<Residue>();
-		for (String string : lines) {
-			try {
-				res.addAll(rp.parseResidues(string));
-			} catch (ResidueNotFoundException | AtomNotFoundException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		System.out.println(res.size());
-		res.get(6).toString();
-
-	}
+//	public static void main(String[] args) {
+//
+//		String Windowsfile = "C:\\Users\\Karine\\eclipse-workspace\\ProjetPDB\\doc\\3l3t.cif";
+//		String file = "/home/karine/src/java/ProjetPDB/doc/3l3t.cif";
+//		
+//		FileReader filereader = new FileReader(file);
+//		StringBuilder content = filereader.reader();
+//		TinyParser tinyParser = new TinyParser(content);
+//
+//		// instances for ResidueParser & AtomParser :
+//		AtomParser ap = tinyParser.new AtomParser(content);
+//		List<String> atomLines = ap.parseAtomLines();
+//		try {
+//			List<Atom> atomsFound = ap.parseAlphaCarbons(atomLines);
+//		} catch (AtomNotFoundException e) {
+//			e.printStackTrace();
+//		}
+//
+//		ResidueParser rp = tinyParser.new ResidueParser(content);
+//		// Find all lines with residues
+//		List<String> lines = rp.parseResidueLines();
+//		List<Residue> res = new ArrayList<Residue>();
+//		for (String string : lines) {
+//			try {
+//				res.addAll(rp.parseResidues(string));
+//			} catch (ResidueNotFoundException | AtomNotFoundException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		
+//		System.out.println(res.size());
+//		res.get(6).toString();
+//
+//	}
 }

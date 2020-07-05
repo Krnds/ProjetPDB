@@ -92,9 +92,9 @@ public class ResidueParser {
 			atoms.add(atomParser.getAtoms(string));
 		}
 
-		Residue residue = new Residue(residueName, residueNumber, atoms);
+		//Residue residue = new Residue(residueName, residueNumber, (new Atom(9, , altLoc, resName, chainName, chainNumber, resNumber, xCoord, yCoord, zCoord)));
 
-		return residue;
+		return null;
 
 	}
 

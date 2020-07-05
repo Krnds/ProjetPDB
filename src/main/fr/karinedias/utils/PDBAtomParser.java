@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import src.main.fr.karinedias.model.Atom;
+import main.fr.karinedias.model.Atom;
 
 public class PDBAtomParser {
 

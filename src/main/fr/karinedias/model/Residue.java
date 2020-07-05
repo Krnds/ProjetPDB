@@ -76,30 +76,4 @@ public class Residue {
 		this.alphaCarbon = alphaCarbon;
 	}
 
-	
-
-
-//	public Residue(AminoAcidCode code) {
-//		aminoAcidCode.put("GLY", 'G');
-//		aminoAcidCode.put("ALA", 'A');
-//		aminoAcidCode.put("VAL", 'V');
-//		aminoAcidCode.put("LEU", 'L');
-//		aminoAcidCode.put("ILE", 'I');
-//		aminoAcidCode.put("PHE", 'F');
-//		aminoAcidCode.put("TYR", 'Y');
-//		aminoAcidCode.put("TRP", 'W');
-//		aminoAcidCode.put("PRO", 'P');
-//		aminoAcidCode.put("HIS", 'H');
-//		aminoAcidCode.put("LYS", 'K');
-//		aminoAcidCode.put("ARG", 'R');
-//		aminoAcidCode.put("SER", 'S');
-//		aminoAcidCode.put("THR", 'T');
-//		aminoAcidCode.put("GLU", 'E');
-//		aminoAcidCode.put("GLN", 'Q');
-//		aminoAcidCode.put("ASP", 'D');
-//		aminoAcidCode.put("ASN", 'N');
-//		aminoAcidCode.put("CYS", 'C');
-//		aminoAcidCode.put("MET", 'M');
-//	}
-
 }
