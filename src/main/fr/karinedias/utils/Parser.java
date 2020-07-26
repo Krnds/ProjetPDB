@@ -1,4 +1,4 @@
-package src.main.fr.karinedias.utils;
+parpackage main.fr.karinedias.utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,11 +10,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import src.main.fr.karinedias.exceptions.AtomNotFoundException;
-import src.main.fr.karinedias.exceptions.ResidueNotFoundException;
-import src.main.fr.karinedias.model.Atom;
-import src.main.fr.karinedias.model.Molecule;
-import src.main.fr.karinedias.model.Residue;
+import main.fr.karinedias.exceptions.AtomNotFoundException;
+import main.fr.karinedias.exceptions.ResidueNotFoundException;
+import main.fr.karinedias.model.Atom;
+import main.fr.karinedias.model.Molecule;
+import main.fr.karinedias.model.Residue;
 
 public class Parser {
 

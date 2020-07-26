@@ -1,4 +1,4 @@
-package src.main.fr.karinedias.utils;
+package main.fr.karinedias.utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,8 +6,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import src.main.fr.karinedias.exceptions.AtomNotFoundException;
-import src.main.fr.karinedias.model.Atom;
+import main.fr.karinedias.exceptions.AtomNotFoundException;
+import main.fr.karinedias.model.Atom;
 
 public class AtomParser {
 

@@ -1,14 +1,14 @@
-package src.main.fr.karinedias.utils;
+package main.fr.karinedias.utils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import src.main.fr.karinedias.exceptions.AtomNotFoundException;
-import src.main.fr.karinedias.exceptions.ResidueNotFoundException;
-import src.main.fr.karinedias.model.Atom;
-import src.main.fr.karinedias.model.Residue;
+import main.fr.karinedias.exceptions.AtomNotFoundException;
+import main.fr.karinedias.exceptions.ResidueNotFoundException;
+import main.fr.karinedias.model.Atom;
+import main.fr.karinedias.model.Residue;
 
 public class ResidueParser {
 
@@ -92,9 +92,9 @@ public class ResidueParser {
 			atoms.add(atomParser.getAtoms(string));
 		}
 
-		Residue residue = new Residue(residueName, residueNumber, atoms);
+		//Residue residue = new Residue(residueName, residueNumber, (new Atom(9, , altLoc, resName, chainName, chainNumber, resNumber, xCoord, yCoord, zCoord)));
 
-		return residue;
+		return null;
 
 	}
 
