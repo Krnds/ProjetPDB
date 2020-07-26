@@ -20,48 +20,40 @@ public class ResidueWithCoordinatesParser {
  * Parse all lines containing the residues
  * @return a list of residues lines
  */
-	private List<String> getResidueLines() {
+	public List<ResidueWithCoordinates> getResidueLines() {
 
+		List<ResidueWithCoordinates> listOfResidues = new ArrayList<ResidueWithCoordinates>(); //using empty constructor for creating an empty object
 		String result = "";
-		// Cut the beginning of the text to not occasionally meet a
-		// 'textTo' value in it:
 		result = contentOfFile.toString().substring(contentOfFile.toString().indexOf("entity_poly_seq") + "entity_poly_seq".length(), contentOfFile.toString().length());
 		// Cut the excessive ending of the text:
 		result = result.substring(0, result.indexOf("#"));
-		List<String> residueLines = new ArrayList<String>();
-		String[] lines = result.split("\\n");
-		//1 516 ASN n 
-		String pattern = "\\d{1,2}\\s\\d{1,3}\\s+{1,3}[A-Z]{3}\\sn\\s+";
-		int nLines = residueLines.size();
 
-		for (String s : lines) {
-			if (s.matches(pattern)) {
-				residueLines.add(s);
-			} else {
-				if (nLines > 0) {
-					break;
-				}
+		//example of line : 1 516 ASN n 
+		String pattern = "(\\d{1,2})\\s(\\d{1,3})\\s+{1,3}([A-Z]{3})\\sn\\s+";
+		Pattern resPattern = Pattern.compile(pattern);
+
+		String resName = "";
+		int resNumber = 0;
+		char chain = '\u0000';
+		//new 
+		for (String s : result.split("\\n")) {
+			Matcher m = resPattern.matcher(s);
+			if (m.find()) {
+				chain = m.group(1).charAt(0);
+				resNumber = Integer.parseInt(m.group(2));
+				resName = m.group(3);
+				listOfResidues.add(getResidue(chain, resName, resNumber));
 			}
 		}
-		return residueLines;
+		return listOfResidues;
 
 	}
-	
-	private void getResidues (List<String> resLines) {
-		
-		for (String string : resLines) {
-			string.split("\\n");
-			
-		}
-		
-	}
+
 
 	
-	public ResidueWithCoordinates getAlphaCarbon(String resName, int resNumber) {
+	private ResidueWithCoordinates getResidue(char chain, String resName, int resNumber) {
 		
 		String result = "";
-		// Cut the beginning of the text to not occasionally meet a
-		// 'textTo' value in it:
 		result = contentOfFile.toString().substring(contentOfFile.toString().indexOf("_atom_site.pdbx_PDB_model_num") + "_atom_site.pdbx_PDB_model_num".length(), contentOfFile.toString().length());
 		// Cut the excessive ending of the text:
 		result = result.substring(0, result.indexOf("#"));
@@ -77,7 +69,7 @@ public class ResidueWithCoordinatesParser {
 		}
 	
 			
-		ResidueWithCoordinates res = new ResidueWithCoordinates("", 0, 0.0, 0.0, 0.0);
+		ResidueWithCoordinates res = new ResidueWithCoordinates("", 0, 'Z', 0.0, 0.0, 0.0);
 		//TEST
 		for (String string : atomLines) {
 
@@ -86,7 +78,7 @@ public class ResidueWithCoordinatesParser {
 			//ATOM   603  C CA    . GLY A 1 98  ? 14.877 -10.126 -6.092  1.00 24.45 ? 116  GLY A CA    1 
 			String atomToFind = "ATOM(\\d{1,5})" // group 1 : atom number
 					+ "([C]{1})" // group 2 : atom name
-					+ "(CA\\.)" // group 3 : Alpha Carbon
+					+ "(CA[\\.|[A-Z]])" // group 3 : Alpha Carbon
 					+ resName
 					+ "([A-Z]{1})" // group 4 : chain name identifier (single character)
 					+ "([0-9])" // group 5 : chain number identifier (single digit)
@@ -102,9 +94,10 @@ public class ResidueWithCoordinatesParser {
 			if (m.find()) {
 				res.setResidueName(resName);
 				res.setResidueNumber(resNumber);
-				res.setxCoord(Float.parseFloat(m.group(7)));
-				res.setyCoord(Float.parseFloat(m.group(8)));
-				res.setzCoord(Float.parseFloat(m.group(9)));
+				res.setChain(m.group(5).charAt(0));
+				res.setxCoord(Double.parseDouble(m.group(7)));
+				res.setyCoord(Double.parseDouble(m.group(8)));
+				res.setzCoord(Double.parseDouble(m.group(9)));
 			} else {
 				continue;
 			}
@@ -112,42 +105,39 @@ public class ResidueWithCoordinatesParser {
 			return res;
 	}
 	
-	public static void main(String[] args) {
-		String filename = "/home/karine/src/java/ProjetPDB/doc/3bw7.cif";
-		FileReader pdb = new FileReader(filename);
-		StringBuilder sb = pdb.reader();
-		ResidueWithCoordinatesParser rwcp = new ResidueWithCoordinatesParser(sb);
-		
-		List<String> testresidues = new ArrayList<String>();
-		testresidues.addAll(rwcp.getResidueLines());
-		
-		for (String string : testresidues) {
-			System.out.println(string);
-		}
-		
-		// 1 10  ASP n
-		//System.out.println(testresidues.get(9).toString());
-		//ATOM   603  C CA    . GLY A 1 98  ? 14.877 -10.126 -6.092  1.00 24.45 ? 116  GLY A CA    1 
-//		long startTime = System.currentTimeMillis();
-//		ResidueWithCoordinates test = rwcp.getAlphaCarbon("SER", 509);
+//	public static void main(String[] args) {
 //		
-//		System.out.println(test.toString());
+//		long startTime = System.currentTimeMillis();
+//		
+//		String filename1 = "/home/karine/src/java/ProjetPDB/doc/5hqx.cif";
+//		String filename = "/home/karine/src/java/ProjetPDB/doc/6rj4.cif";
+//		FileReader pdb = new FileReader(filename);
+//		StringBuilder sb = pdb.reader();
+//		ResidueWithCoordinatesParser rwcp = new ResidueWithCoordinatesParser(sb);
+//		
+//		List<ResidueWithCoordinates> list = rwcp.getResidueLines();
+//
+//		for (ResidueWithCoordinates res : list) {
+//			System.out.println(res.toString());
+//		}
+//		
 //		long endTime = System.currentTimeMillis();
-//		long elapsedTime = endTime - startTime;
-//		System.out.println("Elapsed time : " + elapsedTime + " millisec");
-	}
-	
-	
-	
-	/**
-	 * From ResidueWithCoordinates : 
-	 * - String name
-	 * - int number
-	 * - double x, y, z coordinates
-	 */
-	
-	
-
+//		long elapsedTime = (endTime - startTime)/1000;
+//		System.out.println("Elapsed time : " + elapsedTime + " seconds");
+//
+//	}
+//	
+//	
+//	
+//	/**
+//	 * From ResidueWithCoordinates : 
+//	 * - String name
+//	 * - int number
+//	 * - double x, y, z coordinates
+//	 */
+//	
+//	
+//
 
 
 

@@ -5,18 +5,25 @@ public class ResidueWithCoordinates {
 	
 	private String residueName = "";
 	private int residueNumber = 0;
+	private char chain = '\u0000';
 	private double xCoord, yCoord, zCoord;
 
 	/*
 	 * Constructor of the ResidueWithCoordinates object
 	 */
-	public ResidueWithCoordinates(String residueName, int residueNumber, double xCoord, double yCoord, double zCoord) {
+	public ResidueWithCoordinates(String residueName, int residueNumber, char chain, double xCoord, double yCoord, double zCoord) {
 		
 		this.residueName = residueName;
 		this.residueNumber = residueNumber;
+		this.chain = chain;
 		this.xCoord = xCoord;
 		this.yCoord = yCoord;
 		this.zCoord = zCoord;
+	}
+	
+	// Empty constructor 
+	public ResidueWithCoordinates() {
+		
 	}
 
 	/**
@@ -38,6 +45,20 @@ public class ResidueWithCoordinates {
 	 */
 	public int getResidueNumber() {
 		return residueNumber;
+	}
+
+	/**
+	 * @return the chain
+	 */
+	public char getChain() {
+		return chain;
+	}
+
+	/**
+	 * @param chain the chain to set
+	 */
+	public void setChain(char chain) {
+		this.chain = chain;
 	}
 
 	/**
@@ -92,8 +113,10 @@ public class ResidueWithCoordinates {
 	@Override
 	public String toString() {
 		return "ResidueWithCoordinates [" + (residueName != null ? "residueName=" + residueName + ", " : "")
-				+ "residueNumber=" + residueNumber + ", xCoord=" + xCoord + ", yCoord=" + yCoord + ", zCoord=" + zCoord
-				+ "]";
+				+ "residueNumber=" + residueNumber + ", chain=" + chain + ", xCoord=" + xCoord + ", yCoord=" + yCoord
+				+ ", zCoord=" + zCoord + "]";
 	}
+
+
 
 }

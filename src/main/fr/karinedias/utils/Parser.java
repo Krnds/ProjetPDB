@@ -1,4 +1,4 @@
-package main.fr.karinedias.utils;
+parpackage main.fr.karinedias.utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
