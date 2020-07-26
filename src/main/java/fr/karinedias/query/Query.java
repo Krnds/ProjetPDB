@@ -1,4 +1,4 @@
-package main.fr.karinedias.query;
+package fr.karinedias.query;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -1,25 +1,14 @@
-package test.fr.karinedias.junit;
+package fr.karinedias.junit;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.fail;
 
-import main.fr.karinedias.utils.ResidueWithCoordinatesParser;
+import org.junit.Test;
 
 public class TestResidueWithCoordinatesParser {
-
+	
 	@Test
-    public void testRequestLoan() throws Throwable
-    {
-        // Given
-		
-        ResidueWithCoordinatesParser residue = new ResidueWithCoordinatesParser(contentOfFile)
-
-        // When
-        LoanResponse result = underTest.requestLoan(1000f, 200f, 250f);
-
-        // Then
-        assertNotNull(result);
-        assertTrue(result.isApproved());
-        assertNull(result.getMessage());
-    }
+	public void test() {
+		fail();
+	}
 	
 }

@@ -1,4 +1,4 @@
-package main.fr.karinedias.utils;
+package fr.karinedias.utils;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

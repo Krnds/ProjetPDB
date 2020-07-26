@@ -1,4 +1,4 @@
-package src.main.fr.karinedias.utils;
+package fr.karinedias.utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import main.fr.karinedias.model.Atom;
+import fr.karinedias.model.Atom;
 
 public class PDBAtomParser {
 

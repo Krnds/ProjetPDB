@@ -1,7 +1,7 @@
-package main.fr.karinedias.math;
+package fr.karinedias.math;
 
-import main.fr.karinedias.model.Atom;
-import main.fr.karinedias.model.Residue;
+import fr.karinedias.model.Atom;
+import fr.karinedias.model.Residue;
 
 public class ResidueDistanceCalculation {
 	

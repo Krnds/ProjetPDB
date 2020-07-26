@@ -1,8 +1,6 @@
-package src.test.fr.karinedias.junit;
+package fr.karinedias.junit;
 
-
-
-import main.fr.karinedias.model.Residue;
+import fr.karinedias.model.Residue;
 
 /**
  * Beware, the javax is from the Java SE edition (13.0.1 used here) The external
@@ -18,17 +16,17 @@ import main.fr.karinedias.model.Residue;
 
 //TODO: faire une class permettant de tester si le résultat de la classe ResidueDistanceCalculation donne les mêmes résultats qu'avec la librairie javafx 3dpoints
 public class TestDistance3DPoints {
-	
-	public double testResidueDistanceCalculation (Residue res1, Residue res2) {
-		
-		//TODO: how to have access of getters of residues ? 
-		
+
+	public double testResidueDistanceCalculation(Residue res1, Residue res2) {
+
+		// TODO: how to have access of getters of residues ?
+
 		return 0;
-		
+
 	}
 
 	public static void main(String[] args) {
-		//Point3d residue1 = new Point3d(5, 7, 3);
-		
+		// Point3d residue1 = new Point3d(5, 7, 3);
+
 	}
 }

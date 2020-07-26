@@ -1,11 +1,11 @@
-package main.fr.karinedias.utils;
+package fr.karinedias.utils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import main.fr.karinedias.model.ResidueWithCoordinates;
+import fr.karinedias.model.ResidueWithCoordinates;
 
 public class ResidueWithCoordinatesParser {
 

@@ -1,4 +1,4 @@
-package main.fr.karinedias.exceptions;
+package fr.karinedias.exceptions;
 
 /**
  * Custom Exception thrown when no Residues where found while parsing cif file

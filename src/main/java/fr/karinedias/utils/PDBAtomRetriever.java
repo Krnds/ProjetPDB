@@ -1,4 +1,4 @@
-package src.main.fr.karinedias.utils;
+package fr.karinedias.utils;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

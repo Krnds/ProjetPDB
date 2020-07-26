@@ -1,4 +1,4 @@
-package src.main.fr.karinedias.model;
+package fr.karinedias.model;
 
 public class Chain {
 

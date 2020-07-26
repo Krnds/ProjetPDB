@@ -1,14 +1,16 @@
-package src.test.fr.karinedias.junit;
+package fr.karinedias.junit;
 
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.Assert.fail;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import fr.karinedias.utils.FileReader;
 
 class TestParser {
 
-	@BeforeAll
+	@BeforeClass
 	static void setUpBeforeClass() throws Exception {
 		//create file to test
 		String fileTestPath = "/home/karine/src/java/ProjetPDB/doc/3qt2.cif";
@@ -17,13 +19,13 @@ class TestParser {
 		StringBuilder content = fileTest.reader();
 	}
 
-	@AfterAll
+	@AfterClass
 	static void tearDownAfterClass() throws Exception {
 	}
 
 	@Test
 	void test() {
-		fail("Not yet implemented");
+		fail("Not yet implemented.");
 	}
 
 }

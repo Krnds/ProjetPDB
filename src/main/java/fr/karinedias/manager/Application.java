@@ -1,11 +1,11 @@
-package main.fr.karinedias.manager;
+package fr.karinedias.manager;
 
 import java.io.IOException;
 import java.util.List;
 
-import main.fr.karinedias.model.ResidueWithCoordinates;
-import main.fr.karinedias.utils.FileReader;
-import main.fr.karinedias.utils.ResidueWithCoordinatesParser;
+import fr.karinedias.model.ResidueWithCoordinates;
+import fr.karinedias.utils.FileReader;
+import fr.karinedias.utils.ResidueWithCoordinatesParser;
 
 public class Application {
 

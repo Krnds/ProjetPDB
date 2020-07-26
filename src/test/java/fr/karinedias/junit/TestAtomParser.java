@@ -1,4 +1,4 @@
-package src.test.fr.karinedias.junit;
+package fr.karinedias.junit;
 
 import java.util.List;
 

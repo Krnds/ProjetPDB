@@ -1,14 +1,14 @@
-package main.fr.karinedias.utils;
+package fr.karinedias.utils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import main.fr.karinedias.exceptions.AtomNotFoundException;
-import main.fr.karinedias.exceptions.ResidueNotFoundException;
-import main.fr.karinedias.model.Atom;
-import main.fr.karinedias.model.Residue;
+import fr.karinedias.exceptions.AtomNotFoundException;
+import fr.karinedias.exceptions.ResidueNotFoundException;
+import fr.karinedias.model.Atom;
+import fr.karinedias.model.Residue;
 
 public class ResidueParser {
 
