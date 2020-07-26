@@ -1,37 +1,29 @@
 package fr.karinedias.model;
 
-import java.util.HashMap;
-
 public class Residue {
 
-	HashMap<String, Character> aminoAcidCode = new HashMap<String, Character>();
 	
 	private String residueName = "";
 	private int residueNumber = 0;
-	private Atom alphaCarbon;
+	private char chain = '\u0000';
+	private double xCoord, yCoord, zCoord;
 
 	/*
-	 * Constructor of AminoAcid object
+	 * Constructor of the ResidueWithCoordinates object
 	 */
-	public Residue(String residueName, int residueSequenceNumber, Atom alphaCarbon) {
+	public Residue(String residueName, int residueNumber, char chain, double xCoord, double yCoord, double zCoord) {
+		
 		this.residueName = residueName;
-		this.residueNumber = residueSequenceNumber;
-		this.alphaCarbon = alphaCarbon;
-
+		this.residueNumber = residueNumber;
+		this.chain = chain;
+		this.xCoord = xCoord;
+		this.yCoord = yCoord;
+		this.zCoord = zCoord;
 	}
-
-	/**
-	 * @return the aminoAcidCode
-	 */
-	public HashMap<String, Character> getAminoAcidCode() {
-		return aminoAcidCode;
-	}
-
-	/**
-	 * @param aminoAcidCode the aminoAcidCode to set
-	 */
-	public void setAminoAcidCode(HashMap<String, Character> aminoAcidCode) {
-		this.aminoAcidCode = aminoAcidCode;
+	
+	// Empty constructor 
+	public Residue() {
+		
 	}
 
 	/**
@@ -56,6 +48,20 @@ public class Residue {
 	}
 
 	/**
+	 * @return the chain
+	 */
+	public char getChain() {
+		return chain;
+	}
+
+	/**
+	 * @param chain the chain to set
+	 */
+	public void setChain(char chain) {
+		this.chain = chain;
+	}
+
+	/**
 	 * @param residueNumber the residueNumber to set
 	 */
 	public void setResidueNumber(int residueNumber) {
@@ -63,17 +69,54 @@ public class Residue {
 	}
 
 	/**
-	 * @return the alphaCarbon
+	 * @return the xCoord
 	 */
-	public Atom getAlphaCarbon() {
-		return alphaCarbon;
+	public double getxCoord() {
+		return xCoord;
 	}
 
 	/**
-	 * @param alphaCarbon the alphaCarbon to set
+	 * @param xCoord the xCoord to set
 	 */
-	public void setAlphaCarbon(Atom alphaCarbon) {
-		this.alphaCarbon = alphaCarbon;
+	public void setxCoord(double xCoord) {
+		this.xCoord = xCoord;
 	}
+
+	/**
+	 * @return the yCoord
+	 */
+	public double getyCoord() {
+		return yCoord;
+	}
+
+	/**
+	 * @param yCoord the yCoord to set
+	 */
+	public void setyCoord(double yCoord) {
+		this.yCoord = yCoord;
+	}
+
+	/**
+	 * @return the zCoord
+	 */
+	public double getzCoord() {
+		return zCoord;
+	}
+
+	/**
+	 * @param zCoord the zCoord to set
+	 */
+	public void setzCoord(double zCoord) {
+		this.zCoord = zCoord;
+	}
+
+	@Override
+	public String toString() {
+		return "ResidueWithCoordinates [" + (residueName != null ? "residueName=" + residueName + ", " : "")
+				+ "residueNumber=" + residueNumber + ", chain=" + chain + ", xCoord=" + xCoord + ", yCoord=" + yCoord
+				+ ", zCoord=" + zCoord + "]";
+	}
+
+
 
 }

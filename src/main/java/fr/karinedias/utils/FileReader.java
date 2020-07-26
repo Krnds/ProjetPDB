@@ -2,6 +2,8 @@ package fr.karinedias.utils;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -33,9 +35,10 @@ public class FileReader {
 	 * Test of reader : prints all the file content
 	 */
 	// source : https://howtodoinjava.com/java/io/java-read-file-to-string-examples/
-	public StringBuilder reader() {
+	public StringBuilder reader() throws URISyntaxException {
 		StringBuilder contentBuilder = new StringBuilder();
-		try (Stream<String> stream = Files.lines(Paths.get(filePath), StandardCharsets.UTF_8)) {
+		URI fileUri = ClassLoader.getSystemResource(filePath).toURI();
+		try (Stream<String> stream = Files.lines(Paths.get(fileUri), StandardCharsets.UTF_8)) {
 			stream.forEach(s -> contentBuilder.append(s).append("\n"));
 		} catch (FileNotFoundException exception) {
 			System.out.println("The file " + filePath + " was not found.");
