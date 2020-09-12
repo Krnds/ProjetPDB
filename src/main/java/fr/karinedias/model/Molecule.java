@@ -5,19 +5,14 @@ import java.util.List;
 public class Molecule {
 
 	private int moleculeID = 0;
-	private String type = ""; // TODO: create enumeration for polymer/non-polymer/water (3 types only)
+	private String type = "";
 	private String description = "";
 	private List<Residue> residues;
 
-	public Molecule(int moleculeID, String type) {
-		this.moleculeID = moleculeID;
-		this.type = type;
-	}
-
 	/*
-	 * Constructor :
+	 * Constructors with or without list of Residues:
 	 */
-	public Molecule(int id, String description, String type, List<Residue> residues) {
+	protected Molecule(int id, String description, String type, List<Residue> residues) {
 		this.moleculeID = id;
 		this.description = description;
 		this.type = type;

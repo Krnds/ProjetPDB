@@ -12,7 +12,7 @@ public class FileReaderTest {
 	@Test
 	public void reader_givenFilename_shouldReturnCorrectStringBuilder() throws Exception {
 		// Given
-		String fileName = "test-data/test.cif";
+		String fileName = "src/main/resources/data/test.cif";
 		String atomLinePresent = "ATOM   11   C CA  . ILE A 1 10  ? 49.784  48.711  98.248  1.00 107.24 ? 8   ILE A CA  1";
 		String atomLineAbsent = "ATOM   99   N CA  . ILE A 1 10  ? 49.784  48.711  98.248  1.00 107.24 ? 8   ILE A CA  1";
 		FileReader fileReader = new FileReader(fileName);

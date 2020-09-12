@@ -1,6 +1,5 @@
 package fr.karinedias.utils;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -70,29 +69,4 @@ public class MoleculeParser {
 		}
 	}
 	
-//	public static void main(String[] args) throws Exception {
-//
-//		String lines = "1 polymer     man Interleukin-2                          15435.979 1   ? ?             ? ? \n"
-//				+ "2 polymer     man 'Interleukin-2 receptor beta chain'    24761.123 1   ? N3Q,N17Q,N45Q ? ? \n"
-//				+ "3 polymer     man 'Cytokine receptor common gamma chain' 23912.684 1   ? N53Q          ? ? \n"
-//				+ "4 polymer     man 'Interleukin-2 receptor alpha chain'   24573.492 1   ? N68Q          ? ? ";
-//		String[] mol = lines.split("\n");
-//
-//		System.out.println(mol[0].toString());
-//		for (int i = 0; i < mol.length; i++) {
-//			String moleculePattern = "(\\d)\\s(polymer)\\s+\\w+\\s(.+)\\s+\\d\\d";
-//			Pattern moleculeEntry = Pattern.compile(moleculePattern);
-//			Matcher m = moleculeEntry.matcher(mol[i]);
-//			if (m.lookingAt()) {
-//				System.out.println("Found " + m.groupCount() + " groups");
-//				System.out.print(m.group(1) + "\t");
-//				System.out.print(m.group(2) + "\t");
-//				System.out.print(m.group(3).trim());
-//
-//			} else {
-//				System.out.println("Ca ne marche pas...");
-//			}
-//
-//		}
-//	}
 }

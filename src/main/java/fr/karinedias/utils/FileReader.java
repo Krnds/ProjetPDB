@@ -24,13 +24,11 @@ public class FileReader {
 		filePath = path;
 	}
 
-
 //TODO: create a method for all OS compatible paths
 
 	protected String getFilePath() {
 		return filePath;
 	}
-
 
 	/*
 	 * Test of reader : prints all the file content
@@ -38,7 +36,7 @@ public class FileReader {
 	// source : https://howtodoinjava.com/java/io/java-read-file-to-string-examples/
 	public StringBuilder reader() throws URISyntaxException {
 		StringBuilder contentBuilder = new StringBuilder();
-		//URI fileUri = ClassLoader.getSystemResource(filePath).toURI();
+		// URI fileUri = ClassLoader.getSystemResource(filePath).toURI();
 		URI fileUri = new File(filePath).toURI();
 		try (Stream<String> stream = Files.lines(Paths.get(fileUri), StandardCharsets.UTF_8)) {
 			stream.forEach(s -> contentBuilder.append(s).append("\n"));
