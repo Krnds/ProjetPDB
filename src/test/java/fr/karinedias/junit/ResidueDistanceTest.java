@@ -1,12 +1,13 @@
 package fr.karinedias.junit;
 
-import fr.karinedias.math.ResidueDistanceCalculation;
-import fr.karinedias.model.Residue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import javax.vecmath.Point3d;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import fr.karinedias.math.ResidueDistanceCalculation;
+import fr.karinedias.model.Residue;
 
 /**
  * Beware, the javax is from the Java SE edition (13.0.1 used here) The external
@@ -36,7 +37,7 @@ public class ResidueDistanceTest {
 				(new Residue("test1", 1, 'A', 0, 5, 7, 12), new Residue("test2", 2, 'B', 0, 14, 3, -2));
 	
 		// Then
-		Assert.assertEquals(expectedDistance, actualDistance, 0);
+		assertEquals(expectedDistance, actualDistance, 0);
 
 	}
 

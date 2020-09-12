@@ -1,16 +1,11 @@
 package fr.karinedias.junit;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matcher.*;
-import static org.junit.Assert.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
-import org.hamcrest.Matcher;
-import org.junit.Assert;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import fr.karinedias.model.Molecule;
 import fr.karinedias.utils.FileReader;
