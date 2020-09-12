@@ -37,18 +37,6 @@ public class ResidueDistanceCalculation {
 	}
 	
 	
-	//FOR TESTING PURPOSES
-	public static void main(String[] args) {
-
-		//Residue 1 :
-		//ATOM   919  C  CA  . TRP A  1 121 ? -25.537 5.860   27.678  1.00 25.73  ? 141 TRP A CA  1
-		Residue res121 = new Residue("TRP", 121, '\u0000', 10, 30, 20);
-		Residue res919 = new Residue("ARG", 919, '\u0000', 10, 30, 20);
-		
-		double distance = distanceBetween2ResiduesAlphaCarbon(res121, res919);
-		System.out.println("The distance between the two residues is " + Math.round(distance) + " Angström");
-	}
-	
 	
 	
 }

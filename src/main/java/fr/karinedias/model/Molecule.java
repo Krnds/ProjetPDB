@@ -5,11 +5,10 @@ import java.util.List;
 public class Molecule {
 
 	private int moleculeID = 0;
-	private String type = ""; //TODO: create enumeration for polymer/non-polymer/water (3 types only)
+	private String type = ""; // TODO: create enumeration for polymer/non-polymer/water (3 types only)
 	private String description = "";
-	private List<Chain> chains; // useful ??
+	private List<Residue> residues;
 
-	
 	public Molecule(int moleculeID, String type) {
 		this.moleculeID = moleculeID;
 		this.type = type;
@@ -18,37 +17,43 @@ public class Molecule {
 	/*
 	 * Constructor :
 	 */
+	public Molecule(int id, String description, String type, List<Residue> residues) {
+		this.moleculeID = id;
+		this.description = description;
+		this.type = type;
+		this.residues = residues;
+	}
+
 	public Molecule(int id, String description, String type) {
 		this.moleculeID = id;
 		this.description = description;
 		this.type = type;
 	}
 
+	public List<Residue> getResidues() {
+		return residues;
+	}
 
-	/*
-	 * Getters for Molecules attributes :
-	 */
-	
-	protected int getId() {
+	public void setResidues(List<Residue> residues) {
+		this.residues = residues;
+	}
+
+	public int getId() {
 		return moleculeID;
 	}
 
-
-	protected String getDescription() {
-		return description;
+	public String getType() {
+		return type;
 	}
 
-
-	protected String getType() {
-		return type;
+	public String getDescription() {
+		return description;
 	}
 
 	@Override
 	public String toString() {
-		return "Molecule [moleculeID=" + moleculeID + ", " + (type != null ? "type=" + type + ", " : "")
-				+ (description != null ? "description=" + description : "") + "]";
+		return "Molecule [moleculeID=" + moleculeID + ", type=" + type + ", description=" + description + ", residues="
+				+ residues + "]";
 	}
 
-
-	
 }

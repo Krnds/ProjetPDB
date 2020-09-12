@@ -65,7 +65,7 @@ public class PDBAtomRetriever {
 	// FOR TESTING PURPOSES :
 	public static void main(String[] args) {
 
-		String filenameDebian = "/home/karine/src/java/ProjetPDB/doc/3bw7.cif";
+		String filenameDebian = "/home/karine/src/java/ProjetPDB_old/src/main/resources/data/3bw7.cif";
 		String filenameMacOS = "/Users/dias/eclipse-workspace/ProjetPDB/doc/2b5i.cif";
 		String filenameWindows = "C:\\Users\\Karine\\eclipse-workspace\\ProjetPDB\\doc\\2b5i.cif";
 
