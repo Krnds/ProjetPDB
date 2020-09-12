@@ -1,4 +1,4 @@
-package fr.karinedias.junit;
+package fr.karinedias.math;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
