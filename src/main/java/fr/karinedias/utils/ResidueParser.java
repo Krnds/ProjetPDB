@@ -20,15 +20,10 @@ public class ResidueParser {
 	 * 
 	 * @return a list of residues lines
 	 */
-	public List<Residue> getResidueLines() {
+	public List<Residue> getResidues() {
 
-		List<Residue> listOfResidues = new ArrayList<Residue>(); // using empty constructor for creating an empty object
-		String result = "";
-		result = contentOfFile.toString().substring(
-				contentOfFile.toString().indexOf("entity_poly_seq") + "entity_poly_seq".length(),
-				contentOfFile.toString().length());
-		// Cut the excessive ending of the text:
-		result = result.substring(0, result.indexOf("#"));
+		List<Residue> listOfResidues = new ArrayList<Residue>();
+		String residueLines = ExtractText.extract(contentOfFile.toString(), "_entity_poly_seq.hetero", "#");
 
 		// example of line : 1 516 ASN n
 		String pattern = "(\\d{1,2})\\s(\\d{1,3})\\s+{1,3}([A-Z]{3})\\sn\\s+";
@@ -38,34 +33,30 @@ public class ResidueParser {
 		int resNumber = 0;
 		char chain = '\u0000';
 		// new
-		for (String s : result.split("\\n")) {
+		for (String s : residueLines.split("\\n")) {
 			Matcher m = resPattern.matcher(s);
 			if (m.find()) {
 				chain = m.group(1).charAt(0);
 				resNumber = Integer.parseInt(m.group(2));
 				resName = m.group(3);
-				listOfResidues.add(getResidue(chain, resName, resNumber));
+				listOfResidues.add(parseResidue(chain, resName, resNumber));
 			}
 		}
 		return listOfResidues;
 
 	}
 
-	private Residue getResidue(char chain, String resName, int resNumber) {
+	private Residue parseResidue(char chain, String resName, int resNumber) {
 
-		String result = "";
-		result = contentOfFile.toString().substring(contentOfFile.toString().indexOf("_atom_site.pdbx_PDB_model_num")
-				+ "_atom_site.pdbx_PDB_model_num".length(), contentOfFile.toString().length());
-		// Cut the excessive ending of the text:
-		result = result.substring(0, result.indexOf("#"));
+		String allAtomLines = ExtractText.extract(contentOfFile.toString(), "_atom_site.pdbx_PDB_model_num", "#");
 
 		List<String> atomLines = new ArrayList<String>();
 
-		for (String string : result.split("\\n")) {
+		for (String string : allAtomLines.split("\\n")) {
 			atomLines.add(string);
 		}
-		//TODO: change default Residue object ?
-		Residue res = new Residue(null, -1, 'Z', -1, 0.0, 0.0, 0.0); //create default Residue to avoid NullPointerExc
+		// TODO: change default Residue object ?
+		Residue res = new Residue(null, -1, 'Z', -1, 0.0, 0.0, 0.0); // create default Residue to avoid NullPointerExc
 		for (String string : atomLines) {
 
 			// trim all whitespace from string

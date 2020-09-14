@@ -12,7 +12,7 @@ public class Molecule {
 	/*
 	 * Constructors with or without list of Residues:
 	 */
-	protected Molecule(int id, String description, String type, List<Residue> residues) {
+	public Molecule(int id, String description, String type, List<Residue> residues) {
 		this.moleculeID = id;
 		this.description = description;
 		this.type = type;

@@ -19,30 +19,16 @@ public class MoleculeParser {
 	public MoleculeParser(StringBuilder contentOfFile) {
 		this.contentOfFile = contentOfFile;
 	}
-	
-	// general method for extracting lines of interest in cif file
-	private String getBetweenStrings(String text, String textFrom, String textTo) {
-
-		String result = "";
-		// Cut the beginning of the text to not occasionally meet a
-		// 'textTo' value in it:
-		result = text.substring(text.indexOf(textFrom) + textFrom.length(), text.length());
-		// Cut the excessive ending of the text:
-		result = result.substring(0, result.indexOf(textTo));
-		return result;
-	}
 
 	// search for molecules lines in file
 	public List<String> parseMoleculeLines() {
 
-		String lines = contentOfFile.toString();
-		String[] linesToSearch = getBetweenStrings(lines, "_entity.id",
-				"_entity_poly.entity_id").split("\\n");
+		String[] linesToSearch = ExtractText.extract(contentOfFile.toString(), "_entity.id",
+				"#").split("\\n");
 		
 		List<String> listOfLinesToSearch = Arrays.asList(linesToSearch);
-		// Search for "polymer" word between those lines
 
-		// Filter molecule lines with chains entities : polymer, non-polymer and water
+		// Filter molecule lines with polymer entity
 		List<String> molecules = listOfLinesToSearch.stream()
 				.filter(Pattern.compile("^\\d\\s(polymer)").asPredicate())
 				.collect(Collectors.toList());

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -28,14 +27,12 @@ public class Application {
 
 		// Read a .pdb file :
 		long startTime = System.currentTimeMillis();
-		String filename = "/home/karine/src/java/ProjetPDB_old/src/main/resources/data/cytokinins/6c80.cif";
-		String filename2 = "/home/karine/src/java/ProjetPDB_old/src/main/resources/data/3c0p.cif";
-		String filename3 = "/home/karine/src/java/ProjetPDB_old/src/main/resources/data/3tnw.cif";
-		String filename4 = "/home/karine/src/java/ProjetPDB_old/src/main/resources/data/1w1s.cif";
+		String filename = "/home/karine/src/java/ProjetPDB_old/src/main/resources/data/3tnw.cif";
+		String filename2 = "/home/karine/src/java/ProjetPDB_old/src/main/resources/data/1w1s.cif";
 		FileReader pdb = new FileReader(filename);
 		StringBuilder sb = pdb.reader();
 		ResidueParser rwcp = new ResidueParser(sb);
-		List<Residue> listOfResidues = rwcp.getResidueLines();
+		List<Residue> listOfResidues = rwcp.getResidues();
 		for (Residue residue2 : listOfResidues) {
 			System.out.println(residue2.toString());
 		}
@@ -78,25 +75,44 @@ public class Application {
 		Residue randomResidue2 = listOfResiduesWithoutNulls.get(rand.nextInt(listOfResiduesWithoutNulls.size()));
 		System.out.println("Random residue 2 = " + randomResidue2);
 
-		double distance = ResidueDistanceCalculation.distanceBetween2ResiduesAlphaCarbon(randomResidue1,
-				randomResidue2);
+		double distance = ResidueDistanceCalculation.distanceBetweenResidues(randomResidue1, randomResidue2);
 		System.out.println("The distance between the two residues is " + Math.round(distance) + " Angström\n");
 
 		// Get all neighbor residues
 		List<Residue> resFound = new ArrayList<>();
 		System.out.println(listOfMolecules.get(0));
-		System.out.println(
-				"Enter a distance threshold to find all residues within the distance of another random residue (must be an int)\n");
-		Scanner sc = new Scanner(System.in);
-		int dist = sc.nextInt();
-		resFound = NeighborSearch.getNeighborsResidues(listOfMolecules.get(0), randomResidue2, dist);
-		System.out.println("Found " + resFound.size() + " residues within ");
+//		System.out.println(
+//				"Enter a distance threshold to find all residues within the distance of another random residue (must be an int)\n");
+//		Scanner sc = new Scanner(System.in);
+//		int dist = sc.nextInt();
+//		resFound = NeighborSearch.getNeighborsResidues(listOfMolecules.get(0), randomResidue2, dist);
+//		System.out.println("Found " + resFound.size() + " residues within ");
+//
+//		System.out.println(
+//				"--------------------------------\nResidues found with a distance within " + dist + " Angstrom :\n");
+//		for (Residue residue : resFound) {
+//			System.out.println(residue.toString());
+//		}
 
-		System.out.println(
-				"--------------------------------\nResidues found with a distance within " + dist + " Angstrom :\n");
-		for (Residue residue : resFound) {
-			System.out.println(residue.toString());
+		List<Residue> interactions = new ArrayList<>();
+		int cutoff = 10;
+		interactions = NeighborSearch.getNeighborsFromMolecule(listOfMolecules.get(0), listOfMolecules.get(1), cutoff);
+
+		System.out.println(interactions.size());
+		for (Residue residue2 : interactions) {
+			System.out.println(residue2.getResidueNumber());
 		}
+
+		// Remove duplicate from interactions list
+//		Map<BlogKey, Blog> map = new HashMap<BlogKey, Blog>();
+//		for (Blog blog : blogs) {
+//		     BlogKey key = createKey(blog);
+//		     if (!map.containsKey(key)) {
+//		          map.put(key, blog);
+//		     }
+//		}
+//		Collection<Blog> uniqueBlogs = map.values();
+
 		long endTime = System.currentTimeMillis();
 		long elapsedTime = (endTime - startTime) / 1000;
 		System.out.println("\n\nElapsed time : " + elapsedTime + " seconds");

@@ -33,7 +33,7 @@ public class ResidueDistanceTest {
 		double expectedDistance = test1.distance(test2);
 		
 		// When
-		double actualDistance = ResidueDistanceCalculation.distanceBetween2ResiduesAlphaCarbon
+		double actualDistance = ResidueDistanceCalculation.distanceBetweenResidues
 				(new Residue("test1", 1, 'A', 0, 5, 7, 12), new Residue("test2", 2, 'B', 0, 14, 3, -2));
 	
 		// Then

@@ -19,7 +19,7 @@ public class ResidueDistanceCalculation {
 	 * @return atomic distance in Å between the residues
 	 */
 
-	public static double distanceBetween2ResiduesAlphaCarbon(Residue residue1, Residue residue2) {
+	public static double distanceBetweenResidues(Residue residue1, Residue residue2) {
 
 		// creating all variables of the coordinates of each residue :
 		double residue1Xcoordinate = residue1.getxCoord();
