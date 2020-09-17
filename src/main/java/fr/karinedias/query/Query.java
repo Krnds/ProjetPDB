@@ -13,12 +13,6 @@ import java.util.List;
 import java.util.Random;
 
 public class Query {
-	/**
-	 * PROJET-PDB ETAPE-1 : Isoler toutes les structures de la PDB correspondant à
-	 * des complexes moléculaires Cette classe permet d'effectuer une requête XML
-	 * via l'interface PDB RESTful Web Service et de retourner un complexe au
-	 * hasard.
-	 */
 
 	private static final String SERVICELOCATION = "https://www.rcsb.org/pdb/rest/search";
 	private static final int NUMBEROFENTITIES = 2;
@@ -27,10 +21,11 @@ public class Query {
 			+ NUMBEROFENTITIES + "</struct_asym.numEntities.min><struct_asym.numEntities.max>" + NUMBEROFENTITIES
 			+ "</struct_asym.numEntities.max></orgPdbQuery>";
 	private static List<String> molecularComplexes = new ArrayList<String>();
-	
 
 	/**
-	 * post a specific query with the XML value for fetching all entities of molecular complexes
+	 * post a specific query with the XML value for fetching all entities of
+	 * molecular complexes
+	 * 
 	 * @param xmlQuery
 	 * @return a list of PDB ids.
 	 */
@@ -55,12 +50,13 @@ public class Query {
 
 	/**
 	 * method for fetching a random ID from the list of the complexes
-	 * @throws IOException 
+	 * 
+	 * @throws IOException
 	 */
 
 	final static String getRandomID() throws IOException {
 
-		//store all molecular comlexes into arraylist :
+		// store all molecular comlexes into arraylist :
 		postQuery();
 		Random random = new Random();
 		String randomID = molecularComplexes.get(random.nextInt(molecularComplexes.size()));

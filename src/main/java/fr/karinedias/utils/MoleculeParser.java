@@ -23,7 +23,7 @@ public class MoleculeParser {
 	// search for molecules lines in file
 	public List<String> parseMoleculeLines() {
 
-		String[] linesToSearch = ExtractText.extract(contentOfFile.toString(), "_entity.id",
+		String[] linesToSearch = TextUtils.getStringBetween(contentOfFile.toString(), "_entity.id",
 				"#").split("\\n");
 		
 		List<String> listOfLinesToSearch = Arrays.asList(linesToSearch);

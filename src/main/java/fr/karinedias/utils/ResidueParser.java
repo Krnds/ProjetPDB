@@ -23,7 +23,7 @@ public class ResidueParser {
 	public List<Residue> getResidues() {
 
 		List<Residue> listOfResidues = new ArrayList<Residue>();
-		String residueLines = ExtractText.extract(contentOfFile.toString(), "_entity_poly_seq.hetero", "#");
+		String residueLines = TextUtils.getStringBetween(contentOfFile.toString(), "_entity_poly_seq.hetero", "#");
 
 		// example of line : 1 516 ASN n
 		String pattern = "(\\d{1,2})\\s(\\d{1,3})\\s+{1,3}([A-Z]{3})\\sn\\s+";
@@ -48,7 +48,8 @@ public class ResidueParser {
 
 	private Residue parseResidue(char chain, String resName, int resNumber) {
 
-		String allAtomLines = ExtractText.extract(contentOfFile.toString(), "_atom_site.pdbx_PDB_model_num", "#");
+		String allAtomLines = TextUtils.getStringBetween(contentOfFile.toString(), "_atom_site.pdbx_PDB_model_num",
+				"#");
 
 		List<String> atomLines = new ArrayList<String>();
 
@@ -61,8 +62,8 @@ public class ResidueParser {
 
 			// trim all whitespace from string
 			string = string.replaceAll("\\s+", "");
-			// ATOM 603 C CA . GLY A 1 98 ? 14.877 -10.126 -6.092 1.00 24.45 ? 116 GLY A CA
-			// 1
+			// search for this type of line : ATOM 603 C CA . GLY A 1 98 ? 14.877 -10.126
+			// -6.092 1.00 24.45 ? 116 GLY A CA 1
 			String atomToFind = "ATOM(\\d{1,5})" // group 1 : atom number
 					+ "([C]{1})" // group 2 : atom name
 					+ "(CA[\\.|[A-Z]])" // group 3 : Alpha Carbon

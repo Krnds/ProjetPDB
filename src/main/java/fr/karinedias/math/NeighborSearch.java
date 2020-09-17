@@ -1,9 +1,11 @@
 package fr.karinedias.math;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import fr.karinedias.model.Molecule;
 import fr.karinedias.model.Residue;
@@ -11,7 +13,6 @@ import fr.karinedias.model.Residue;
 public class NeighborSearch {
 
 	List<Molecule> molecules;
-	// TODO: create an Object NeighborSearch ?
 
 	// get all residues within a distance X from a residue
 	/**
@@ -34,41 +35,48 @@ public class NeighborSearch {
 		return neighbors;
 	}
 
-	// TODO: Supprimer en faire le KNN algorithm en bruteforce en Java, cf.
-	// pseudocode
 	/**
 	 * 
-	 * @param molecule : Polymer containing all the residues to search for
-	 * @param baseRes  : TODO: a residue from the molecule or from another ??
-	 * @param distance : minimal distance between the residue and
-	 * @return a list of nearest neighbors residues within the parameter residue
+	 * @param firstMol : Frist Molecule to search for residues
+	 * @param secondMol : Second Molecule to search for residues
+	 * @param distance : cutoff distance in Angströms
+	 * @param sorted : if true returns a sorted list of neighbors residues
+	 * @return list of residues found to be neighbors
 	 */
-	public static List<Residue> getNeighborsFromMolecule(Molecule firstMol, Molecule secondMol, int distance) {
+	public static List<Residue> getNeighborsFromMolecule(Molecule firstMol, Molecule secondMol, int distance,
+			boolean sorted) {
 
 		List<Residue> residuesMol1 = firstMol.getResidues();
 		List<Residue> residuesMol2 = secondMol.getResidues();
 		List<Residue> neighbors = new ArrayList<>();
-
+		int it = 0;
 		for (int i = 0; i < residuesMol2.size(); i++) {
 			for (int j = 0; j < residuesMol1.size(); j++) {
 				if (ResidueDistanceCalculation.distanceBetweenResidues(residuesMol2.get(i),
 						residuesMol1.get(j)) < distance) {
 					neighbors.add(residuesMol1.get(j));
 				}
+				it++;
 			}
 		}
-
-		return neighbors;
+		System.out.println("Iterations = "  +it);
+		// remove duplicates from neighbors list
+		List<Residue> neighborsWithoutDuplicates = neighbors.stream().distinct().collect(Collectors.toList());
+		// sort results by ResidueNumber
+		if (sorted) {
+			neighborsWithoutDuplicates.sort(Comparator.comparing(Residue::getResidueNumber));
+		}
+		return neighborsWithoutDuplicates;
 	}
 
+	// TODO: essayer d'implementer en Java l'algo KNN
 	public static void kNearestNeighbors(Molecule cytokine, Molecule receptor) {
-		
+
 		Set<Residue> referencePoints = new HashSet<Residue>(cytokine.getResidues());
 		Set<Residue> queryPoints = new HashSet<Residue>(receptor.getResidues());
-		
-		
+
 		int k = -1;
-		//Set<Float> distances
+		// Set<Float> distances
 	}
 
 //FOR TESTING PURPOSES
