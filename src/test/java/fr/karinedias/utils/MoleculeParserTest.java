@@ -4,28 +4,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import fr.karinedias.model.Molecule;
 
 public class MoleculeParserTest {
-
-//	@BeforeEach
-//	public void setup() throws Exception {
-//		Path path = Paths.get(getClass().getClassLoader().getResource("test-data/test_moleculeParser.cif").toURI());
-//
-//		FileReader fileTest = new FileReader(path.toString());
-//		StringBuilder content = fileTest.reader();
-//		MoleculeParser mp = new MoleculeParser(content);
-//	}
 
 	@Test
 	public void moleculeParserTest() throws Exception {
@@ -57,9 +45,7 @@ public class MoleculeParserTest {
 		assertEquals(expectedMolecules.get(0).getType(), actualMolecules.get(0).getType());
 		assertEquals(expectedMolecules.get(1).getType(), actualMolecules.get(1).getType());
 
-//		Object[] expectedArray = expectedMolecules.toArray();
-//		Object[] actualArray = actualMolecules.toArray();
-//		assertArrayEquals(expectedArray, actualArray);
+		assertEquals(expectedMolecules, actualMolecules);
 
 	}
 

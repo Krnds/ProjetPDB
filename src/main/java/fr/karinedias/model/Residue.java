@@ -2,31 +2,35 @@ package fr.karinedias.model;
 
 public class Residue {
 
-	
-	private String residueName = "";
-	private int residueNumber = -1;
-	private char chain = '\u0000';
-	private int chainNumber = -1;
+	private String residueName;
+	private int residueNumber;
+	private int altResidueNumber;
+	private char altChain;
+	private int chainNumber;
 	private double xCoord, yCoord, zCoord;
 
 	/*
 	 * Constructor of the ResidueWithCoordinates object
-	 */
-	public Residue(String residueName, int residueNumber, char chain, int chainNumber, double xCoord, double yCoord, double zCoord) {
-		
+	 */	
+	public Residue(String residueName, int residueNumber, int altResidueNumber ,char altChain, int chainNumber, double xCoord, double yCoord,
+			double zCoord) {
+
 		this.residueName = residueName;
 		this.residueNumber = residueNumber;
-		this.chain = chain;
+		this.altResidueNumber = altResidueNumber;
+		this.altChain = altChain;
 		this.chainNumber = chainNumber;
 		this.xCoord = xCoord;
 		this.yCoord = yCoord;
 		this.zCoord = zCoord;
 	}
-	
-	// Empty constructor 
+
+	// Empty constructor
 	public Residue() {
-		
+
 	}
+
+
 
 	/**
 	 * @return the residueName
@@ -50,24 +54,38 @@ public class Residue {
 	}
 
 	/**
-	 * @return the chain
-	 */
-	public char getChain() {
-		return chain;
-	}
-
-	/**
-	 * @param chain the chain to set
-	 */
-	public void setChain(char chain) {
-		this.chain = chain;
-	}
-
-	/**
 	 * @param residueNumber the residueNumber to set
 	 */
 	public void setResidueNumber(int residueNumber) {
 		this.residueNumber = residueNumber;
+	}
+
+	/**
+	 * @return the altChain
+	 */
+	public char getAltChain() {
+		return altChain;
+	}
+
+	/**
+	 * @param altChain the altChain to set
+	 */
+	public void setAltChain(char altChain) {
+		this.altChain = altChain;
+	}
+
+	/**
+	 * @return the chainNumber
+	 */
+	public int getChainNumber() {
+		return chainNumber;
+	}
+
+	/**
+	 * @param chainNumber the chainNumber to set
+	 */
+	public void setChainNumber(int chainNumber) {
+		this.chainNumber = chainNumber;
 	}
 
 	/**
@@ -83,16 +101,7 @@ public class Residue {
 	public void setxCoord(double xCoord) {
 		this.xCoord = xCoord;
 	}
-	
 
-	public void setChainNumber(int chainNumber) {
-		this.chainNumber = chainNumber;
-	}
-
-	public int getChainNumber() {
-		return chainNumber;
-	}
-	
 	/**
 	 * @return the yCoord
 	 */
@@ -120,16 +129,63 @@ public class Residue {
 	public void setzCoord(double zCoord) {
 		this.zCoord = zCoord;
 	}
+	
+	
 
 	@Override
 	public String toString() {
-		return "Residue [residueName=" + residueName + ", residueNumber=" + residueNumber + ", chain=" + chain
-				+ ", chainNumber=" + chainNumber + ", xCoord=" + xCoord + ", yCoord=" + yCoord + ", zCoord=" + zCoord
-				+ "]";
+		return "Residue [residueName=" + residueName + ", residueNumber=" + residueNumber + ", altResidueNumber="
+				+ altResidueNumber + ", altChain=" + altChain + ", chainNumber=" + chainNumber + ", xCoord=" + xCoord
+				+ ", yCoord=" + yCoord + ", zCoord=" + zCoord + "]";
 	}
 
+	@Override
+	public boolean equals(Object o) {
 
+		if (o == this)
+			return true;
+		if (!(o instanceof Residue)) {
+			return false;
+		}
 
+		Residue residue = (Residue) o;
 
+		return residue.getResidueName().equals(residueName) && residue.getChainNumber() == residueNumber
+				&& residue.getAltChain() == altChain && residue.getChainNumber() == chainNumber
+				&& residue.getxCoord() == xCoord && residue.getyCoord() == yCoord && residue.getzCoord() == zCoord;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = 17;
+		result = 31 * result + residueName.hashCode();
+		result = 31 * result + residueNumber;
+		result = 31 * result + altChain;
+		result = 31 * result + chainNumber;
+
+		result = 31 * result + hashDouble(xCoord);
+		result = 31 * result + hashDouble(yCoord);
+		result = 31 * result + hashDouble(zCoord);
+		return result;
+	}
+
+	// Source : effective Java
+	/**
+	 * To transform a double into int for hashCode calculation
+	 * @param value (double)
+	 * @return an int
+	 */
+	private int hashDouble(double val) {
+		long longBits = Double.doubleToLongBits(val);
+		return (int) (longBits ^ (longBits >>> 32));
+	}
+
+	public int getAltResidueNumber() {
+		return altResidueNumber;
+	}
+
+	public void setAltResidueNumber(int altResidueNumber) {
+		this.altResidueNumber = altResidueNumber;
+	}
 
 }

@@ -574,4 +574,3 @@ ATOM   208  C C   . ASN A 1 35  ? 42.895  40.554  106.709 1.00 89.73  ? 33  ASN 
 ATOM   209  O O   . ASN A 1 35  ? 43.165  41.708  106.382 1.00 89.74  ? 33  ASN A O   1 
 ATOM   210  C CB  . ASN A 1 35  ? 44.032  39.363  104.839 1.00 84.47  ? 33  ASN A CB  1 
 #
-THis is the end of the file
