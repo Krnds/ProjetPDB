@@ -25,16 +25,12 @@ public class ChainParser {
 			chainLines.add(string.trim());
 		}
 
-		// List<Character> chainsFound = new ArrayList<>();
 		List<Chain> chainsOfMolecule = new ArrayList<>();
-//		Chain chain = new Chain('\u0000', -1); // default chain object
+
 		for (String string : chainLines) {
 
 			// trim all whitespace from string
 			string = string.replaceAll("\\s+", "");
-
-			// TODO mettre dans le regex le nom de la strucure, mais lier avec l'objet
-			// Structure ?
 
 			// 1 1 3QB7 A 4 ? 132 ? D4HNR6 25 ? 153 ? 1 129
 			String chainToFind = "\\d{1,2}(\\d)([A-Z0-9]{4})" // group 1 : molecule Number, group 2 : Structure ID

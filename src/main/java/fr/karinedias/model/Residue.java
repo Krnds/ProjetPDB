@@ -2,6 +2,7 @@ package fr.karinedias.model;
 
 public class Residue {
 
+	private int atomNumber;
 	private String residueName;
 	private int residueNumber;
 	private int altResidueNumber;
@@ -11,10 +12,11 @@ public class Residue {
 
 	/*
 	 * Constructor of the ResidueWithCoordinates object
-	 */	
-	public Residue(String residueName, int residueNumber, int altResidueNumber ,char altChain, int chainNumber, double xCoord, double yCoord,
-			double zCoord) {
+	 */
+	public Residue(int atomNumber, String residueName, int residueNumber, int altResidueNumber, char altChain,
+			int chainNumber, double xCoord, double yCoord, double zCoord) {
 
+		this.atomNumber = atomNumber;
 		this.residueName = residueName;
 		this.residueNumber = residueNumber;
 		this.altResidueNumber = altResidueNumber;
@@ -30,7 +32,19 @@ public class Residue {
 
 	}
 
+	/**
+	 * @return the atomNumber
+	 */
+	public int getAtomNumber() {
+		return atomNumber;
+	}
 
+	/**
+	 * @param atomNumber the atomNumber to set
+	 */
+	public void setAtomNumber(int atomNumber) {
+		this.atomNumber = atomNumber;
+	}
 
 	/**
 	 * @return the residueName
@@ -129,8 +143,6 @@ public class Residue {
 	public void setzCoord(double zCoord) {
 		this.zCoord = zCoord;
 	}
-	
-	
 
 	@Override
 	public String toString() {
@@ -172,6 +184,7 @@ public class Residue {
 	// Source : effective Java
 	/**
 	 * To transform a double into int for hashCode calculation
+	 * 
 	 * @param value (double)
 	 * @return an int
 	 */

@@ -107,8 +107,6 @@ public class NeighborSearch {
 					}
 				}
 			}
-			
-			
 		}
 		
 		// get chains of receptor
@@ -133,22 +131,8 @@ public class NeighborSearch {
 					}
 				}
 			}
-			
-			
 		}
 		
-		
-		
-		// get residues for each chain of receptor
-//		for (Chain chainChar : receptor.getChain()) {
-//			System.out.println(receptor.getChain());
-//			residuesReceptorChains.put(chainChar.getChain(),receptor.getResidues().stream().filter(r -> r.getAltChain() == chainChar.getChain()).collect(Collectors.toList()));
-//		}
-
-
-		
-		
-	// ANTHONY :	residuesCytokineChains.values().stream().flatMap(liste -> liste.get(index))
 
 		// remove duplicates from neighbors list
 		List<Residue> neighborsWithoutDuplicates = neighbors.stream().distinct().collect(Collectors.toList());
@@ -159,28 +143,5 @@ public class NeighborSearch {
 		return neighborsWithoutDuplicates;
 
 	}
-
-////FOR TESTING PURPOSES
-//	public static void main(String[] args) {
-//		List<Residue> res = new ArrayList<>();
-//		res.add(new Residue("ALA", 1, 'A', 1, -5.837, 6.837, 37.876));
-//		res.add(new Residue("ALA", 2, 'A', 1, 5.037, 6.117, 37.876));
-//		res.add(new Residue("TYR", 3, 'A', 1, -5.837, 2.837, 3.876));
-//		res.add(new Residue("GLY", 4, 'A', 1, 7.837, -2.837, 1.076));
-//		res.add(new Residue("THR", 5, 'A', 1, 12.837, 7.837, 11.076));
-//		Molecule mol = new Molecule(0, "Test", "syn", res);
-//
-//		Residue r = new Residue("ASP", 8, 'B', 2, 45.736, 23.746, 6.837);
-//		List<Residue> resFound = new ArrayList<>();
-//		resFound = getNeighborsResidues(mol, r, 40);
-//
-//		System.out.println(res.get(0).toString());
-//		System.out.println(res.get(1).toString());
-//		double d = ResidueDistanceCalculation.distanceBetweenResidues(r, res.get(2));
-//		System.out.println(d);
-//		for (Residue residue : resFound) {
-//			System.out.println(residue.toString());
-//		}
-//	}
 
 }

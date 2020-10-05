@@ -57,7 +57,7 @@ public class ResidueParser {
 			atomLines.add(string);
 		}
 
-		Residue res = new Residue(null, -1, -1, 'Z', -1, 0.0, 0.0, 0.0); // create default Residue to avoid
+		Residue res = new Residue(-1, null, -1, -1, 'Z', -1, 0.0, 0.0, 0.0); // create default Residue to avoid
 																			// NullPointerExc
 		for (String string : atomLines) {
 
@@ -97,9 +97,7 @@ public class ResidueParser {
 		}
 		return res;
 	}
-	
-	
-	
+
 	public List<Residue> parseAllResidues() {
 
 		String allAtomLines = TextUtils.getStringBetween(contentOfFile.toString(), "_atom_site.pdbx_PDB_model_num",
@@ -112,19 +110,18 @@ public class ResidueParser {
 		}
 
 		List<Residue> residuesFound = new ArrayList<Residue>();
-		//Residue res = new Residue(null, -1, -1, 'Z', -1, 0.0, 0.0, 0.0); // create default Residue to avoid
-																			// NullPointerExc
+
 		for (String string : atomLines) {
-		Residue res = new Residue(null, -1, -1, 'Z', -1, 0.0, 0.0, 0.0);
+			Residue res = new Residue(-1, null, -1, -1, 'Z', -1, 0.0, 0.0, 0.0); // create default Residue to avoid
+			// NullPointerExc
 			// trim all whitespace from string
 			string = string.replaceAll("\\s+", "");
 			// search for this type of line : ATOM 603 C CA . GLY A 1 98 ? 14.877 -10.126
 			// -6.092 1.00 24.45 ? 116 GLY A CA 1
 
 			String atomToFind = "ATOM(\\d{1,5})" // group 1 : atom number
-					+ "C"
-					+ "CA[\\.|[A-Z]]"
-					+ "([A-Z]{3})" + "([A-Z]{1})" //GROUP 2 : resName + GROUP3 : Chaine name ('A')
+					+ "C" + "CA[\\.|[A-Z]]" + "([A-Z]{3})" + "([A-Z]{1})" // GROUP 2 : resName + GROUP3 : Chaine name
+																			// ('A')
 					+ "([0-9]{1})" // group 4 : MoleculeNumber
 					+ "([0-9]{1,3})" + "[?]{1}" // group 5 : residue number
 					+ "(-?[0-9]{1,4}\\.[0-9]{3})" // group 6 : X orthogonal coordinate of the atom
@@ -137,6 +134,7 @@ public class ResidueParser {
 			Matcher m = atomEntry.matcher(string);
 
 			if (m.find()) {
+				res.setAtomNumber(Integer.parseInt(m.group(1)));
 				res.setResidueName(m.group(2));
 				res.setResidueNumber(Integer.parseInt(m.group(5)));
 				res.setChainNumber(Integer.parseInt(m.group(4)));
@@ -146,9 +144,9 @@ public class ResidueParser {
 				res.setAltResidueNumber(Integer.parseInt(m.group(9)));
 				res.setAltChain(m.group(10).charAt(0));
 				residuesFound.add(res);
-				
+
 			}
-			
+
 		}
 
 		return residuesFound;

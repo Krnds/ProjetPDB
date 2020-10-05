@@ -14,6 +14,7 @@ import org.jmol.adapter.smarter.SmarterJmolAdapter;
 import org.jmol.api.JmolAdapter;
 import org.jmol.api.JmolViewer;
 
+import fr.karinedias.model.Chain;
 import fr.karinedias.model.Molecule;
 import fr.karinedias.model.Residue;
 import fr.karinedias.utils.FileReader;
@@ -31,7 +32,7 @@ public class JmolIntegration {
 		Container contentPane = frame.getContentPane();
 		jmolPanel = new JmolPanel();
 
-		jmolPanel.setPreferredSize(new Dimension(800, 800));
+		jmolPanel.setPreferredSize(new Dimension(900, 900));
 		contentPane.add(jmolPanel);
 
 		frame.pack();
@@ -78,7 +79,7 @@ public class JmolIntegration {
 		public void paint(Graphics g) {
 			getSize(currentSize);
 			g.getClipBounds(rectClip);
-			viewer.renderScreenImage(g, 800, 800);
+			viewer.renderScreenImage(g, 900, 900);
 		}
 	}
 
@@ -90,19 +91,35 @@ public class JmolIntegration {
 		// send PDB file to Jmol
 		viewer.openStringInline(filename);
 		viewer.evalString("restrict *.ca; hide waters ;spacefill on, backbone 0.8");
-		viewer.evalString("select :A ; color gold; define mol1 selected");
-		viewer.evalString("select :B ; color LightSeaGreen; define mol2 selected");
+		viewer.evalString("select :A or : C ; color gold; define mol1 selected");
+		viewer.evalString("select :B or :D ; color LightSeaGreen; define mol2 selected");
 //		viewer.evalString("select within (10.0, :X) and not mol1; color Bisque; define zone selected");
 //		viewer.evalString("select within (10.0, :Y) and not mol2; color Bisque; define zone selected");
 
-		viewer.evalString("select ser44,pro45,thr46,arg47,lys71,asp73,leu74,tyr75,asn76,lys77,leu102,phe103,pro134,pro135,leu136,asp137,thr185,phe186,ser187,val188,pro189,ser44,pro45,thr46,arg47,lys71,asp73,leu74,tyr75,asn76,lys77,leu102,phe103,pro134,pro135,leu136,asp137,thr185,phe186,ser187,val188,pro189; color red; define t1 selected");
-//		viewer.evalString("select gln236,leu237,ser238,asp239,ile240,ala241,tyr242,val249,tyr261,phe296,ala297,lys298,asn299,thr300,pro209,val233,gly235,trp243,glu259,asp260,tyr262,ser263,thr274,leu275,ile276,thr277,ile303,val264,glu265,lys270,arg271,ser273,his301,pro206,thr207,arg208,arg272,asn204,lys114,leu115,pro116,leu201,glu203,lys205,lys112,gln113,ile199,thr200,glu202,phe111,phe111,gly121,gly122,leu123,val124,pro126,phe198,asp120,cys125,arg163,ile165,val117,gly119,val160,lys161,asp162,leu164,val166,met167,val169,tyr127,met128,glu129,gly159,ile196,glu197,ile110,tyr177,cys179,arg194,val195,ile13,leu15,lys12,asn30,glu11,ile14,pro28,leu29,arg9,glu10,pro31,leu88,lys7,glu8,pro26,cys27,asn32,glu33,leu88,arg89,ile90,lys91,ile92,ser93,val16,arg25,ala109,phe130,ser17,gln108,thr193,ala94,lys95,ala107,ser18,phe96,val97,tyr105,asn106,asn176,thr178,gly302,asp304,val210,ala305,ser248,ala118,asn168,ala170,phe131,lys132,asn136,glu137,leu138,val24,lys63,his34,asn269; color bisque; define t2 selected");
+		 viewer.evalString("select atomno=2,atomno=16,atomno=25,atomno=186,atomno=194,atomno=203,atomno=211,atomno=218,atomno=222,atomno=231,atomno=303,atomno=310,atomno=319,atomno=323,atomno=330,atomno=337,atomno=343,atomno=350,atomno=355,atomno=363,atomno=374,atomno=383,atomno=391,atomno=392,atomno=400,atomno=408,atomno=416,atomno=425,atomno=465,atomno=512,atomno=528,atomno=543,atomno=553,atomno=560,atomno=632,atomno=913,atomno=918,atomno=935,atomno=945,atomno=951,atomno=961,atomno=972,atomno=1096,atomno=1180,atomno=1191,atomno=1196,atomno=1207,atomno=1211,atomno=1218,atomno=1225,atomno=1243,atomno=1250,atomno=1274,atomno=1275,atomno=1462,atomno=2193,atomno=2221,atomno=2229,atomno=2235,atomno=2240,atomno=2249; color red; define t1 selected");
+
+		//viewer.evalString("select atomno=1370,atomno=1379,atomno=1386,atomno=1398,atomno=1402,atomno=1411,atomno=1422,atomno=1617,atomno=1624,atomno=1633,atomno=1641,atomno=1653,atomno=1779,atomno=1787,atomno=1809,atomno=1810,atomno=1832,atomno=2150,atomno=2492,atomno=2499,atomno=2506,atomno=2513,atomno=2527,atomno=2532; color FireBrick; define t1 selected");
+		//viewer.evalString(
+		//		"select atomno=1430,atomno=1436,atomno=1443,atomno=1450,atomno=1649,atomno=1667,atomno=1675,atomno=1683,atomno=1695,atomno=1703,atomno=1909,atomno=1917,atomno=2154,atomno=2161,atomno=2168,atomno=2176,atomno=2543,atomno=2550,atomno=2561,atomno=2567,atomno=2574; color red; define t2 selected");
 //		viewer.evalString("select t1 and not mol1");
 //		viewer.evalString("select t2 and not mol2");
 //		viewer.evalString("display mol2; color LightSeaGreen");
 		// viewer.evalString("display mol1 and zone or mol2 and zone");
 		this.viewer = viewer;
 	}
+	
+//	public void setStructure2(String filename, List<Character> chains, String objCommand) {
+//
+//		JmolViewer viewer = jmolPanel.getViewer();
+//		viewer.openFile(filename);
+//
+//		// send PDB file to Jmol
+//		viewer.openStringInline(filename);
+//		viewer.evalString("restrict *.ca; hide waters ;spacefill on, backbone 0.8");
+//		viewer.evalString(selectChain(chains, ))
+//		this.viewer = viewer;
+//	}
+	
 
 	private String selectChain(List<Character> chains, String color, String selectionName) {
 
@@ -122,19 +139,20 @@ public class JmolIntegration {
 			}
 		} else
 			command = "select :" + chains.get(0) + "; color " + color + "; define " + selectionName + " selected";
-
+		
 		return command;
 	}
 
-	// TODO
-	private String selectResidues(List<Residue> residues, String color, String selectionName) {
+	private String selectObjects(int nInteractions, String objects, String color, String selectionName) {
 
-		String res = null;
-		for (Residue residue : residues) {
-			res = residue.getResidueName().toLowerCase() + residue.getResidueNumber() + ",";
+		String command = "";
+
+		if (nInteractions > 1) {
+			command = "select " + objects + "; color " + color + "; define " + selectionName + " selected";
+		} else {
+			command = "select :" + objects + "; color " + color + "; define " + selectionName + " selected";
 		}
-		return "select " + res + "; color " + color + "; define " + selectionName + "selected";
-
+		return command;
 	}
 
 	public static void main(String[] args) {
@@ -150,7 +168,7 @@ public class JmolIntegration {
 //		├── 4nn6.cif
 //		└── 4wrl.cif
 
-		String cyto1 = "/home/karine/src/java/ProjetPDB_old/src/main/resources/data/cytokins/3og4.cif";
+		String cyto1 = "/home/karine/src/java/ProjetPDB_old/src/main/resources/data/3tnw.cif";
 		FileReader pdb = new FileReader(cyto1);
 
 		// à lancer dans Application

@@ -29,7 +29,7 @@ public class Query {
 	 * @param xmlQuery
 	 * @return a list of PDB ids.
 	 */
-	private static void postQuery() throws IOException {
+	public static void postQuery() throws IOException {
 
 		URL webService = new URL(SERVICELOCATION);
 
@@ -88,6 +88,13 @@ public class Query {
 		// Get the response
 		return connection.getInputStream();
 
+	}
+
+	/**
+	 * @return the molecularComplexes
+	 */
+	public List<String> getMolecularComplexes() {
+		return molecularComplexes;
 	}
 
 }
