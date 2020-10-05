@@ -3,7 +3,7 @@ package fr.karinedias.model;
 public class Chain {
 
 	private int moleculeNumber;
-	private Character chain;
+	private char chain;
 
 	public Chain(char chain, int moleculeNumber) {
 		this.chain = chain;
@@ -27,14 +27,14 @@ public class Chain {
 	/**
 	 * @return the chain
 	 */
-	public Character getChain() {
+	public char getChain() {
 		return chain;
 	}
 
 	/**
 	 * @param chain the chain to set
 	 */
-	public void setChain(Character chain) {
+	public void setChain(char chain) {
 		this.chain = chain;
 	}
 

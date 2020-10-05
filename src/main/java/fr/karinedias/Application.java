@@ -63,11 +63,13 @@ public class Application {
 		List<Molecule> listOfMolecules = new ArrayList<>();
 		listOfMolecules.addAll(mp.getAllMolecules(mp.parseMoleculeLines()));
 		System.out.println("Found " + listOfMolecules.size() + " molecule(s) in structure " + structure.toUpperCase());
+		
 
 		// parsing chains
 		ChainParser cp = new ChainParser(sb);
 		int numberOfChains = 0;
 		for (Molecule mol : listOfMolecules) {
+			System.out.println(mol.getDescription());
 			mol.setChain(cp.getChains(mol));
 			numberOfChains += mol.getChain().size();
 		}
@@ -76,6 +78,11 @@ public class Application {
 		for (Molecule mol : listOfMolecules) {
 			System.out.println(mol.getChain().toString());
 		}
+		
+		//TODO: if > 2 chains, create custom treatment to regroup chains to cytokine/receptor
+		if (listOfMolecules.size() > 2)
+			;//TODO parse in description 'receptor' and put to mol2
+		//TODO: parse 'cytokine' and put to mol1 ?
 
 		// JMOL CHAINS
 		// Create structure to fit each molecule number with the list of chains
@@ -170,7 +177,6 @@ public class Application {
 					selectResiduesCommand
 							.add(residue2.getResidueName().toLowerCase() + residue2.getAltResidueNumber() + ",");
 					selectAtoms += "atomno=" + residue2.getAtomNumber() + ","; 
-					// System.out.print("atomno=" + residue2.getAtomNumber()+ ",");
 				}
 			}
 		}

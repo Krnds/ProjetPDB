@@ -4,14 +4,14 @@ import java.util.List;
 
 public class Molecule {
 
-	private int moleculeID = 0;
-	private String type = "";
-	private String description = "";
+	private int moleculeID;
+	private String type;
+	private String description;
 	private List<Residue> residues;
 	private List<Chain> chains;
 
 	/*
-	 * Constructors with or without list of Residues:
+	 * Constructors with Residues:
 	 */
 	public Molecule(int id, String description, String type, List<Residue> residues) {
 		this.moleculeID = id;
@@ -20,6 +20,9 @@ public class Molecule {
 		this.residues = residues;
 	}
 
+	/*
+	 * Constructors without Residues used in MoleculeParser :
+	 */
 	public Molecule(int id, String description, String type) {
 		this.moleculeID = id;
 		this.description = description;
@@ -59,8 +62,6 @@ public class Molecule {
 	public void setChain(List<Chain> chain) {
 		this.chains = chain;
 	}
-
-	
 
 	@Override
 	public String toString() {
