@@ -17,6 +17,7 @@ import javax.annotation.PostConstruct;
 import fr.karinedias.math.NeighborSearch;
 import fr.karinedias.math.ResidueDistanceCalculation;
 import fr.karinedias.model.Chain;
+import fr.karinedias.model.Complex;
 import fr.karinedias.model.Molecule;
 import fr.karinedias.model.Residue;
 import fr.karinedias.query.CytokineQuery;
@@ -45,18 +46,24 @@ public class Application {
 		// résidus random
 		// TODO:
 
+
 		// cytokines
-		String structure = "6rj4";
-		String structureFile = "/home/karine/src/java/ProjetPDB_old/src/main/resources/data/" + structure.toLowerCase()
+		// 1ira, 3alq, 3dlq, 3g9v
+		// 3alq, 3dlq, 3g9v, 3og4, 3og6, 3qb7, 3va2, 4nkq, 4nn6, 4wrl, 5l04
+		String structure = "5l04";
+		String structureFile = "/home/karine/src/java/ProjetPDB_old/src/main/resources/data/cytokines/" + structure.toLowerCase()
 				+ ".cif";
+		int cutoff = 9;
 
 		String testAppli = "/home/karine/src/java/ProjetPDB_old/src/test/resources/test-data/test.cif";
 
 		FileReader pdb = new FileReader(structureFile);
 		StringBuilder sb = pdb.reader();
 		ResidueParser rwcp = new ResidueParser(sb);
+	
+		
 		// List<Residue> listOfResidues = rwcp.getResidues();
-		List<Residue> listOfResidues = rwcp.parseAllResidues();
+		List<Residue> listOfResidues = rwcp.getAllResidues();
 
 		// parsing molecules
 		MoleculeParser mp = new MoleculeParser(sb);
@@ -64,7 +71,9 @@ public class Application {
 		listOfMolecules.addAll(mp.getAllMolecules(mp.parseMoleculeLines()));
 		System.out.println("Found " + listOfMolecules.size() + " molecule(s) in structure " + structure.toUpperCase());
 		
-
+		//get complex info
+		Complex complex = new Complex(structure, listOfMolecules);
+		
 		// parsing chains
 		ChainParser cp = new ChainParser(sb);
 		int numberOfChains = 0;
@@ -137,7 +146,7 @@ public class Application {
 		}
 
 		// Test get neighbors from chain
-		int cutoff = 10;
+		//int cutoff = 8;
 		List<Residue> neighborsFromChain = NeighborSearch.getNeighborsFromChains(listOfMolecules.get(0),
 				listOfMolecules.get(1), cutoff, true);
 

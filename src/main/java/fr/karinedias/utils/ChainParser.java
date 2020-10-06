@@ -47,18 +47,4 @@ public class ChainParser {
 		return chainsOfMolecule;
 	}
 
-//	public static void main(String[] args) throws URISyntaxException {
-//		String test1 = " _struct_ref_seq.pdbx_auth_seq_align_end \n"
-//				+ "	1 1 3QB7 A 4 ? 132 ? D4HNR6 25 ? 153 ? 1  129 \n"
-//				+ "	2 1 3QB7 B 4 ? 132 ? D4HNR6 25 ? 153 ? 1  129 \n"
-//				+ "	3 2 3QB7 C 4 ? 203 ? P31785 55 ? 254 ? 33 232 \n"
-//				+ "	4 2 3QB7 D 4 ? 203 ? P31785 55 ? 254 ? 33 232 \n" + "	# ";
-//		String file = "/home/karine/src/java/ProjetPDB_old/src/main/resources/data/6rj4.cif";
-//		FileReader pdb = new FileReader(file);
-//		StringBuilder sb = pdb.reader();
-//		ChainParser cp = new ChainParser(sb);
-//		Chain test = cp.getChains();
-//		System.out.println(test);
-//
-//	}
 }
