@@ -198,9 +198,6 @@ public class Application {
 //		System.out.println(jmolInfo.get(2));
 		
 		JmolIntegration_new testJmol = new JmolIntegration_new();
-//		testJmol.selectChain(jmolInfo.get(1), "blue");
-//		testJmol.selectChain(jmolInfo.get(2), "gold");
-//		testJmol.selectAtoms(selectAtoms, "red");
 		testJmol.setStructure(structureFile, jmolInfo,selectAtoms);
 		
 		

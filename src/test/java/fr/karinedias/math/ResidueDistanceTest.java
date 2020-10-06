@@ -18,8 +18,8 @@ public class ResidueDistanceTest {
 		Point3d test2 = new Point3d(14, 3, -2);
 		double actualDistance = test1.distance(test2);
 
-		double expectedDistance = distanceBetweenResidues(new Residue("test1", 1, 'A', 0, 5, 7, 12),
-				new Residue("test2", 2, 'B', 0, 14, 3, -2));
+		double expectedDistance = distanceBetweenResidues(new Residue(340, "test1", 1, 1, 'A', 0, 5, 7, 12),
+				new Residue(120, "test2", 2, 2, 'B', 0, 14, 3, -2));
 
 		assertEquals(expectedDistance, actualDistance);
 
@@ -32,8 +32,8 @@ public class ResidueDistanceTest {
 		Point3d test2 = new Point3d(0, 0, 0);
 		double actualDistance = test1.distance(test2);
 
-		double expectedDistance = distanceBetweenResidues(new Residue("test1", 1, 'A', 0, 0, 0, 0),
-				new Residue("test2", 2, 'B', 0, 0, 0, 0));
+		double expectedDistance = distanceBetweenResidues(new Residue(340, "test1", 1, 1, 'A', 0, 0, 0, 0),
+				new Residue(120, "test2", 2, 2, 'B', 0, 0, 0, 0));
 
 		assertEquals(expectedDistance, actualDistance);
 	}

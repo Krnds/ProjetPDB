@@ -22,19 +22,19 @@ class NeighborSearchTest {
 	void getNeighborsResiduesTest() throws URISyntaxException {
 		// Given
 		List<Residue> expectedResidues = new ArrayList<>();
-		expectedResidues.add(new Residue("VAL", 1, 'A', 1, 43.152, 19.932, 2.662));
-		expectedResidues.add(new Residue("LEU", 2, 'A', 1, 43.289, 22.947, 0.349));
-		expectedResidues.add(new Residue("SER", 3, 'A', 1, 43.993, 22.273, -3.337));
-		expectedResidues.add(new Residue("PRO", 4, 'A', 1, 45.820, 24.813, -5.510));
-		expectedResidues.add(new Residue("ALA", 5, 'A', 1, 42.457, 25.083, -7.173));
-		expectedResidues.add(new Residue("ASP", 6, 'A', 1, 41.279, 27.281, -4.320));
-		expectedResidues.add(new Residue("LYS", 7, 'A', 1, 44.711, 28.798, -3.618));
-		expectedResidues.add(new Residue("THR", 8, 'A', 1, 45.085, 30.328, -7.077));
-		expectedResidues.add(new Residue("ASN", 9, 'A', 1, 41.313, 30.776, -7.245));
-		expectedResidues.add(new Residue("VAL", 10, 'A', 1, 41.216, 33.253, -4.385));
+		expectedResidues.add(new Residue(2, "VAL", 1, 1, 'A', 1, 43.152, 19.932, 2.662));
+		expectedResidues.add(new Residue(9, "LEU", 2, 2, 'A', 1, 43.289, 22.947, 0.349));
+		expectedResidues.add(new Residue(17, "SER", 3, 3, 'A', 1, 43.993, 22.273, -3.337));
+		expectedResidues.add(new Residue(23, "PRO", 4, 4, 'A', 1, 45.820, 24.813, -5.510));
+		expectedResidues.add(new Residue(30, "ALA", 5, 5, 'A', 1, 42.457, 25.083, -7.173));
+		expectedResidues.add(new Residue(35, "ASP", 6, 6, 'A', 1, 41.279, 27.281, -4.320));
+		expectedResidues.add(new Residue(43, "LYS", 7, 7, 'A', 1, 44.711, 28.798, -3.618));
+		expectedResidues.add(new Residue(52, "THR", 8, 8, 'A', 1, 45.085, 30.328, -7.077));
+		expectedResidues.add(new Residue(59, "ASN", 9, 9, 'A', 1, 41.313, 30.776, -7.245));
+		expectedResidues.add(new Residue(67, "VAL", 10, 10, 'A', 1, 41.216, 33.253, -4.385));
 
 		Molecule expectedMolecule = new Molecule(1, "Molecule Test1", "polymer", expectedResidues);
-		Residue residueToCompare = new Residue("GLU", 1110, 'B', 2, 9.439, 48.049, 8.826);
+		Residue residueToCompare = new Residue(1110, "GLU", 6, 6, 'B', 2, 9.439, 48.049, 8.826);
 		List<Residue> expected = new ArrayList<>();
 		expected = NeighborSearch.getNeighborsResidues(expectedMolecule, residueToCompare, 40);
 
@@ -47,7 +47,7 @@ class NeighborSearchTest {
 		Molecule actualMolecule = mp.getAllMolecules(mp.parseMoleculeLines()).get(0);
 		ResidueParser rp = new ResidueParser(content);
 
-		List<Residue> actualResiduesFounds = rp.getResidues().stream()
+		List<Residue> actualResiduesFounds = rp.getAllResidues().stream()
 				.filter(residue -> residue.getChainNumber() == actualMolecule.getId()).collect(Collectors.toList());
 		// Set all residues to the correct molecule
 		actualMolecule.setResidues(actualResiduesFounds);
