@@ -35,16 +35,6 @@ public class MoleculeParserTest {
 		// Then
 		assertTrue(expectedMolecules.size() == actualMolecules.size());
 		assertNotNull(actualMolecules);
-		// assertions for molecule id
-		assertEquals(expectedMolecules.get(0).getId(), actualMolecules.get(0).getId());
-		assertEquals(expectedMolecules.get(1).getId(), actualMolecules.get(1).getId());
-		// assertions for molecule description
-		assertEquals(expectedMolecules.get(0).getDescription(), actualMolecules.get(0).getDescription());
-		assertEquals(expectedMolecules.get(1).getDescription(), actualMolecules.get(1).getDescription());
-		// assertions for molecule type
-		assertEquals(expectedMolecules.get(0).getType(), actualMolecules.get(0).getType());
-		assertEquals(expectedMolecules.get(1).getType(), actualMolecules.get(1).getType());
-
 		assertEquals(expectedMolecules, actualMolecules);
 
 	}

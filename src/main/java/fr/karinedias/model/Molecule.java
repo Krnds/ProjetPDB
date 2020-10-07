@@ -79,7 +79,7 @@ public class Molecule {
 		}
 
 		Molecule molecule = (Molecule) o;
-		if (molecule.getResidues().size() == 0) {
+		if (molecule.getResidues() == null) {
 			return molecule.getDescription().equals(description) && molecule.getId() == moleculeID
 					&& molecule.getType().equals(type);
 		} else {

@@ -47,21 +47,17 @@ class NeighborSearchTest {
 		Molecule actualMolecule = mp.getAllMolecules(mp.parseMoleculeLines()).get(0);
 		ResidueParser rp = new ResidueParser(content);
 
-		List<Residue> actualResiduesFounds = rp.getAllResidues().stream()
+		List<Residue> actualResiduesFound = rp.getAllResidues().stream()
 				.filter(residue -> residue.getChainNumber() == actualMolecule.getId()).collect(Collectors.toList());
 		// Set all residues to the correct molecule
-		actualMolecule.setResidues(actualResiduesFounds);
+		actualMolecule.setResidues(actualResiduesFound);
 
 		List<Residue> actual = new ArrayList<>();
 		actual = NeighborSearch.getNeighborsResidues(actualMolecule, residueToCompare, 40);
 
 		// Then
 		assertEquals(expected.size(), actual.size());
-		// assertEquals(expected.get(0), actual.get(0));
-		boolean b = expected.toArray().equals(actual.toArray());
-		System.out.println(b);
-		boolean isEqualAllValues = expected.containsAll(actual);
-		System.out.println(isEqualAllValues);
+		assertEquals(expectedResidues, actualResiduesFound);
 
 	}
 

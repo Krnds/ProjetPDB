@@ -162,7 +162,7 @@ public class Residue {
 
 		Residue residue = (Residue) o;
 
-		return residue.getResidueName().equals(residueName) && residue.getChainNumber() == residueNumber
+		return residue.getAtomNumber()==atomNumber && residue.getResidueName().equals(residueName) && residue.getChainNumber() == chainNumber
 				&& residue.getAltChain() == altChain && residue.getChainNumber() == chainNumber
 				&& residue.getxCoord() == xCoord && residue.getyCoord() == yCoord && residue.getzCoord() == zCoord;
 	}
