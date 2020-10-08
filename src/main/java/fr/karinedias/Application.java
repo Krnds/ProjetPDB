@@ -27,11 +27,11 @@ import fr.karinedias.utils.FileReader;
 import fr.karinedias.utils.MoleculeParser;
 import fr.karinedias.utils.ResidueParser;
 import fr.karinedias.visualisation.JmolIntegration;
-import fr.karinedias.visualisation.JmolIntegration_new;
+import fr.karinedias.visualisation.JmolIntegration;
 
 public class Application {
-	
-	private static final Scanner SC = new Scanner(System.in);
+
+	private static Scanner SC;
 
 	/**
 	 * Test all classes in main
@@ -46,22 +46,19 @@ public class Application {
 		// résidus random
 		// TODO:
 
-
 		// cytokines
-		// 1ira, 3alq, 3dlq, 3g9v
-		// 3alq, 3dlq, 3g9v, 3og4, 3og6, 3qb7, 3va2, 4nkq, 4nn6, 4wrl, 5l04
-		String structure = "5l04";
-		String structureFile = "/home/karine/src/java/ProjetPDB_old/src/main/resources/data/cytokines/" + structure.toLowerCase()
-				+ ".cif";
-		int cutoff = 9;
+		// 3alq, 3dlq, 3g9v, 3og4, 3og6, 3qb7, 3va2, 4nkq, 4nn6, 4wrl
+		String structure = "4nn6";
+		String structureFile = "/home/karine/src/java/ProjetPDB_old/src/main/resources/data/cytokines/"
+				+ structure.toLowerCase() + ".cif";
+		int cutoff = 8;
 
 		String testAppli = "/home/karine/src/java/ProjetPDB_old/src/test/resources/test-data/test.cif";
 
 		FileReader pdb = new FileReader(structureFile);
 		StringBuilder sb = pdb.reader();
 		ResidueParser rwcp = new ResidueParser(sb);
-	
-		
+
 		// List<Residue> listOfResidues = rwcp.getResidues();
 		List<Residue> listOfResidues = rwcp.getAllResidues();
 
@@ -70,10 +67,10 @@ public class Application {
 		List<Molecule> listOfMolecules = new ArrayList<>();
 		listOfMolecules.addAll(mp.getAllMolecules(mp.parseMoleculeLines()));
 		System.out.println("Found " + listOfMolecules.size() + " molecule(s) in structure " + structure.toUpperCase());
-		
-		//get complex info
+
+		// get complex info
 		Complex complex = new Complex(structure, listOfMolecules);
-		
+
 		// parsing chains
 		ChainParser cp = new ChainParser(sb);
 		int numberOfChains = 0;
@@ -87,11 +84,12 @@ public class Application {
 		for (Molecule mol : listOfMolecules) {
 			System.out.println(mol.getChain().toString());
 		}
-		
-		//TODO: if > 2 chains, create custom treatment to regroup chains to cytokine/receptor
+
+		// TODO: if > 2 chains, create custom treatment to regroup chains to
+		// cytokine/receptor
 		if (listOfMolecules.size() > 2)
-			;//TODO parse in description 'receptor' and put to mol2
-		//TODO: parse 'cytokine' and put to mol1 ?
+			;// TODO parse in description 'receptor' and put to mol2
+		// TODO: parse 'cytokine' and put to mol1 ?
 
 		// JMOL CHAINS
 		// Create structure to fit each molecule number with the list of chains
@@ -110,11 +108,10 @@ public class Application {
 
 			List<Character> chainCharacters = c.stream().map(Chain::getChain).collect(Collectors.toList());
 			System.out.println(chainCharacters.toString());
-			
-			
+
 			jmolInfo.put(currentMolecule.getId(), chainCharacters);
 			System.out.println(jmolInfo.toString());
-			
+
 			for (Character ch : chainCharacters) {
 				List<Residue> resOfChain = new ArrayList<>();
 				resOfChain.addAll(residuesOfCurrentMolecule.stream().filter(r -> r.getAltChain() == ch)
@@ -126,7 +123,8 @@ public class Application {
 
 		}
 
-		System.out.println("Number of residues found in " + structure.toUpperCase() + " = " + listOfResidues.size() + "\n");
+		System.out.println(
+				"Number of residues found in " + structure.toUpperCase() + " = " + listOfResidues.size() + "\n");
 
 		// Get random residues from all molecules and compute distance between them
 		Random rand = new Random();
@@ -146,19 +144,27 @@ public class Application {
 		}
 
 		// Test get neighbors from chain
-		//int cutoff = 8;
+		// int cutoff = 8;
 		List<Residue> neighborsFromChain = NeighborSearch.getNeighborsFromChains(listOfMolecules.get(0),
 				listOfMolecules.get(1), cutoff, true);
 
 		// Get all neighbor residues
-		List<Residue> interactions = new ArrayList<>();
+		List<Residue> interactions = NeighborSearch.getNeighborsResidues(complex, randomResidue1, cutoff);
+
+		System.out.println("FOUND " + interactions.size() + " INTERACTIONS!");
+
+		// Get all neighbors distances
+		List<Double> interactionsDistance = NeighborSearch.getNeighborsDistance(complex, randomResidue1, cutoff);
+		for (Double d : interactionsDistance) {
+			System.out.println(d);
+		}
 
 // attention, il faut prendre en compte le cas où plus de 2 molécules... (or cytokine/récepteur)
 
 		interactions = NeighborSearch.getNeighborsFromMolecule(listOfMolecules.get(0), listOfMolecules.get(1), cutoff,
 				false);
-		//System.out.println(listOfMolecules.get(0).toString());
-		//System.out.println(listOfMolecules.get(1).toString());
+		// System.out.println(listOfMolecules.get(0).toString());
+		// System.out.println(listOfMolecules.get(1).toString());
 		System.out.println(
 				"Found " + neighborsFromChain.size() + " residues within a distance of " + cutoff + " Angströms :");
 
@@ -185,71 +191,112 @@ public class Application {
 				if (residue2.getAltChain() == character) {
 					selectResiduesCommand
 							.add(residue2.getResidueName().toLowerCase() + residue2.getAltResidueNumber() + ",");
-					selectAtoms += "atomno=" + residue2.getAtomNumber() + ","; 
+					selectAtoms += "atomno=" + residue2.getAtomNumber() + ",";
 				}
 			}
 		}
-		
+
 		System.out.println(selectChains.toString());
 		System.out.println(selectAtoms.toString());
-		//selectChains = A,B,C,D --> TODO: avoir la liste des chaines par molécule
+		// selectChains = A,B,C,D --> TODO: avoir la liste des chaines par molécule
 
 //		System.out.println(jmolInfo.get(1));
 //		System.out.println(jmolInfo.get(2));
-		
-		JmolIntegration_new testJmol = new JmolIntegration_new();
-		testJmol.setStructure(structureFile, jmolInfo,selectAtoms);
-		
-		
+
+		JmolIntegration testJmol = new JmolIntegration();
+		testJmol.setStructure(structureFile, jmolInfo, selectAtoms);
+
 		long endTime = System.currentTimeMillis();
 		long elapsedTime = (endTime - startTime) / 1000;
 		System.out.println("\n\nElapsed time : " + elapsedTime + " seconds");
 	}
-	
+
 	public static void menu() {
-		
-        int choice = 0;
-        System.exit(0);
-        boolean correct = true;
 
-        System.out.println("----------Calcul des distances intermoléculaires dans la PDB----------");
+		int choice = 0;
+		boolean correct = true;
 
-        do {
-            System.out.println(
-            		"[1]\tChercher des complexes moléculaires\n"
-            		+"[2]\tCalcul de distance entre deux résidus d'un complexe choisi"
-            		+ "[3]\tListe des résidus situés à une distance inférieure à un seuil"
-            		+ "[4]\tRésidus situés à une distance inférieure avec 10 cytokines"
-            		+ "[5]\tDéfinir une zone d'interaction et l'appliquer aux 10 cytokines"
-            		+ "[5]\tDéfinir et colorer les zones d'interaction sur 3 cytokines");
+		System.out.println("----------Calcul des distances intermoléculaires dans la PDB----------");
+
+		do {
+			SC = new Scanner(System.in);
+			System.out.println("[1]\tChercher des complexes moléculaires\n"
+					+ "[2]\tCalcul de distance entre deux résidus d'un complexe choisi\n"
+					+ "[3]\tListe des résidus situés à une distance inférieure à un seuil\n"
+					+ "[4]\tRésidus situés à une distance inférieure avec 10 cytokines\n"
+					+ "[5]\tDéfinir une zone d'interaction et l'appliquer aux 10 cytokines\n"
+					+ "[6]\tDéfinir et colorer les zones d'interaction sur 3 cytokines\n" + "[7]\tQuitter");
 
 			if (SC.hasNextInt()) {
 				choice = SC.nextInt();
 			}
-			if (choice >= 0 || choice >= 7) {
+			if (choice <= 0 || choice >= 7) {
 				System.out.println("Ce choix n'est pas valide");
 				correct = false;
 			}
+			switch (choice) {
+			case 1:
+				try {
+					choice1();
+				} catch (IOException e) {
+					System.out.println("File not found");
+					e.printStackTrace();
+				}
+			case 2:
+				choice2();
+			}
 
-
-        } while (correct);
-        SC.close();
-    }
+		} while (correct);
+		SC.close();
+	}
 
 	public static void choice1() throws IOException {
+		boolean incorrect = false;
 		long startTime = System.currentTimeMillis();
-		System.out.println("-----------FIND ALL ID OF MOLECULAR COMPLEXES-----------");
-
-		// Find all PDB complexes (2 or more entities)
-		Query query = new Query();
-		Query.postQuery();
-		System.out.println("Found " + query.getMolecularComplexes().size() + " complexes in PDB.\n Want to print the list of ID ? [Y/N]");
-		if (SC.next() == "Y")
-			System.out.println(query.getMolecularComplexes().toString());
-		if (SC.next() == "N")
-			; // do nothing
+		System.out.println("\nRecherche du nombre de complexes moléculaires dans la PDB...");
+		do {
+			// Find all PDB complexes (2 or more entities)
+			Query query = new Query();
+			Query.postQuery();
+			System.out.println(query.getMolecularComplexes().size()
+					+ " complexes moléculaires ont été trouvés.\nImprimer la liste des identifiants ? [O/N]");
+			if (SC.next().contentEquals("O"))
+				System.out.println(query.getMolecularComplexes().toString());
+			if (SC.next().contentEquals("N")) {
+				break;
+			} else {
+				incorrect = true;
+				System.out.println("Mauvaise commande");
+			}
+		} while (incorrect);
 		long endTime = System.currentTimeMillis();
 		long elapsedTime = (endTime - startTime) / 1000;
-		System.out.println("\n\nElapsed time : " + elapsedTime + " seconds");
+		System.out.println("\n\nTemps d'éxécution " + elapsedTime + " secondes");
+		SC.close();
+	}
+
+	public static void choice2() {
+		// Choisir complexe et calculer la distance entre 2 résidus aléatoires
+		// TODO:
+		boolean incorrect = false;
+		long startTime = System.currentTimeMillis();
+		System.out.println("\nRecherche du nombre de complexes moléculaires dans la PDB...");
+		do {
+			System.out.println("Choisissez un complexe entre ces identifiants :\n");
+			System.out.println(
+					"[1]\t1fn3\n[2]\t2b5i\n[3]\t2na8\n[4]\t3c0p\n[2]\t3dcu\n[2]\t3l3t\n[2]\t3qt2\n[2]\t3tnw\n[2]\t6rj4");
+			int rep = SC.nextInt();
+			if (rep < 1 || rep > 9) {
+
+			}
+		} while (incorrect);
+		long endTime = System.currentTimeMillis();
+		long elapsedTime = (endTime - startTime) / 1000;
+		System.out.println("\n\nTemps d'éxécution " + elapsedTime + " secondes");
+		SC.close();
+	}
+
+	private void error() {
+		System.out.println("Mauvaise commande. Veuillez recommencer");
 	}
 }

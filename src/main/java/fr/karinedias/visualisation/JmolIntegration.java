@@ -17,13 +17,13 @@ import org.jmol.api.JmolAdapter;
 import org.jmol.api.JmolViewer;
 
 
-public class JmolIntegration_new {
+public class JmolIntegration {
 	JmolViewer viewer;
 
 	JmolPanel jmolPanel;
 	JFrame frame;
 
-	public JmolIntegration_new() {
+	public JmolIntegration() {
 		frame = new JFrame();
 		frame.addWindowListener(new ApplicationCloser());
 		Container contentPane = frame.getContentPane();
