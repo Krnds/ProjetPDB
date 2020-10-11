@@ -34,6 +34,9 @@ public class NeighborSearch {
 		}
 		List<Residue> neighbors = new ArrayList<>();
 		for (int i = 0; i < residuesOfComplex.size(); i++) {
+			// if baseRes is compared with himself, skip distance calculation
+			if (residuesOfComplex.get(i).equals(baseRes))
+					i++;
 			if (ResidueDistanceCalculation.distanceBetweenResidues(baseRes, residuesOfComplex.get(i)) < distance) {
 				neighbors.add(residuesOfComplex.get(i));
 			}

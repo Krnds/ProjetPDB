@@ -44,7 +44,7 @@ public class MoleculeParser {
 	// parse only polymer molecules (non-polymer and water are not made of residues)
 	private Molecule parseMolecule(String moleculeLine) {
 
-		String moleculePattern = "(\\d)\\s(polymer)\\s+\\w+\\s(.+)\\s+\\d\\d";
+		String moleculePattern = "(\\d)\\s(polymer)\\s+\\w+\\s(.+)\\s+";
 		Pattern moleculeEntry = Pattern.compile(moleculePattern);
 		Matcher m = moleculeEntry.matcher(moleculeLine);
 		if (m.lookingAt()) {

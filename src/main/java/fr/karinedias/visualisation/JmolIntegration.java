@@ -16,7 +16,6 @@ import org.jmol.adapter.smarter.SmarterJmolAdapter;
 import org.jmol.api.JmolAdapter;
 import org.jmol.api.JmolViewer;
 
-
 public class JmolIntegration {
 	JmolViewer viewer;
 
@@ -99,6 +98,23 @@ public class JmolIntegration {
 		this.viewer = viewer;
 	}
 
+	// represents structure when there's no interactions displayed
+	public void setStructureWithoutInteraction(String filename, HashMap<Integer, List<Character>> info) {
+
+		JmolViewer viewer = jmolPanel.getViewer();
+		viewer.openFile(filename);
+
+		// send PDB file to Jmol
+		viewer.openStringInline(filename);
+		viewer.evalString("restrict *.ca; hide waters ;spacefill on, backbone 0.8");
+
+		// select and color chains of each molecule
+		viewer.evalString(selectChain(info.get(1), "gold"));
+		viewer.evalString(selectChain(info.get(2), "LightSeaGreen"));
+
+		this.viewer = viewer;
+	}
+
 	public String selectChain(List<Character> chains, String color) {
 
 		String command = "";
@@ -116,7 +132,7 @@ public class JmolIntegration {
 			}
 		} else
 			command = "select :" + chains.get(0) + "; color " + color;
-		
+
 		return command;
 	}
 
