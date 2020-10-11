@@ -56,8 +56,8 @@ public class FileReader {
 	public StringBuilder readerJar() throws URISyntaxException {
 		
 	    Path pathToFile = Paths.get(getFilePath());
-	    System.out.println(pathToFile.toAbsolutePath());
-		//ClassLoader classLoader = this.getClass().getClassLoader();
+
+		//ClassLoader classLoader = this.getClass().getClassLoader(); //ne fonctionne pas non plus
 	    ClassLoader classLoader = pathToFile.getClass().getClassLoader();
         InputStream inputStream = classLoader.getResourceAsStream(getFilePath());
 

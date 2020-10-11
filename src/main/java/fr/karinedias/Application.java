@@ -147,7 +147,7 @@ public class Application {
 				incorrect = true;
 				System.out.println("Entrée invalide");
 			} else {
-				distancesFromRandomResidues("src/main/resources/data/" + complexes(r) + ".cif");
+				distancesFromRandomResidues("/data/" + complexes(r) + ".cif");
 			}
 
 		} while (incorrect);
@@ -169,7 +169,7 @@ public class Application {
 			} else {
 				System.out.println("Entrez une distance (entier) :");
 				int d = SC.nextInt();
-				allResiduesFromDistance("src/main/resources/data/" + complexes(r) + ".cif", complexes(r), d);
+				allResiduesFromDistance("/data/" + complexes(r) + ".cif", complexes(r), d);
 			}
 
 		} while (incorrect);
@@ -188,7 +188,7 @@ public class Application {
 			} else {
 				System.out.println("Entrez une distance (entier) :");
 				int d = SC.nextInt();
-				distancesFromResidue("src/main/resources/data/cytokines/" + cytokines(r) + ".cif", cytokines(r), d);
+				distancesFromResidue("/data/cytokines/" + cytokines(r) + ".cif", cytokines(r), d);
 			}
 		} while (incorrect);
 	}
@@ -207,7 +207,7 @@ public class Application {
 				System.out.println("Entrez une distance (entier) :");
 				int d = SC.nextInt();
 				try {
-					representInteractions("src/main/resources/data/cytokines/" + cytokines(r) + ".cif", cytokines(r),
+					representInteractions("/data/cytokines/" + cytokines(r) + ".cif", cytokines(r),
 							d);
 				} catch (URISyntaxException e) {
 					// TODO Auto-generated catch block
@@ -225,7 +225,7 @@ public class Application {
 
 		FileReader fr = new FileReader(structureFile);
 		StringBuilder sb;
-		sb = fr.reader();
+		sb = fr.readerJar();
 		ResidueParser rp = new ResidueParser(sb);
 		List<Residue> listOfResidues = rp.getAllResidues();
 
@@ -244,7 +244,7 @@ public class Application {
 			throws URISyntaxException {
 		FileReader fr = new FileReader(structureFile);
 		StringBuilder sb;
-		sb = fr.reader();
+		sb = fr.readerJar();
 		ResidueParser rp = new ResidueParser(sb);
 		List<Residue> listOfResidues = rp.getAllResidues();
 		for (Residue residue : listOfResidues) {
@@ -286,7 +286,7 @@ public class Application {
 	private static void distancesFromResidue(String structureFile, String ID, int distance) throws URISyntaxException {
 		FileReader fr = new FileReader(structureFile);
 		StringBuilder sb;
-		sb = fr.reader();
+		sb = fr.readerJar();
 		ResidueParser rp = new ResidueParser(sb);
 		List<Residue> listOfResidues = rp.getAllResidues();
 		for (Residue residue : listOfResidues) {
@@ -324,7 +324,7 @@ public class Application {
 
 	private static void representInteractions(String structureFile, String ID, int distance) throws URISyntaxException {
 		FileReader pdb = new FileReader(structureFile);
-		StringBuilder sb = pdb.reader();
+		StringBuilder sb = pdb.readerJar();
 		ResidueParser rp = new ResidueParser(sb);
 
 		List<Residue> listOfResidues = rp.getAllResidues();
