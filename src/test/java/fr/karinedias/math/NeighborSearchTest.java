@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import fr.karinedias.model.Complex;
 import fr.karinedias.model.Molecule;
 import fr.karinedias.model.Residue;
 import fr.karinedias.utils.FileReader;
@@ -33,27 +34,31 @@ class NeighborSearchTest {
 		expectedResidues.add(new Residue(59, "ASN", 9, 9, 'A', 1, 41.313, 30.776, -7.245));
 		expectedResidues.add(new Residue(67, "VAL", 10, 10, 'A', 1, 41.216, 33.253, -4.385));
 
-		Molecule expectedMolecule = new Molecule(1, "Molecule Test1", "polymer", expectedResidues);
+		List<Molecule> expectedMolecule =new ArrayList<>(); 
+		expectedMolecule.add(new Molecule(1, "Molecule Test1", "polymer", expectedResidues));
+		Complex expectedComplex = new Complex("TEST", expectedMolecule);
 		Residue residueToCompare = new Residue(1110, "GLU", 6, 6, 'B', 2, 9.439, 48.049, 8.826);
 		List<Residue> expected = new ArrayList<>();
-		expected = NeighborSearch.getNeighborsResidues(expectedMolecule, residueToCompare, 40);
+		expected = NeighborSearch.getNeighborsResidues(expectedComplex, residueToCompare, 40);
 
 		// When
 		Path path = Paths.get(getClass().getClassLoader().getResource("test-data/fakemolecule.cif").toURI());
 		FileReader fileTest = new FileReader(path.toString());
 		StringBuilder content = fileTest.reader();
 		MoleculeParser mp = new MoleculeParser(content);
-		// get first molecule
-		Molecule actualMolecule = mp.getAllMolecules(mp.parseMoleculeLines()).get(0);
+		// get first molecule and create complex with that molecule
+		List<Molecule> actualMolecule = new ArrayList<>();
+		actualMolecule.add(mp.getAllMolecules(mp.parseMoleculeLines()).get(0));
+		Complex actualComplex = new Complex("TEST", actualMolecule);
 		ResidueParser rp = new ResidueParser(content);
 
 		List<Residue> actualResiduesFound = rp.getAllResidues().stream()
-				.filter(residue -> residue.getChainNumber() == actualMolecule.getId()).collect(Collectors.toList());
+				.filter(residue -> residue.getChainNumber() == actualMolecule.get(0).getId()).collect(Collectors.toList());
 		// Set all residues to the correct molecule
-		actualMolecule.setResidues(actualResiduesFound);
+		actualMolecule.get(0).setResidues(actualResiduesFound);
 
 		List<Residue> actual = new ArrayList<>();
-		actual = NeighborSearch.getNeighborsResidues(actualMolecule, residueToCompare, 40);
+		actual = NeighborSearch.getNeighborsResidues(actualComplex, residueToCompare, 40);
 
 		// Then
 		assertEquals(expected.size(), actual.size());

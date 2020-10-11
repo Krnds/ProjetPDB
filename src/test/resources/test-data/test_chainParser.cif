@@ -1,0 +1,25 @@
+# 
+loop_
+_struct_ref_seq.align_id 
+_struct_ref_seq.ref_id 
+_struct_ref_seq.pdbx_PDB_id_code 
+_struct_ref_seq.pdbx_strand_id 
+_struct_ref_seq.seq_align_beg 
+_struct_ref_seq.pdbx_seq_align_beg_ins_code 
+_struct_ref_seq.seq_align_end 
+_struct_ref_seq.pdbx_seq_align_end_ins_code 
+_struct_ref_seq.pdbx_db_accession 
+_struct_ref_seq.db_align_beg 
+_struct_ref_seq.pdbx_db_align_beg_ins_code 
+_struct_ref_seq.db_align_end 
+_struct_ref_seq.pdbx_db_align_end_ins_code 
+_struct_ref_seq.pdbx_auth_seq_align_beg 
+_struct_ref_seq.pdbx_auth_seq_align_end 
+1 1 6RJ4 B 1 ? 269 ? P84253 2 ? 270 ? 2 270 
+2 2 6RJ4 A 1 ? 275 ? P84308 2 ? 276 ? 2 276 
+3 1 6RJ4 D 1 ? 269 ? P84253 2 ? 270 ? 2 270 
+4 2 6RJ4 C 1 ? 275 ? P84308 2 ? 276 ? 2 276 
+5 1 6RJ4 F 1 ? 269 ? P84253 2 ? 270 ? 2 270 
+6 2 6RJ4 E 1 ? 275 ? P84308 2 ? 276 ? 2 276 
+#
+

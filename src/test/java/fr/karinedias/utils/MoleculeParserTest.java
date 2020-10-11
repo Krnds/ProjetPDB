@@ -16,7 +16,7 @@ import fr.karinedias.model.Molecule;
 public class MoleculeParserTest {
 
 	@Test
-	public void moleculeParserTest() throws Exception {
+	public void getAllMolecules_should_return_expected_molecules() throws Exception {
 
 		Path path = Paths.get(getClass().getClassLoader().getResource("test-data/test_moleculeParser.cif").toURI());
 

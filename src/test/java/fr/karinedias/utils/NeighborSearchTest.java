@@ -15,7 +15,7 @@ import fr.karinedias.model.Residue;
 class NeighborSearchTest {
 
 	@Test
-	void getgetNeighborsFromMolecule_should_returnX() throws Exception {
+	void getNeighborsFromMolecule_should_returnX() throws Exception {
 		
 		// Prepare data
 		Path path = Paths.get(getClass().getClassLoader().getResource("test-data/test_moleculeParser.cif").toURI());
