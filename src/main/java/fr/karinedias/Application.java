@@ -2,7 +2,11 @@ package fr.karinedias;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -10,6 +14,8 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 import fr.karinedias.math.NeighborSearch;
 import fr.karinedias.math.ResidueDistanceCalculation;
@@ -17,6 +23,7 @@ import fr.karinedias.model.Chain;
 import fr.karinedias.model.Complex;
 import fr.karinedias.model.Molecule;
 import fr.karinedias.model.Residue;
+import fr.karinedias.query.FetchStructure;
 import fr.karinedias.query.Query;
 import fr.karinedias.utils.ChainParser;
 import fr.karinedias.utils.FileReader;
@@ -27,12 +34,12 @@ import fr.karinedias.visualisation.JmolIntegration;
 public class Application {
 	private static Scanner SC;
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException, URISyntaxException {
 		menu();
 
 	}
 
-	public static void menu() {
+	public static void menu() throws IOException, URISyntaxException {
 
 		int choice = 0;
 		boolean retourMenu = true;
@@ -46,21 +53,18 @@ public class Application {
 					+ "[2]\tCalcul de distance entre deux résidus d'un complexe choisi\n"
 					+ "[3]\tListe des résidus situés à une distance inférieure à un seuil\n"
 					+ "[4]\tDistances les plus faibles entre un résidu et ses voisins (avec des cytokines)\n"
-					+ "[5]\tDéfinir une zone d'interaction et l'appliquer aux 10 cytokines\n"
-					+ "[6]\tDéfinir et colorer les zones d'interaction sur 3 cytokines\n" + "[7]\tQuitter");
+					+ "[5]\tDéfinir une zone d'interaction et l'appliquer aux 10 cytokines\n" + "[6]\tQuitter");
 
 			if (SC.hasNextInt()) {
 				choice = SC.nextInt();
 			}
-			if (choice <= 0 || choice > 7) {
-				System.out.println("Ce choix n'est pas valide");
-				// retourMenu = true;
+			if (choice <= 0 || choice > 6) {
+				System.out.println("Choix invalide");
 			}
 			switch (choice) {
 			case 1:
 				try {
 					choice1();
-					// retourMenu = true;
 					break;
 				} catch (IOException e) {
 					System.out.println("File not found");
@@ -72,33 +76,21 @@ public class Application {
 					break;
 				} catch (URISyntaxException e) {
 					System.out.println("file not found");
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			case 3:
-				try {
-					choice3();
-					break;
-				} catch (URISyntaxException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				choice3();
+				break;
 			case 4:
-				try {
-					choice4();
-				} catch (URISyntaxException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				choice4();
 				break;
 			case 5:
 				choice5();
 				break;
-			case 7:
+			case 6:
 				SC.close();
 				retourMenu = false;
 				System.exit(0);
-				// Runtime.getRuntime().halt(0);
 				break;
 			}
 
@@ -130,10 +122,9 @@ public class Application {
 		long endTime = System.currentTimeMillis();
 		long elapsedTime = (endTime - startTime) / 1000;
 		System.out.println("\nTemps d'éxécution " + elapsedTime + " secondes");
-		// SC.close();
 	}
 
-	public static void choice2() throws URISyntaxException {
+	public static void choice2() throws URISyntaxException, IOException {
 		boolean incorrect = false;
 		long startTime = System.currentTimeMillis();
 
@@ -156,7 +147,7 @@ public class Application {
 		System.out.println("\n\nTemps d'éxécution " + elapsedTime + " seconde(s)");
 	}
 
-	public static void choice3() throws URISyntaxException {
+	public static void choice3() throws IOException {
 		boolean incorrect = false;
 		System.out.println("Choisissez un complexe parmi ces identifiants :\n");
 		System.out.println(
@@ -175,7 +166,7 @@ public class Application {
 		} while (incorrect);
 	}
 
-	public static void choice4() throws URISyntaxException {
+	public static void choice4() throws IOException {
 		boolean incorrect = false;
 		System.out.println("Choisissez un complexe cytokine/recepteur parmi :\n");
 		System.out.println(
@@ -193,7 +184,7 @@ public class Application {
 		} while (incorrect);
 	}
 
-	public static void choice5() {
+	public static void choice5() throws IOException, URISyntaxException {
 		boolean incorrect = false;
 		System.out.println("Choisissez un complexe cytokine/recepteur parmi :\n");
 		System.out.println(
@@ -206,22 +197,12 @@ public class Application {
 			} else {
 				System.out.println("Entrez une distance (entier) :");
 				int d = SC.nextInt();
-				try {
-					representInteractions("/data/cytokines/" + cytokines(r) + ".cif", cytokines(r),
-							d);
-				} catch (URISyntaxException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				representInteractions("/data/cytokines/" + cytokines(r) + ".cif", cytokines(r), d);
 			}
 		} while (incorrect);
 	}
 
-	public static void choice6() {
-
-	}
-
-	private static void distancesFromRandomResidues(String structureFile) throws URISyntaxException {
+	private static void distancesFromRandomResidues(String structureFile) throws IOException {
 
 		FileReader fr = new FileReader(structureFile);
 		StringBuilder sb;
@@ -240,8 +221,7 @@ public class Application {
 		System.out.println("La distance entre les 2 résidus est de " + Math.round(distance) + " Angström\n");
 	}
 
-	private static void allResiduesFromDistance(String structureFile, String ID, int distance)
-			throws URISyntaxException {
+	private static void allResiduesFromDistance(String structureFile, String ID, int distance) throws IOException {
 		FileReader fr = new FileReader(structureFile);
 		StringBuilder sb;
 		sb = fr.readerJar();
@@ -283,7 +263,7 @@ public class Application {
 		}
 	}
 
-	private static void distancesFromResidue(String structureFile, String ID, int distance) throws URISyntaxException {
+	private static void distancesFromResidue(String structureFile, String ID, int distance) throws IOException {
 		FileReader fr = new FileReader(structureFile);
 		StringBuilder sb;
 		sb = fr.readerJar();
@@ -322,7 +302,8 @@ public class Application {
 		}
 	}
 
-	private static void representInteractions(String structureFile, String ID, int distance) throws URISyntaxException {
+	private static void representInteractions(String structureFile, String ID, int distance)
+			throws IOException, URISyntaxException {
 		FileReader pdb = new FileReader(structureFile);
 		StringBuilder sb = pdb.readerJar();
 		ResidueParser rp = new ResidueParser(sb);
@@ -363,12 +344,9 @@ public class Application {
 
 		}
 
-//		// Get the names of the alternate chains displayed in Jmol
+		// Get the names of the alternate chains displayed in Jmol
 		Set<Character> chains = new HashSet<Character>(listOfResidues.size());
 		listOfResidues.stream().filter(r -> chains.add(r.getAltChain())).collect(Collectors.toList());
-		for (Character character : chains) {
-			System.out.println("Chains found : " + character);
-		}
 
 		// Test get neighbors from chain
 		List<Residue> neighborsFromChain = NeighborSearch.getNeighborsFromChains(listOfMolecules.get(0),
@@ -391,8 +369,15 @@ public class Application {
 				}
 			}
 
+			System.out.println(System.getProperty("java.io.tmpdir") + structureFile);
+
 			JmolIntegration testJmol = new JmolIntegration();
-			testJmol.setStructure(structureFile, jmolInfo, selectAtoms);
+
+			
+			FetchStructure structureFromPDB = new FetchStructure(ID);
+			structureFromPDB.getPDBFile();
+
+			testJmol.setStructure(structureFromPDB.getPath(), jmolInfo, selectAtoms);
 		} else {
 			JmolIntegration Jmol = new JmolIntegration();
 			Jmol.setStructureWithoutInteraction(structureFile, jmolInfo);
@@ -452,10 +437,6 @@ public class Application {
 		default:
 			return "";
 		}
-
-	}
-
-	private static void chooseStructure() {
 
 	}
 

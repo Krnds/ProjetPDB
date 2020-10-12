@@ -1,15 +1,18 @@
 package fr.karinedias.utils;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import fr.karinedias.Application;
@@ -28,16 +31,14 @@ public class FileReader {
 		filePath = path;
 	}
 
-//TODO: create a method for all OS compatible paths
 
 	protected String getFilePath() {
 		return filePath;
 	}
 
 	/*
-	 * Test of reader : prints all the file content
+	 * Method for reading a file in IDE
 	 */
-	// source : https://howtodoinjava.com/java/io/java-read-file-to-string-examples/
 	public StringBuilder reader() throws URISyntaxException {
 		StringBuilder contentBuilder = new StringBuilder();
 
@@ -51,32 +52,20 @@ public class FileReader {
 		}
 		return contentBuilder;
 	}
+
 	
-	
-	public StringBuilder readerJar() throws URISyntaxException {
-		
-	    Path pathToFile = Paths.get(getFilePath());
+	// Method for reading a file in jar
+	public StringBuilder readerJar() throws IOException {
 
-		//ClassLoader classLoader = this.getClass().getClassLoader(); //ne fonctionne pas non plus
-	    ClassLoader classLoader = pathToFile.getClass().getClassLoader();
-        InputStream inputStream = classLoader.getResourceAsStream(getFilePath());
 
-        //InputStream inputStream = Application.class.getResourceAsStream(getFilePath());
-        // the stream holding the file content
-        if (inputStream == null) {
-            throw new IllegalArgumentException("file not found! " + pathToFile);
-        }
-		
-		StringBuilder contentBuilder = new StringBuilder();
+		try (InputStream inputStream = getClass().getResourceAsStream(getFilePath());
+				BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+			String contents = reader.lines().collect(Collectors.joining(System.lineSeparator()));
 
-		try (Stream<String> stream = Files.lines(Paths.get(inputStream.toString()), StandardCharsets.UTF_8)) {
-			stream.forEach(s -> contentBuilder.append(s).append("\n"));
-		} catch (FileNotFoundException exception) {
-			System.out.println("The file " + filePath + " was not found.");
-		} catch (IOException exception) {
-			System.out.println(exception);
+			StringBuilder sb = new StringBuilder(contents);
+
+			return sb;
+
 		}
-		return contentBuilder;
 	}
-
 }
