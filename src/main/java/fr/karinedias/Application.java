@@ -2,11 +2,7 @@ package fr.karinedias;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -14,8 +10,6 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
 
 import fr.karinedias.math.NeighborSearch;
 import fr.karinedias.math.ResidueDistanceCalculation;
@@ -373,7 +367,6 @@ public class Application {
 
 			JmolIntegration testJmol = new JmolIntegration();
 
-			
 			FetchStructure structureFromPDB = new FetchStructure(ID);
 			structureFromPDB.getPDBFile();
 
