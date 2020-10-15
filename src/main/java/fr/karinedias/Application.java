@@ -47,12 +47,12 @@ public class Application {
 					+ "[3]\tListe des résidus situés à une distance inférieure à un seuil\n"
 					+ "[4]\tDistances les plus faibles entre un résidu et ses voisins (avec des cytokines)\n"
 					+ "[5]\tDéfinir une zone d'interaction et l'appliquer aux 10 cytokines\n"
-					+ "[6]\tDéfinir et colorer les zones d'interaction sur 3 cytokines\n" + "[7]\tQuitter");
+					+ "[6]\tQuitter");
 
 			if (SC.hasNextInt()) {
 				choice = SC.nextInt();
 			}
-			if (choice <= 0 || choice > 7) {
+			if (choice <= 0 || choice > 6) {
 				System.out.println("Ce choix n'est pas valide");
 				// retourMenu = true;
 			}
@@ -94,11 +94,10 @@ public class Application {
 			case 5:
 				choice5();
 				break;
-			case 7:
+			case 6:
 				SC.close();
 				retourMenu = false;
 				System.exit(0);
-				// Runtime.getRuntime().halt(0);
 				break;
 			}
 
@@ -130,7 +129,6 @@ public class Application {
 		long endTime = System.currentTimeMillis();
 		long elapsedTime = (endTime - startTime) / 1000;
 		System.out.println("\nTemps d'éxécution " + elapsedTime + " secondes");
-		// SC.close();
 	}
 
 	public static void choice2() throws URISyntaxException {
